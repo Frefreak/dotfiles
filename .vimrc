@@ -8,6 +8,7 @@ Plugin 'aceofall/gtags.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'bling/vim-airline'
 Plugin 'https://github.com/scrooloose/nerdcommenter.git'
+Plugin 'https://github.com/vim-latex/vim-latex'
 call vundle#end()
 
 syntax on
@@ -37,7 +38,7 @@ let CtagsCscope_Auto_Map = 1
 let GtagsCscope_Quiet = 1
 autocmd CompleteDone * pclose
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType tex setlocal shiftwidth=2 tabstop=2
+"autocmd FileType tex setlocal shiftwidth=2 tabstop=2
 autocmd FileType python setlocal shiftwidth=4 tabstop=4
 autocmd FileType haskell setlocal expandtab softtabstop=4 shiftwidth=4 shiftround
 
@@ -52,3 +53,7 @@ let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
+
+"vim-latex
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
