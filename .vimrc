@@ -12,6 +12,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'eagletmt/neco-ghc'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'atweiden/vim-dragvisuals'
+Plugin 'tpope/vim-fugitive'
 call vundle#end()
 
 syntax on
@@ -40,9 +41,9 @@ autocmd FileType python setlocal shiftwidth=4 tabstop=4
 autocmd FileType haskell setlocal tabstop=8 expandtab softtabstop=4 shiftwidth=4 shiftround
 
 "NerdTree
-map <C-n> :NERDTreeToggle<CR>
-map <C-h> :tabp<CR>
-map <C-l> :tabn<CR>
+noremap <C-n> :NERDTreeToggle<CR>
+noremap <C-h> :tabp<CR>
+noremap <C-l> :tabn<CR>
 
 "airline
 set laststatus=2
