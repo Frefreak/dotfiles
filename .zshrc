@@ -12,19 +12,25 @@ alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias la='ls -a'
 alias m='make'
-alias vi='vim'
 alias grep="egrep --color=auto"
 alias gv='gvim'
 alias g='git'
 alias sudo='sudo '
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
+alias steam-wine='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe >/dev/null 2>&1 &'
 
 mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
 ghc () { stack --verbosity slient exec -- ghc $* }
 ghci () { stack --verbosity slient exec -- ghci $* }
-hv () { stack --verbosity slient exec -- vim $* }
-compdef hv=vim
+hv () { stack --verbosity slient exec -- nvim $* }
+vi () {
+	if [[ ${1##*.} == "hs" || ${1##*.} == "lhs" ]];
+		then stack --verbosity slient exec -- nvim $*;
+		else nvim $*;
+	fi
+}
+compdef vi=nvim
 
 
 TERM=xterm-256color
