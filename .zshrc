@@ -14,6 +14,7 @@ alias la='ls -a'
 alias m='make'
 alias grep="egrep --color=auto"
 alias gv='gvim'
+alias vi='vim'
 alias g='git'
 alias sudo='sudo '
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
@@ -23,15 +24,13 @@ mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x
 compdef mm=make
 ghc () { stack --verbosity slient exec -- ghc $* }
 ghci () { stack --verbosity slient exec -- ghci $* }
-hv () { stack --verbosity slient exec -- nvim $* }
-vi () {
+nv () {
 	if [[ ${1##*.} == "hs" || ${1##*.} == "lhs" ]];
 		then stack --verbosity slient exec -- nvim $*;
 		else nvim $*;
 	fi
 }
-compdef vi=nvim
-
+compdef nv=nvim
 
 TERM=xterm-256color
 
