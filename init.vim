@@ -2,36 +2,43 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
 Plug 'bling/vim-airline'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
+Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : 'haskell' }
+Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
+Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
+Plug 'benekastah/neomake'
+Plug 'Rip-Rip/clang_complete', { 'for' : 'cpp' }
+Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'atweiden/vim-dragvisuals'
 Plug 'tpope/vim-fugitive'
-Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/vimproc.vim'
-Plug 'benekastah/neomake'
-Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
-Plug 'Rip-Rip/clang_complete'
-Plug 'zchee/deoplete-jedi'
 Plug 'SirVer/ultisnips'
+Plug 'morhetz/gruvbox'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'jpalardy/vim-slime'
 call plug#end()
 
-syntax on
+"color scheme related
 set background=dark
-colorscheme primary
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:gruvbox_italic=1
+colorscheme gruvbox
+syntax on
+set mouse=
 set fileencodings=utf8,cp936,gb18030,big5
-set autoindent
+"set autoindent
 filetype plugin indent on
-set hlsearch
+"set hlsearch
 set wrapscan
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
 set noexpandtab
-set smarttab
+"set smarttab
 augroup resCur
   autocmd!
   autocmd BufReadPost * call setpos(".", getpos("'\""))
@@ -48,11 +55,11 @@ autocmd FileType hamlet setlocal expandtab softtabstop=4 shiftwidth=4 shiftround
 
 "NerdTree
 noremap <C-n> :NERDTreeToggle<CR>
-noremap <C-h> :tabp<CR>
-noremap <C-l> :tabn<CR>
+noremap <F4> :tabp<CR>
+noremap <F5> :tabn<CR>
 
 "airline
-set laststatus=2
+"set laststatus=2
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -147,3 +154,6 @@ let g:clang_make_default_keymappings = 0
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsListSnippets="<c-l>"
+
+"vim-slime
+let g:slime_target = "tmux"
