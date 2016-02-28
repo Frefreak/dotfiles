@@ -6,7 +6,7 @@ Plug 'bling/vim-airline'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
-Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : 'haskell' }
+Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
 Plug 'benekastah/neomake'
@@ -20,6 +20,7 @@ Plug 'SirVer/ultisnips'
 Plug 'morhetz/gruvbox'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'jpalardy/vim-slime'
+Plug 'munshkr/vim-tidal', { 'for': 'haskell.tidal' }
 call plug#end()
 "}}}
 
@@ -54,8 +55,8 @@ augroup end
 
 autocmd CompleteDone * pclose
 
-augroup filetype_html
-	autocmd Filetype html,xhtml setlocal shiftwidth=2 tabstop=2
+augroup filetype_web
+	autocmd Filetype html,xhtml,javascript  setlocal sw=2 ts=2 expandtab sts=2 shiftround
 	autocmd Filetype html,xhtml nnoremap <buffer> <localleader>ft Vatzf
 augroup end
 
@@ -66,7 +67,7 @@ augroup end
 augroup filetype_haskell
 	autocmd FileType haskell setlocal tabstop=8 expandtab softtabstop=4 shiftwidth=4 shiftround
 	autocmd FileType cabal setlocal ts=2 expandtab sw=2 sts=2
-	autocmd FileType hamlet setlocal expandtab softtabstop=4 shiftwidth=4 shiftround
+	autocmd FileType hamlet setlocal expandtab softtabstop=2 shiftwidth=2 shiftround
 augroup end
 
 augroup filetye_vim
@@ -77,7 +78,7 @@ augroup end
 " NerdTree {{{
 noremap <C-n> :NERDTreeToggle<CR>
 noremap <F5> :tabp<CR>
-noremap <F5> :tabn<CR>
+noremap <F6> :tabn<CR>
 "}}}
 
 " airline {{{
@@ -157,6 +158,8 @@ inoremap <silent><expr> <Tab>
 inoremap <silent><expr><C-k> deoplete#mappings#manual_complete()
 augroup deoplete_special
 	au FileType haskell let g:deoplete#disable_auto_complete = 0
+	au FileType python let g:deoplete#disable_auto_complete = 0
+	au FileType c,cpp let g:deoplete#disable_auto_complete = 0
 augroup end
 "}}}
 
@@ -185,6 +188,7 @@ let g:clang_make_default_keymappings = 0
 
 " Ultisnips {{{
 let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnipppetsDir = '~/.nvim/UltiSnips/'
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsListSnippets="<c-l>"
 "}}}
@@ -193,19 +197,8 @@ let g:UltiSnipsListSnippets="<c-l>"
 let g:slime_target = "tmux"
 "}}}
 
-" enable this to start writing nvim-hs plugin for nvim {{{
-let g:nvimhsmode = 0
-if nvimhsmode
-	call rpcrequest(rpcstart(expand('$HOME/bin/nvim-hs-devel.sh')), "PingNvimhs")
-	augroup neomake_enable
-		au!
-	augroup end
-endif
-"}}}
-
 " learn vimscript the hard way {{{
 inoremap <c-u> <esc>viwUea
-nnoremap <c-u> viwUe
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -219,7 +212,6 @@ nnoremap H 0
 nnoremap L $
 
 inoremap jk <esc>
-inoremap <esc> <nop>
 
 onoremap in( :<c-u>normal! f(vi(<CR>
 onoremap il( :<c-u>normal! F)vi)<CR>
@@ -227,8 +219,23 @@ onoremap an( :<c-u>normal! f(va(<CR>
 onoremap al( :<c-u>normal! F)va)<CR>
 
 onoremap in{ :<c-u>execute "normal! /{\r:noh\rvi{"<CR>
-onoremap il{ :<c-u>execute "normal! /}\rN:noh\rvi}"<CR>
+onoremap il{ :<c-u>execute "normal! ?}\r:noh\rvi}"<CR>
 onoremap an{ :<c-u>execute "normal! /{\r:noh\rva{"<CR>
-onoremap al{ :<c-u>execute "normal! /}\rN:noh\rva}"<CR>
+onoremap al{ :<c-u>execute "normal! ?}\r:noh\rva}"<CR>
+
+"}}}
+
+" Some tools I personal use {{{
+
+" Markdown preview using github api, markdownPreview is an external executable
+command! MarkdownPreview :call MarkdownPreview()
+augroup filetype_markdown
+	au BufWritePost *.md :MarkdownPreview
+augroup end
+
+function! MarkdownPreview()
+	:silent :execute "!markdownPreview %"
+	:echom fnamemodify(@%, ':s?md?html?') . " saved"
+endfunction
 
 "}}}
