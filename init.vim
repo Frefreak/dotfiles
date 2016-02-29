@@ -6,9 +6,9 @@ Plug 'bling/vim-airline'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
-Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
-Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
+Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'benekastah/neomake'
 Plug 'Rip-Rip/clang_complete', { 'for' : 'cpp' }
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
@@ -20,7 +20,6 @@ Plug 'SirVer/ultisnips'
 Plug 'morhetz/gruvbox'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'jpalardy/vim-slime'
-Plug 'munshkr/vim-tidal', { 'for': 'haskell.tidal' }
 call plug#end()
 "}}}
 
