@@ -6,9 +6,9 @@ Plug 'bling/vim-airline'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
-Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
-Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
+Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
 Plug 'benekastah/neomake'
 Plug 'Rip-Rip/clang_complete', { 'for' : 'cpp' }
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
@@ -20,6 +20,8 @@ Plug 'SirVer/ultisnips'
 Plug 'morhetz/gruvbox'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'jpalardy/vim-slime'
+Plug 'munshkr/vim-tidal', { 'for': 'haskell.tidal' }
+Plug 'aceofall/gtags.vim'
 call plug#end()
 "}}}
 
@@ -194,6 +196,25 @@ let g:UltiSnipsListSnippets="<c-l>"
 
 " vim-slime {{{
 let g:slime_target = "tmux"
+"}}}
+
+" gtags {{{
+set cscopetag
+set cscopeprg='gtags-cscope'
+
+let GtagsCscope_Auto_Load = 1
+let CtagsCscope_Auto_Map = 1
+let GtagsCscope_Quiet = 1
+"}}}
+
+" enable this to start writing nvim-hs plugin for nvim {{{
+let g:nvimhsmode = 0
+if nvimhsmode
+	call rpcrequest(rpcstart(expand('$HOME/bin/nvim-hs-devel.sh')), "PingNvimhs")
+	augroup neomake_enable
+		au!
+	augroup end
+endif
 "}}}
 
 " learn vimscript the hard way {{{
