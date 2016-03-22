@@ -6,9 +6,9 @@ Plug 'bling/vim-airline'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
-Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
-Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
+Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'benekastah/neomake'
 Plug 'Rip-Rip/clang_complete', { 'for' : 'cpp' }
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
@@ -20,7 +20,6 @@ Plug 'SirVer/ultisnips'
 Plug 'morhetz/gruvbox'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'jpalardy/vim-slime'
-Plug 'munshkr/vim-tidal', { 'for': 'haskell.tidal' }
 Plug 'aceofall/gtags.vim'
 call plug#end()
 "}}}
@@ -161,6 +160,7 @@ augroup deoplete_special
 	au FileType haskell let g:deoplete#disable_auto_complete = 0
 	au FileType python let g:deoplete#disable_auto_complete = 0
 	au FileType c,cpp let g:deoplete#disable_auto_complete = 0
+	au Filetype matlab let g:deoplete#disable_auto_complete = 0
 augroup end
 "}}}
 
@@ -207,16 +207,6 @@ let CtagsCscope_Auto_Map = 1
 let GtagsCscope_Quiet = 1
 "}}}
 
-" enable this to start writing nvim-hs plugin for nvim {{{
-let g:nvimhsmode = 0
-if nvimhsmode
-	call rpcrequest(rpcstart(expand('$HOME/bin/nvim-hs-devel.sh')), "PingNvimhs")
-	augroup neomake_enable
-		au!
-	augroup end
-endif
-"}}}
-
 " learn vimscript the hard way {{{
 inoremap <c-u> <esc>viwUea
 
@@ -225,23 +215,28 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>ee
 nnoremap <leader>( viw<esc>a)<esc>bi(<esc>ee
-vnoremap <leader>" viw<esc>`>a"<esc>`<i"<esc>`>2l
-vnoremap <leader>( viw<esc>`>a)<esc>`<i(<esc>`>2l
+vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>`>2l
+vnoremap <leader>( <esc>`>a)<esc>`<i(<esc>`>2l
 
 nnoremap H 0
 nnoremap L $
 
 inoremap jk <esc>
 
-onoremap in( :<c-u>normal! f(vi(<CR>
-onoremap il( :<c-u>normal! F)vi)<CR>
-onoremap an( :<c-u>normal! f(va(<CR>
-onoremap al( :<c-u>normal! F)va)<CR>
+onoremap in( :<c-u>execute "normal! /(\r:noh\rvi("<CR>
+onoremap il( :<c-u>execute "normal! ?)\r:noh\rvi)"<CR>
+onoremap an( :<c-u>execute "normal! /(\r:noh\rva("<CR>
+onoremap al( :<c-u>execute "normal! ?)\r:noh\rva)"<CR>
 
 onoremap in{ :<c-u>execute "normal! /{\r:noh\rvi{"<CR>
 onoremap il{ :<c-u>execute "normal! ?}\r:noh\rvi}"<CR>
 onoremap an{ :<c-u>execute "normal! /{\r:noh\rva{"<CR>
 onoremap al{ :<c-u>execute "normal! ?}\r:noh\rva}"<CR>
+
+onoremap in" :<c-u>execute "normal! /\"\r:noh\rvi\""<CR>
+onoremap il" :<c-u>execute "normal! ?\"\r:noh\rvi\""<CR>
+onoremap an" :<c-u>execute "normal! /\"\r:noh\rva\""<CR>
+onoremap al" :<c-u>execute "normal! ?\"\r:noh\rva\""<CR>
 
 "}}}
 
@@ -250,7 +245,7 @@ onoremap al{ :<c-u>execute "normal! ?}\r:noh\rva}"<CR>
 " Markdown preview using github api, markdownPreview is an external executable
 command! MarkdownPreview :call MarkdownPreview()
 augroup filetype_markdown
-	au BufWritePost *.md :MarkdownPreview
+	au BufWritePost *.md,*.markdown :MarkdownPreview
 augroup end
 
 function! MarkdownPreview()
