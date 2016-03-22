@@ -24,6 +24,8 @@ mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x
 compdef mm=make
 ghc () { stack --verbosity slient exec -- ghc $* }
 ghci () { stack --verbosity slient exec -- ghci $* }
+ghc-pkg () { stack --verbosity slient exec -- ghc-pkg $* }
+clash () { stack --verbosity slient exec -- clash $* }
 nv () {
 	if [[ ${1##*.} == "hs" || ${1##*.} == "lhs" ]];
 		then stack --verbosity slient exec -- nvim $*;
@@ -43,10 +45,15 @@ bindkey "[A" history-beginning-search-backward
 bindkey "[B"  history-beginning-search-forward
 bindkey "." insert-last-word
 
-export PATH=$PATH:~/x-tools/arm-unknown-linux-gnueabi/bin/:~/bin/
+
+export PATH=$PATH:~/bin:/home/adv_zxy/x-tools7h/arm-unknown-linux-gnueabihf/bin
 
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
+
 
 . /etc/profile.d/autojump.sh
 
