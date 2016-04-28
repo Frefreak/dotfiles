@@ -6,9 +6,9 @@ Plug 'bling/vim-airline'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
-Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
-Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
+Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
 Plug 'benekastah/neomake'
 Plug 'Rip-Rip/clang_complete', { 'for' : 'cpp' }
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
@@ -21,6 +21,7 @@ Plug 'morhetz/gruvbox'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'jpalardy/vim-slime'
 Plug 'aceofall/gtags.vim'
+Plug 'KabbAmine/zeavim.vim'
 call plug#end()
 "}}}
 
@@ -50,7 +51,7 @@ augroup END
 
 " some auto commands {{{
 augroup neomake_enable
-	autocmd! BufWritePost *.c,*.cpp,*.hs,*.py Neomake
+	autocmd! BufWritePost * Neomake
 augroup end
 
 autocmd CompleteDone * pclose
@@ -73,12 +74,16 @@ augroup end
 augroup filetye_vim
 	autocmd FileType vim setlocal foldmethod=marker
 augroup end
+
+augroup filetye_zsh
+	autocmd FileType zsh setlocal foldmethod=marker
+augroup end
 "}}}
 
 " NerdTree {{{
 noremap <C-n> :NERDTreeToggle<CR>
-noremap <F5> :tabp<CR>
-noremap <F6> :tabn<CR>
+noremap <F4> :tabp<CR>
+noremap <F5> :tabn<CR>
 "}}}
 
 " airline {{{
@@ -160,7 +165,6 @@ augroup deoplete_special
 	au FileType haskell let g:deoplete#disable_auto_complete = 0
 	au FileType python let g:deoplete#disable_auto_complete = 0
 	au FileType c,cpp let g:deoplete#disable_auto_complete = 0
-	au Filetype matlab let g:deoplete#disable_auto_complete = 0
 augroup end
 "}}}
 
@@ -207,6 +211,19 @@ let CtagsCscope_Auto_Map = 1
 let GtagsCscope_Quiet = 1
 "}}}
 
+" enable this to start writing nvim-hs plugin for nvim {{{
+let g:nvimhsmode = 0
+if nvimhsmode
+	call rpcrequest(rpcstart(expand('$HOME/bin/nvim-hs-devel.sh')), "PingNvimhs")
+	augroup neomake_enable
+		au!
+	augroup end
+endif
+"}}}
+
+" deoplete-jedi {{{
+let deoplete#sources#jedi#show_docstring = 1
+"}}}
 " learn vimscript the hard way {{{
 inoremap <c-u> <esc>viwUea
 
@@ -223,21 +240,20 @@ nnoremap L $
 
 inoremap jk <esc>
 
-onoremap in( :<c-u>execute "normal! /(\r:noh\rvi("<CR>
-onoremap il( :<c-u>execute "normal! ?)\r:noh\rvi)"<CR>
-onoremap an( :<c-u>execute "normal! /(\r:noh\rva("<CR>
-onoremap al( :<c-u>execute "normal! ?)\r:noh\rva)"<CR>
-
 onoremap in{ :<c-u>execute "normal! /{\r:noh\rvi{"<CR>
 onoremap il{ :<c-u>execute "normal! ?}\r:noh\rvi}"<CR>
 onoremap an{ :<c-u>execute "normal! /{\r:noh\rva{"<CR>
 onoremap al{ :<c-u>execute "normal! ?}\r:noh\rva}"<CR>
 
+onoremap in( :<c-u>execute "normal! /(\r:noh\rvi("<CR>
+onoremap il( :<c-u>execute "normal! ?)\r:noh\rvi)"<CR>
+onoremap an( :<c-u>execute "normal! /(\r:noh\rva("<CR>
+onoremap al( :<c-u>execute "normal! ?)\r:noh\rva)"<CR>
+
 onoremap in" :<c-u>execute "normal! /\"\r:noh\rvi\""<CR>
 onoremap il" :<c-u>execute "normal! ?\"\r:noh\rvi\""<CR>
 onoremap an" :<c-u>execute "normal! /\"\r:noh\rva\""<CR>
 onoremap al" :<c-u>execute "normal! ?\"\r:noh\rva\""<CR>
-
 "}}}
 
 " Some tools I personal use {{{
@@ -245,7 +261,7 @@ onoremap al" :<c-u>execute "normal! ?\"\r:noh\rva\""<CR>
 " Markdown preview using github api, markdownPreview is an external executable
 command! MarkdownPreview :call MarkdownPreview()
 augroup filetype_markdown
-	au BufWritePost *.md,*.markdown :MarkdownPreview
+	au BufWritePost *.md :MarkdownPreview
 augroup end
 
 function! MarkdownPreview()
@@ -254,3 +270,4 @@ function! MarkdownPreview()
 endfunction
 
 "}}}
+
