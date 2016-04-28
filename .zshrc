@@ -50,7 +50,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git vi-mode stack autojump command-not-found)
 
 # User configuration
 
@@ -92,10 +92,6 @@ source $ZSH/oh-my-zsh.sh
 # }}}
 
 # {{{ custom stuffs
-autoload -U compinit promptinit bashcompinit
-compinit
-#promptinit
-zstyle ':completion:*' menu select
 setopt extended_glob
 
 alias ls='ls --color=auto'
@@ -103,13 +99,6 @@ alias ll='ls -lh'
 alias la='ls -a'
 alias m='make'
 alias grep="egrep --color=auto"
-alias gv='gvim'
-alias vi='vim'
-alias g='git'
-alias gs='git status'
-alias gc='git checkout'
-alias gl='git log'
-alias gd='git diff'
 alias sudo='sudo '
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias steam-wine='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe >/dev/null 2>&1 &'
@@ -135,8 +124,6 @@ HISTSIZE=1000
 HISTFILE=~/.history
 
 bindkey -v
-#bindkey "[A" history-beginning-search-backward
-#bindkey "[B"  history-beginning-search-forward
 bindkey "" history-beginning-search-backward
 bindkey ""  history-beginning-search-forward
 bindkey "." insert-last-word
@@ -153,11 +140,4 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
 
-
-. /etc/profile.d/autojump.sh
-
-. /usr/share/doc/pkgfile/command-not-found.zsh
-
-bashcompinit
-eval "$(stack --bash-completion-script stack)"
 # }}}
