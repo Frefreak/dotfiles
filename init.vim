@@ -71,6 +71,10 @@ augroup filetype_haskell
 	autocmd FileType hamlet setlocal expandtab softtabstop=2 shiftwidth=2 shiftround
 augroup end
 
+augroup filetype_yaml
+	autocmd FileType yaml setlocal tabstop=8 softtabstop=4 shiftwidth=4 shiftround
+augroup end
+
 augroup filetye_vim
 	autocmd FileType vim setlocal foldmethod=marker
 augroup end

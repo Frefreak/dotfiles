@@ -50,7 +50,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode stack autojump command-not-found)
+plugins=(git vi-mode stack autojump command-not-found systemd)
 
 # User configuration
 
@@ -130,7 +130,6 @@ bindkey "." insert-last-word
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line 
-
 
 export PATH=$PATH:/home/adv_zxy/x-tools7h/arm-unknown-linux-gnueabihf/bin
 
