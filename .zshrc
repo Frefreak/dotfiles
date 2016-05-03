@@ -50,7 +50,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode stack autojump command-not-found systemd)
+plugins=(git vi-mode autojump command-not-found systemd)
 
 # User configuration
 
@@ -92,6 +92,8 @@ source $ZSH/oh-my-zsh.sh
 # }}}
 
 # {{{ custom stuffs
+autoload bashcompinit
+bashcompinit
 setopt extended_glob
 
 alias ls='ls --color=auto'
@@ -133,6 +135,7 @@ bindkey -M vicmd 'L' end-of-line
 export PATH=$PATH:/home/adv_zxy/x-tools7h/arm-unknown-linux-gnueabihf/bin
 
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+. /usr/share/bash-completion/completions/stack
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
