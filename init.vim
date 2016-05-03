@@ -22,6 +22,7 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'jpalardy/vim-slime'
 Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
+Plug 'wellle/targets.vim'
 call plug#end()
 "}}}
 
@@ -245,21 +246,8 @@ nnoremap H 0
 nnoremap L $
 
 inoremap jk <esc>
+cnoremap jk <C-c>
 
-onoremap in{ :<c-u>execute "normal! /{\r:noh\rvi{"<CR>
-onoremap il{ :<c-u>execute "normal! ?}\r:noh\rvi}"<CR>
-onoremap an{ :<c-u>execute "normal! /{\r:noh\rva{"<CR>
-onoremap al{ :<c-u>execute "normal! ?}\r:noh\rva}"<CR>
-
-onoremap in( :<c-u>execute "normal! /(\r:noh\rvi("<CR>
-onoremap il( :<c-u>execute "normal! ?)\r:noh\rvi)"<CR>
-onoremap an( :<c-u>execute "normal! /(\r:noh\rva("<CR>
-onoremap al( :<c-u>execute "normal! ?)\r:noh\rva)"<CR>
-
-onoremap in" :<c-u>execute "normal! /\"\r:noh\rvi\""<CR>
-onoremap il" :<c-u>execute "normal! ?\"\r:noh\rvi\""<CR>
-onoremap an" :<c-u>execute "normal! /\"\r:noh\rva\""<CR>
-onoremap al" :<c-u>execute "normal! ?\"\r:noh\rva\""<CR>
 "}}}
 
 " Some other stuffs {{{
@@ -278,8 +266,6 @@ endfunction
 " wrap visual text with 't' tag via ultisnips
 function! Wrap()
        :call UltiSnips#SaveLastVisualSelection()
-       ":call feedkeys ("it")
-       ":call UltiSnips#ExpandSnippet()
 endfunction
 
 command! Wrap :call Wrap()
