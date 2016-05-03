@@ -1,0 +1,11 @@
+snippet snip "Expanding to Snippet Block" b
+snippet ${1:trigger} "${2:desc}" $3
+$4
+`echo "endsnippet"`
+endsnippet
+
+snippet glob "Exppanding to Global" b
+global ${1:!p}
+$2
+endglobal
+endsnippet

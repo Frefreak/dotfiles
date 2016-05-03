@@ -1,0 +1,57 @@
+global !p
+def first_word(s):
+    w = s.split()
+    if w == []:
+        return ""
+    else:
+        return w[0]
+endglobal
+
+snippet tag "html tag"
+<$1>
+$2
+</`!p
+w = t[1].split()
+if w == []:
+  snip.rv = ""
+else:
+  snip.rv = w[0]`>$0
+endsnippet
+
+snippet cfunc "javascript function block inside class"
+$1: function($2) {
+	$3
+}$0
+endsnippet
+
+snippet func "javascript function block" 
+function $1() {
+$2
+}$0
+endsnippet
+
+snippet t "html tag"
+<$1>
+	${2:${VISUAL}}
+</`!p snip.rv = first_word(t[1])`>
+endsnippet
+
+snippet tc "html tag with class"
+<$1 class="$2">
+	${3:${VISUAL}}
+</`!p snip.rv = first_word(t[1])`>
+endsnippet
+
+snippet tf "tag with class fragment (reveal.js)"
+<$1 class="fragment">
+	$2
+</`!p snip.rv = first_word(t[1])`>
+endsnippet
+
+snippet time "show current time/date string"
+<script>Date();</script>
+endsnippet
+
+snippet fc "font color"
+<font color="${1:red}"> $2 </font>$0
+endsnippet

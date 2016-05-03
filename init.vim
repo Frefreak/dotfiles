@@ -40,6 +40,7 @@ filetype plugin indent on
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
+set cursorline
 "}}}
 
 " reset cursor to last location {{{
@@ -156,7 +157,7 @@ vmap  <expr>  <LEFT>   DVB_Drag('left')
 vmap  <expr>  <RIGHT>  DVB_Drag('right')
 vmap  <expr>  <DOWN>   DVB_Drag('down')
 vmap  <expr>  <UP>     DVB_Drag('up')
-vmap  <expr>  D        DVB_Duplicate()
+"vmap  <expr>  D        DVB_Duplicate()
 "}}}
 
 " deoplete {{{
@@ -198,7 +199,7 @@ let g:clang_make_default_keymappings = 0
 " Ultisnips {{{
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnipppetsDir = '~/.nvim/UltiSnips/'
-let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsExpandTrigger="<C-E>"
 let g:UltiSnipsListSnippets="<c-l>"
 "}}}
 
@@ -228,6 +229,7 @@ endif
 " deoplete-jedi {{{
 let deoplete#sources#jedi#show_docstring = 1
 "}}}
+
 " learn vimscript the hard way {{{
 inoremap <c-u> <esc>viwUea
 
@@ -260,7 +262,7 @@ onoremap an" :<c-u>execute "normal! /\"\r:noh\rva\""<CR>
 onoremap al" :<c-u>execute "normal! ?\"\r:noh\rva\""<CR>
 "}}}
 
-" Some tools I personal use {{{
+" Some other stuffs {{{
 
 " Markdown preview using github api, markdownPreview is an external executable
 command! MarkdownPreview :call MarkdownPreview()
@@ -273,5 +275,17 @@ function! MarkdownPreview()
 	:echom fnamemodify(@%, ':s?md?html?') . " saved"
 endfunction
 
+" wrap visual text with 't' tag via ultisnips
+function! Wrap()
+       :call UltiSnips#SaveLastVisualSelection()
+       ":call feedkeys ("it")
+       ":call UltiSnips#ExpandSnippet()
+endfunction
+
+command! Wrap :call Wrap()
+vnoremap <leader>tt :call UltiSnips#SaveLastVisualSelection()<CR>gvxot<C-R>=UltiSnips#ExpandSnippet()<CR>
+
+vnoremap  "+y
+nnoremap  "+p
 "}}}
 
