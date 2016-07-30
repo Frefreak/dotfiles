@@ -44,3 +44,8 @@ endsnippet
 snippet fc "font color"
 <font color="${1:red}"> $2 </font>$0
 endsnippet
+
+snippet img "image tag"
+<img src='$1' alt='`!p snip.rv = os.path.splitext(os.path.basename(t[1]))[0]`'/>
+$0
+endsnippet
