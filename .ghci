@@ -1,0 +1,8 @@
+:set prompt "\ESC[1;32m\STX\x3bb> \ESC[0m\STX"
+:set -XOverloadedStrings
+:set -XDataKinds
+:set -XPolyKinds
+:set -XTypeOperators
+:set -XGADTs
+:set -Wall
+:set -fdefer-type-errors
