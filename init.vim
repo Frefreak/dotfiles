@@ -23,6 +23,7 @@ Plug 'jpalardy/vim-slime'
 Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'wellle/targets.vim'
+Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript'] }
 call plug#end()
 "}}}
 
@@ -77,11 +78,15 @@ augroup filetype_yaml
 	autocmd FileType yaml setlocal tabstop=8 softtabstop=4 shiftwidth=4 shiftround
 augroup end
 
-augroup filetye_vim
+augroup filetype_vim
 	autocmd FileType vim setlocal foldmethod=marker
 augroup end
 
-augroup filetye_zsh
+augroup filetype_html
+	autocmd FileType html setlocal foldmethod=syntax
+augroup end
+
+augroup filetype_zsh
 	autocmd FileType zsh setlocal foldmethod=marker
 augroup end
 "}}}
@@ -104,6 +109,9 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor='tex'
 let g:Tex_CompileRule_pdf='xelatex -interaction=nonstopmode $*'
 let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_MultipleCompileFormats='pdf'
+
+imap `w \omega
 "}}}
 
 " neco-ghc {{{
@@ -206,6 +214,7 @@ let g:UltiSnipsListSnippets="<c-l>"
 
 " vim-slime {{{
 let g:slime_target = "tmux"
+nnoremap <leader>r :SlimeSend1 :r<CR>
 "}}}
 
 " gtags {{{
@@ -271,7 +280,7 @@ endfunction
 command! Wrap :call Wrap()
 vnoremap <leader>tt :call UltiSnips#SaveLastVisualSelection()<CR>gvxot<C-R>=UltiSnips#ExpandSnippet()<CR>
 
-vnoremap  "+y
-nnoremap  "+p
+vnoremap ty "+y
+nnoremap tp "+p
 "}}}
 
