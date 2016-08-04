@@ -1,6 +1,5 @@
 " vim-plug {{{
 call plug#begin('~/.config/nvim/plugged')
-Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'bling/vim-airline'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
@@ -23,7 +22,7 @@ Plug 'jpalardy/vim-slime'
 Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'wellle/targets.vim'
-Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'markdown', 'css'] }
+Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript'] }
 call plug#end()
 "}}}
 
@@ -33,7 +32,6 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:gruvbox_italic=1
 colorscheme gruvbox
 syntax on
-"set synmaxcol=120
 "}}}
 
 " general settings {{{
@@ -61,7 +59,7 @@ augroup end
 autocmd CompleteDone * pclose
 
 augroup filetype_web
-	autocmd Filetype html,xhtml,javascript  setlocal sw=2 ts=2 expandtab sts=2 shiftround cursorcolumn
+	autocmd Filetype html,xhtml,javascript  setlocal sw=2 ts=2 expandtab sts=2 shiftround
 	autocmd Filetype html,xhtml nnoremap <buffer> <localleader>ft Vatzf
 augroup end
 
@@ -111,6 +109,7 @@ let g:tex_flavor='tex'
 let g:Tex_CompileRule_pdf='xelatex -interaction=nonstopmode $*'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_MultipleCompileFormats='pdf'
+
 imap `w \omega
 "}}}
 
@@ -209,7 +208,7 @@ let g:clang_make_default_keymappings = 0
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnipppetsDir = '~/.nvim/UltiSnips/'
 let g:UltiSnipsExpandTrigger="<C-E>"
-let g:UltiSnipsListSnippets="<c-l>"
+"let g:UltiSnipsListSnippets="<c-l>"
 "}}}
 
 " vim-slime {{{
@@ -259,13 +258,20 @@ cnoremap jk <C-c>
 
 "}}}
 
+" Key mapping {{{
+vnoremap ty "+y
+nnoremap tp "+p
+
+" }}}
+"
 " Some other stuffs {{{
 
+"
 " Markdown preview using github api, markdownPreview is an external executable
 command! MarkdownPreview :call MarkdownPreview()
-"augroup filetype_markdown
-	"au BufWritePost *.md :MarkdownPreview
-"augroup end
+augroup filetype_markdown
+	au BufWritePost *.md :MarkdownPreview
+augroup end
 
 function! MarkdownPreview()
 	:silent :execute "!markdownPreview %"
@@ -280,7 +286,5 @@ endfunction
 command! Wrap :call Wrap()
 vnoremap <leader>tt :call UltiSnips#SaveLastVisualSelection()<CR>gvxot<C-R>=UltiSnips#ExpandSnippet()<CR>
 
-vnoremap ty "+y
-nnoremap tp "+p
 "}}}
 
