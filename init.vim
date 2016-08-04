@@ -269,9 +269,9 @@ nnoremap tp "+p
 "
 " Markdown preview using github api, markdownPreview is an external executable
 command! MarkdownPreview :call MarkdownPreview()
-augroup filetype_markdown
-	au BufWritePost *.md :MarkdownPreview
-augroup end
+"augroup filetype_markdown
+"	au BufWritePost *.md :MarkdownPreview
+"augroup end
 
 function! MarkdownPreview()
 	:silent :execute "!markdownPreview %"
