@@ -57,7 +57,6 @@ plugins=(git vi-mode autojump command-not-found systemd)
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -101,10 +100,10 @@ alias m='make'
 alias grep="egrep --color=auto"
 alias sudo='sudo '
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
-alias steam-wine='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe >/dev/null 2>&1 &'
 alias a2='aria2c'
 alias pc='proxychains -q'
 alias pca='proxychains -q aria2c'
+alias pcg='proxychains -q git clone'
 
 mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
@@ -112,6 +111,7 @@ ghc () { stack --verbosity slient exec -- ghc $* }
 ghci () { stack --verbosity slient exec -- ghci $* }
 ghc-pkg () { stack --verbosity slient exec -- ghc-pkg $* }
 clash () { stack --verbosity slient exec -- clash $* }
+hawk () { stack --verbosity slient exec -- hawk $* }
 n () {
 	if [[ ${1##*.} == "hs" || ${1##*.} == "lhs" ]];
 		then stack --verbosity slient exec -- nvim $*;
