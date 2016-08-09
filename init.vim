@@ -17,12 +17,13 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/vimproc.vim'
 Plug 'SirVer/ultisnips'
 Plug 'morhetz/gruvbox'
-Plug 'tmux-plugins/vim-tmux'
 Plug 'jpalardy/vim-slime'
 Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'wellle/targets.vim'
-Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript'] }
+Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php'] }
+Plug 'tmux-plugins/vim-tmux'
+Plug 'roxma/vim-tmux-clipboard'
 call plug#end()
 "}}}
 
@@ -88,6 +89,7 @@ augroup end
 augroup filetype_zsh
 	autocmd FileType zsh setlocal foldmethod=marker
 augroup end
+
 "}}}
 
 " NerdTree {{{

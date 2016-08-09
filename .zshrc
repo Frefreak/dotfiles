@@ -119,8 +119,9 @@ n () {
 	fi
 }
 compdef n=nvim
-
-TERM=xterm-256color
+# TIL the corrected way to set $TERM
+# This should be handled by terminal, not shell
+# TERM=xterm-256color
 
 SAVEHIST=1000
 HISTSIZE=1000
