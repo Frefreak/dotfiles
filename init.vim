@@ -89,7 +89,6 @@ augroup end
 augroup filetype_zsh
 	autocmd FileType zsh setlocal foldmethod=marker
 augroup end
-
 "}}}
 
 " NerdTree {{{
