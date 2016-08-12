@@ -1,0 +1,10 @@
+/script load scriptassist
+/scriptassist install nickcolor_expando.pl
+/scriptassist install nm2.pl
+/scriptassist install smartfilter.pl
+/scriptassist install tmux-nicklist-portable.pl
+/scriptassist autorun nickcolor_expando.pl
+/scriptassist autorun nm2.pl
+/scriptassist autorun scriptassist.pl
+/scriptassist autorun smartfilter.pl
+/scriptassist autorun tmux-nicklist-portable.pl
