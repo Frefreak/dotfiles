@@ -24,6 +24,8 @@ Plug 'wellle/targets.vim'
 Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php'] }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'roxma/vim-tmux-clipboard'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
 call plug#end()
 "}}}
 
@@ -89,12 +91,6 @@ augroup end
 augroup filetype_zsh
 	autocmd FileType zsh setlocal foldmethod=marker
 augroup end
-"}}}
-
-" NerdTree {{{
-noremap <C-n> :NERDTreeToggle<CR>
-noremap <F4> :tabp<CR>
-noremap <F5> :tabn<CR>
 "}}}
 
 " airline {{{
@@ -209,7 +205,7 @@ let g:clang_make_default_keymappings = 0
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnipppetsDir = '~/.nvim/UltiSnips/'
 let g:UltiSnipsExpandTrigger="<C-E>"
-"let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsListSnippets="<c-l>"
 "}}}
 
 " vim-slime {{{
@@ -264,7 +260,12 @@ vnoremap ty "+y
 nnoremap tp "+p
 
 " }}}
-"
+
+" fzf {{{
+nnoremap <silent> <leader>f :FZF -m<CR>
+nnoremap <silent> <leader>h :History <CR>
+" }}}
+
 " Some other stuffs {{{
 
 "
@@ -288,4 +289,3 @@ command! Wrap :call Wrap()
 vnoremap <leader>tt :call UltiSnips#SaveLastVisualSelection()<CR>gvxot<C-R>=UltiSnips#ExpandSnippet()<CR>
 
 "}}}
-
