@@ -96,14 +96,17 @@ bashcompinit
 setopt extended_glob
 
 alias ls='ls --color=auto'
+alias cm='cmake'
 alias m='make'
-alias grep="egrep --color=auto"
+alias grep="grep -P --color=auto"
 alias sudo='sudo '
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias a2='aria2c'
 alias pc='proxychains -q'
 alias pca='proxychains -q aria2c'
 alias pcg='proxychains -q git clone'
+
+alias torch-activate='. /home/adv_zxy/torch/install/bin/torch-activate'
 
 mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
@@ -119,9 +122,6 @@ n () {
 	fi
 }
 compdef n=nvim
-# TIL the corrected way to set $TERM
-# This should be handled by terminal, not shell
-# TERM=xterm-256color
 
 SAVEHIST=1000
 HISTSIZE=1000
@@ -136,6 +136,7 @@ bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line 
 
 export PATH=$PATH:/home/adv_zxy/x-tools7h/arm-unknown-linux-gnueabihf/bin
+export VIMRC="/home/adv_zxy/.config/nvim/init.vim"
 
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 . /usr/share/bash-completion/completions/stack
