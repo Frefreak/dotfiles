@@ -210,6 +210,8 @@ let g:UltiSnipsListSnippets="<c-l>"
 
 " vim-slime {{{
 let g:slime_target = "tmux"
+let g:slime_python_ipython = 1
+let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 nnoremap <leader>r :SlimeSend1 :r<CR>
 "}}}
 
@@ -266,9 +268,13 @@ nnoremap <silent> <leader>f :FZF -m<CR>
 nnoremap <silent> <leader>h :History <CR>
 " }}}
 
+" neomake {{{
+let g:neomake_cpp_enable_markers=['clang']
+let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall"]
+" }}}
+
 " Some other stuffs {{{
 
-"
 " Markdown preview using github api, markdownPreview is an external executable
 command! MarkdownPreview :call MarkdownPreview()
 "augroup filetype_markdown
