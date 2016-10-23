@@ -269,8 +269,9 @@ nnoremap <silent> <leader>h :History <CR>
 " }}}
 
 " neomake {{{
-let g:neomake_cpp_enable_markers=['clang']
+let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall"]
+let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
 " }}}
 
 " Some other stuffs {{{
