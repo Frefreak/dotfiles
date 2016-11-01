@@ -269,9 +269,11 @@ nnoremap <silent> <leader>h :History <CR>
 " }}}
 
 " neomake {{{
-let g:neomake_cpp_enabled_makers = ['clang']
-let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall"]
+let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
+    \ + ["-std=c++14", "-Wextra", "-Wall"]
 let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
+let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
+    \ + ['-d', 'missing-docstring,invalid-name']
 " }}}
 
 " Some other stuffs {{{
@@ -295,4 +297,18 @@ endfunction
 command! Wrap :call Wrap()
 vnoremap <leader>tt :call UltiSnips#SaveLastVisualSelection()<CR>gvxot<C-R>=UltiSnips#ExpandSnippet()<CR>
 
+function! RepeatLastCommand()
+	if !exists("b:tmux_target_pane")
+		let b:tmux_target_pane = input("tmux target pane: ", 1)
+	end
+	call system("tmux send-keys -t " . shellescape(b:tmux_target_pane) . " Up")
+	call system("tmux send-keys -t " . shellescape(b:tmux_target_pane) . " Enter")
+endfunction
+nnoremap <leader>p :call RepeatLastCommand()<CR>
+
+function! ChangeTmuxTargetPane()
+	let b:tmux_target_pane = input("tmux target pane: ", b:tmux_target_pane)
+endfunction
+
+inoremap `l λ
 "}}}

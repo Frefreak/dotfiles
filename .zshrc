@@ -94,6 +94,7 @@ source $ZSH/oh-my-zsh.sh
 autoload bashcompinit
 bashcompinit
 setopt extended_glob
+setopt no_histverify
 
 alias ls='ls --color=auto'
 alias cm='cmake'
@@ -121,7 +122,13 @@ n () {
 		else nvim $*;
 	fi
 }
+
+bv() {
+	xxd $* | less
+}
+
 compdef n=nvim
+compdef bv=xxd
 
 SAVEHIST=1000
 HISTSIZE=1000
