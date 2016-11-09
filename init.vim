@@ -270,10 +270,10 @@ nnoremap <silent> <leader>h :History <CR>
 
 " neomake {{{
 let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
-    \ + ["-std=c++14", "-Wextra", "-Wall"]
+    \ + ["-std=c++1z"]
 let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
 let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
-    \ + ['-d', 'missing-docstring,invalid-name']
+    \ + ['-d', 'missing-docstring,invalid-name,maybe-no-member']
 " }}}
 
 " Some other stuffs {{{
