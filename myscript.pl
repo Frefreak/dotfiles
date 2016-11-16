@@ -20,6 +20,22 @@ if (defined $ENV{TMUX}) {
 } else {
 	print CLIENTCRAP '%R!%G!%B! %W%9%FNot under tmux!%n';
 }
+our $username = "c4r50nz";
+sub msgPublic {
+    my ($server, $msg, $nick, $address, $target) = @_;
+    if ($msg =~ $username) {
+	system("kdialog --title " . "\"Irssi: You have been mentioned!\"" .
+		" --passivepopup \"" . $msg . "\" 5");
+    }
+}
+sub msgPrivate {
+    my ($server, $msg, $nick, $address) = @_;
+    system("kdialog --title " . "\"Irssi: You have a private message!\"" .
+		" --passivepopup \"" . $nick . " @ " . $address . "\" 5");
+}
+
+Irssi::signal_add('message public', 'msgPublic');
+Irssi::signal_add('message private', 'msgPrivate');
 
 # .irssi/script structure
 # .
