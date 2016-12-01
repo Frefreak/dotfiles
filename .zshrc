@@ -102,13 +102,15 @@ alias ls='ls --color=auto'
 alias cm='cmake'
 alias m='make'
 alias grep="grep -P --color=auto"
+alias jf='journalctl -f'
 alias sudo='sudo '
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias a2='aria2c'
 alias pc='proxychains -q'
 alias pca='proxychains -q aria2c'
 alias pcg='proxychains -q git clone'
-
+alias site_deploy='stack exec -- site deploy'
+alias site_build='stack exec -- site build'
 alias torch-activate='. /home/adv_zxy/torch/install/bin/torch-activate'
 
 mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
@@ -124,6 +126,16 @@ n () {
 		else nvim $*;
 	fi
 }
+man() {
+    LESS_TERMCAP_md=$'\e[01;31m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;44;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[01;32m' \
+    command man "$@"
+}
+compdef man=man
 
 bv() {
 	xxd $* | less

@@ -1,6 +1,7 @@
 syntax on
 set t_Co=256
 set background=dark
+colorscheme primary
 set fileencodings=utf8,cp936,gb18030,big5
 set autoindent
 filetype plugin indent on
@@ -60,22 +61,3 @@ nnoremap <C-V>     v
 vnoremap    v   <C-V>
 vnoremap <C-V>     v
 
-nnoremap <leader>" viw<esc>a"<esc>bi"<esc>ee
-nnoremap <leader>( viw<esc>a)<esc>bi(<esc>ee
-vnoremap <leader>" viw<esc>`>a"<esc>`<i"<esc>`>2l
-vnoremap <leader>( viw<esc>`>a)<esc>`<i(<esc>`>2l
-
-nnoremap H 0
-nnoremap L $
-
-inoremap jk <esc>
-
-onoremap in( :<c-u>normal! f(vi(<CR>
-onoremap il( :<c-u>normal! F)vi)<CR>
-onoremap an( :<c-u>normal! f(va(<CR>
-onoremap al( :<c-u>normal! F)va)<CR>
-
-onoremap in{ :<c-u>execute "normal! /{\r:noh\rvi{"<CR>
-onoremap il{ :<c-u>execute "normal! ?}\r:noh\rvi}"<CR>
-onoremap an{ :<c-u>execute "normal! /{\r:noh\rva{"<CR>
-onoremap al{ :<c-u>execute "normal! ?}\r:noh\rva}"<CR>
