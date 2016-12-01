@@ -95,6 +95,8 @@ autoload bashcompinit
 bashcompinit
 setopt extended_glob
 setopt no_histverify
+setopt noincappendhistory
+setopt nosharehistory
 
 alias ls='ls --color=auto'
 alias cm='cmake'
@@ -138,7 +140,7 @@ bindkey -v
 bindkey "" history-beginning-search-backward
 bindkey ""  history-beginning-search-forward
 bindkey "." insert-last-word
-bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M viins 'kj' vi-cmd-mode
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line 
 
@@ -147,6 +149,7 @@ export VIMRC="/home/adv_zxy/.config/nvim/init.vim"
 
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 . /usr/share/bash-completion/completions/stack
+eval "$(pandoc --bash-completion)"
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'

@@ -252,8 +252,8 @@ vnoremap <leader>( <esc>`>a)<esc>`<i(<esc>`>2l
 nnoremap H 0
 nnoremap L $
 
-inoremap jk <esc>
-cnoremap jk <C-c>
+inoremap kj <esc>
+cnoremap kj <C-c>
 
 "}}}
 
@@ -311,4 +311,5 @@ function! ChangeTmuxTargetPane()
 endfunction
 
 inoremap `l λ
+set timeoutlen=100
 "}}}
