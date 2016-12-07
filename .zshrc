@@ -98,6 +98,9 @@ setopt no_histverify
 setopt noincappendhistory
 setopt nosharehistory
 
+eval $(dircolors)
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
 alias ls='ls --color=auto'
 alias cm='cmake'
 alias m='make'
