@@ -269,6 +269,7 @@ nnoremap <silent> <leader>h :History <CR>
 " }}}
 
 " neomake {{{
+let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
     \ + ["-std=c++1z"]
 let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
@@ -311,5 +312,5 @@ function! ChangeTmuxTargetPane()
 endfunction
 
 inoremap `l λ
-set timeoutlen=100
+set timeoutlen=500
 "}}}
