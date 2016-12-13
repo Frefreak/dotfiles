@@ -29,9 +29,10 @@ Plug 'junegunn/fzf'
 call plug#end()
 "}}}
 
-" color scheme related {{{
+" display related {{{
 set background=dark
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let g:gruvbox_italic=1
 colorscheme gruvbox
 syntax on
