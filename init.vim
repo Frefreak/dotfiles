@@ -9,7 +9,7 @@ Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius'
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
 Plug 'benekastah/neomake'
-Plug 'Rip-Rip/clang_complete', { 'for' : 'cpp' }
+Plug 'zchee/deoplete-clang', { 'for' : 'cpp' }
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'atweiden/vim-dragvisuals'
 Plug 'tpope/vim-fugitive'
@@ -209,15 +209,6 @@ augroup filetype_haskell
 augroup end
 "}}}
 
-" clang_complete {{{
-let g:clang_complete_auto = 0
-let g:clang_auto_select = 0
-let g:clang_omnicppcomplete_compliance = 0
-let g:clang_make_default_keymappings = 0
-let g:clang_library_path='/usr/lib/'
-let g:clang_use_library = 1
-"}}}
-
 " Ultisnips {{{
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnipppetsDir = '~/.nvim/UltiSnips/'
@@ -253,6 +244,11 @@ endif
 
 " deoplete-jedi {{{
 let deoplete#sources#jedi#show_docstring = 1
+"}}}
+
+" deoplete-clang {{{
+let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so.3.9"
+let g:deoplete#sources#clang#clang_header="/usr/include/clang"
 "}}}
 
 " learn vimscript the hard way {{{
