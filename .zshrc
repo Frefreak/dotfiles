@@ -97,6 +97,7 @@ setopt extended_glob
 setopt no_histverify
 setopt noincappendhistory
 setopt nosharehistory
+setopt magic_equal_subst
 
 eval $(dircolors)
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -141,7 +142,7 @@ man() {
 compdef man=man
 
 bv() {
-	xxd $* | less
+	xxd $* | n -
 }
 
 compdef n=nvim
@@ -170,4 +171,20 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
 
+## fzf
+export FZF_DEFAULT_COMMAND='ag -g ""'
+source /usr/share/fzf/completion.zsh
+# fh - repeat history
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+# fkill - kill process
+fkill() {
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    kill -${1:-9} $pid
+  fi
+}
 # }}}
