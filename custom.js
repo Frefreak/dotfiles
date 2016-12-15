@@ -6,6 +6,6 @@ require([
 ], function() {
   CodeMirror.Vim.map("H", "0", "normal");
   CodeMirror.Vim.map("L", "$", "normal");
-  CodeMirror.Vim.map("jk", "<Esc>", "insert");
+  CodeMirror.Vim.map("kj", "<Esc>", "insert");
   CodeMirror.Vim.map(";", ":", "normal");
 });
