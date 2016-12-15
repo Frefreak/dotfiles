@@ -36,7 +36,9 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let g:gruvbox_italic=1
 colorscheme gruvbox
-syntax on
+syntax enable
+highlight IncSearch ctermbg=000000 ctermfg=darkred cterm=underline
+highlight Search ctermbg=000000 ctermfg=darkred cterm=underline
 "}}}
 
 " general settings {{{
@@ -47,6 +49,7 @@ set tabstop=8
 set softtabstop=8
 set shiftwidth=8
 set cursorline
+set inccommand=nosplit
 "}}}
 
 " reset cursor to last location {{{
@@ -126,7 +129,7 @@ autocmd Filetype xhtml,html call clearmatches() " html is special
 nnoremap <silent> n   n:call HLNext(0.01)<cr>
 nnoremap <silent> N   N:call HLNext(0.01)<cr>
 
-highlight WhiteOnBlack ctermbg=black ctermfg=white
+highlight WhiteOnBlack ctermbg=darkred ctermfg=000000
 function! _HLNext (blinktime)
 	let [bufnum, lnum, col, off] = getpos('.')
 	let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
