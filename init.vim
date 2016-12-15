@@ -25,8 +25,8 @@ Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php'] }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'roxma/vim-tmux-clipboard'
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 "}}}
 
@@ -279,7 +279,8 @@ nnoremap tp "+p
 
 " fzf {{{
 nnoremap <silent> <leader>f :FZF -m<CR>
-nnoremap <silent> <leader>h :History <CR>
+nnoremap <silent> <leader>h :History<CR>
+nnoremap <silent> <leader>a :Ag<CR>
 " }}}
 
 " neomake {{{
