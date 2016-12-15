@@ -129,12 +129,12 @@ autocmd Filetype xhtml,html call clearmatches() " html is special
 nnoremap <silent> n   n:call HLNext(0.01)<cr>
 nnoremap <silent> N   N:call HLNext(0.01)<cr>
 
-highlight WhiteOnBlack ctermbg=darkred ctermfg=000000
+highlight BlinkHighlight ctermbg=darkred ctermfg=000000
 function! _HLNext (blinktime)
 	let [bufnum, lnum, col, off] = getpos('.')
 	let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
 	let target_pat = '\c\%#\%('.@/.'\)'
-	let ring = matchadd('WhiteOnBlack', target_pat, 101)
+	let ring = matchadd('BlinkHighlight', target_pat, 101)
 	redraw
 	exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
 	call matchdelete(ring)
