@@ -130,17 +130,6 @@ n () {
 		else nvim $*;
 	fi
 }
-man() {
-    LESS_TERMCAP_md=$'\e[01;31m' \
-    LESS_TERMCAP_me=$'\e[0m' \
-    LESS_TERMCAP_se=$'\e[0m' \
-    LESS_TERMCAP_so=$'\e[01;44;33m' \
-    LESS_TERMCAP_ue=$'\e[0m' \
-    LESS_TERMCAP_us=$'\e[01;32m' \
-    command man "$@"
-}
-compdef man=man
-
 bv() {
 	xxd $* | n -
 }
@@ -161,6 +150,7 @@ bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line 
 
 export PATH=$PATH:/home/adv_zxy/x-tools7h/arm-unknown-linux-gnueabihf/bin
+export MANPAGER="nvim -c 'set ft=man' -c 'call clearmatches()' -"
 export VIMRC="/home/adv_zxy/.config/nvim/init.vim"
 
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
