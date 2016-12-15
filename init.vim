@@ -21,6 +21,7 @@ Plug 'jpalardy/vim-slime'
 Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'wellle/targets.vim'
+Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php'] }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'roxma/vim-tmux-clipboard'
@@ -288,6 +289,11 @@ let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
 let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
 let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
     \ + ['-d', 'missing-docstring,invalid-name,maybe-no-member']
+" }}}
+
+" nerdcommenter {{{
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
 " }}}
 
 " Some other stuffs {{{
