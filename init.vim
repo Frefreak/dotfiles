@@ -122,7 +122,7 @@ let g:haskellmode_completion_ghc = 0
 
 " from Damian Conway, More Instantly Better Vim - OSCON 2013 {{{
 " ColorColumn
-call matchadd('ColorColumn', '\%>81v', 100)
+call matchadd('ColorColumn', '\%81v', 100)
 autocmd Filetype xhtml,html call clearmatches() " html is special
 
 " jump to next
@@ -256,15 +256,8 @@ let g:deoplete#sources#clang#clang_header="/usr/include/clang"
 "}}}
 
 " learn vimscript the hard way {{{
-inoremap <c-u> <esc>viwUea
-
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-
-nnoremap <leader>" viw<esc>a"<esc>bi"<esc>ee
-nnoremap <leader>( viw<esc>a)<esc>bi(<esc>ee
-vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>`>2l
-vnoremap <leader>( <esc>`>a)<esc>`<i(<esc>`>2l
 
 nnoremap H 0
 nnoremap L $
