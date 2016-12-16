@@ -54,7 +54,7 @@ plugins=(git vi-mode autojump command-not-found systemd)
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -131,7 +131,7 @@ n () {
 	fi
 }
 bv() {
-	xxd $* | n -
+	xxd $* | n - -c "set ft=xxd"
 }
 
 compdef n=nvim
@@ -164,10 +164,12 @@ ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
 ## fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
 source /usr/share/fzf/completion.zsh
+
 # fh - repeat history
 fh() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
+
 # fkill - kill process
 fkill() {
   pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
@@ -177,4 +179,23 @@ fkill() {
     kill -${1:-9} $pid
   fi
 }
+
+# filter file opened by nvim
+ff() {
+	filename=$(n --headless -c 'echo join(v:oldfiles, "\n")' +q |& tr -d '' |\
+		sort -u | fzf)
+	[[ -n $filename ]] && n $filename
+}
+
+# filter file content opened by nvim
+ffc() {
+	filename=$(n --headless -c 'echo join(v:oldfiles, "\n")' +q |&\
+		grep -v "scp://|https?://|man://|ftp://" | tr -d '' | sort -u |\
+		xargs -I{} sh -c "test -f '{}' && echo '{}'" |\
+		xargs ag --nobreak --noheading . | fzf |\
+		awk -F':' '{print $1, "+"$2}')
+	args=("${(@s: :)filename}")
+	[[ -n $args[1] ]] && n $args
+}
+
 # }}}

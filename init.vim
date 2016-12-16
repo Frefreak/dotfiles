@@ -183,7 +183,7 @@ function! s:check_back_space() abort "{{{
 	return !col || getline('.')[col - 1]  =~ '\s'
 	endfunction
 "}}}
-inoremap <silent><expr><C-k> deoplete#mappings#manual_complete()
+inoremap <silent><expr><C-x><C-o> deoplete#mappings#manual_complete()
 augroup deoplete_special
 	au FileType haskell let g:deoplete#disable_auto_complete = 0
 	au FileType python let g:deoplete#disable_auto_complete = 0
@@ -259,7 +259,7 @@ let g:deoplete#sources#clang#clang_header="/usr/include/clang"
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-nnoremap H 0
+nnoremap H ^
 nnoremap L $
 
 inoremap kj <esc>
