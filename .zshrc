@@ -184,7 +184,7 @@ fkill() {
 ff() {
 	filename=$(n --headless -c 'echo join(v:oldfiles, "\n")' +q |& tr -d '' |\
 		sort -u | fzf)
-	[[ -n $filename ]] && n $filename
+	[[ -n $filename ]] && print -z "n" $filename
 }
 
 # filter file content opened by nvim
@@ -195,7 +195,7 @@ ffc() {
 		xargs ag --nobreak --noheading . | fzf |\
 		awk -F':' '{print $1, "+"$2}')
 	args=("${(@s: :)filename}")
-	[[ -n $args[1] ]] && n $args
+	[[ -n $args[1] ]] && print -z "n" $args
 }
 
 # }}}
