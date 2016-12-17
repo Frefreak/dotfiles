@@ -189,7 +189,7 @@ uniqNoSort() {
 ff() {
 	filename=$(n --headless -c 'echo join(v:oldfiles, "\n")' +q |& \
 		tr -d '' | uniqNoSort | fzf +s)
-	[[ -n $filename ]] && print -z "n" "\"$filename\""
+	[[ -n $filename ]] && print -z "n" "$filename"
 }
 
 # filter file content opened by nvim

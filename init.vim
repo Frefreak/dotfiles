@@ -174,16 +174,17 @@ vmap  <expr>  <UP>     DVB_Drag('up')
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#disable_auto_complete = 1
 
-inoremap <silent><expr> <TAB>
+inoremap <silent><expr> <Tab>
 		\ pumvisible() ? "\<C-n>" :
 		\ <SID>check_back_space() ? "\<TAB>" :
 		\ deoplete#mappings#manual_complete()
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 function! s:check_back_space() abort "{{{
 	let col = col('.') - 1
 	return !col || getline('.')[col - 1]  =~ '\s'
 	endfunction
 "}}}
-inoremap <silent><expr><C-x><C-o> deoplete#mappings#manual_complete()
+
 augroup deoplete_special
 	au FileType haskell let g:deoplete#disable_auto_complete = 0
 	au FileType python let g:deoplete#disable_auto_complete = 0
@@ -215,7 +216,7 @@ augroup end
 
 " Ultisnips {{{
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnipppetsDir = '~/.nvim/UltiSnips/'
+let g:UltiSnipsSnipppetsDir='/home/adv_zxy/.local/share/nvim/UltiSnips/'
 let g:UltiSnipsExpandTrigger="<C-E>"
 let g:UltiSnipsListSnippets="<c-l>"
 "}}}
