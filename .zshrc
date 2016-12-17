@@ -180,19 +180,25 @@ fkill() {
   fi
 }
 
+# unique without sorting
+uniqNoSort() {
+	perl -ne 'print unless $seen{$_}++'
+}
+
 # filter file opened by nvim
 ff() {
-	filename=$(n --headless -c 'echo join(v:oldfiles, "\n")' +q |& tr -d '' |\
-		sort -u | fzf)
-	[[ -n $filename ]] && print -z "n" $filename
+	filename=$(n --headless -c 'echo join(v:oldfiles, "\n")' +q |& \
+		tr -d '' | uniqNoSort | fzf +s)
+	[[ -n $filename ]] && print -z "n" "\"$filename\""
 }
 
 # filter file content opened by nvim
 ffc() {
 	filename=$(n --headless -c 'echo join(v:oldfiles, "\n")' +q |&\
-		grep -v "scp://|https?://|man://|ftp://" | tr -d '' | sort -u |\
-		xargs -I{} sh -c "test -f '{}' && echo '{}'" |\
-		xargs ag --nobreak --noheading . | fzf |\
+		grep -v "scp://|https?://|man://|ftp://" | tr -d '' |\
+		uniqNoSort |\
+		xargs -I{} sh -c "test -f '{}' && test -r '{}' && echo '{}'" |\
+		xargs ag --nobreak --noheading . | fzf +s |\
 		awk -F':' '{print $1, "+"$2}')
 	args=("${(@s: :)filename}")
 	[[ -n $args[1] ]] && print -z "n" $args
