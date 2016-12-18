@@ -16,6 +16,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/vimproc.vim'
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'morhetz/gruvbox'
 Plug 'jpalardy/vim-slime'
 Plug 'aceofall/gtags.vim'
@@ -216,9 +217,9 @@ augroup end
 
 " Ultisnips {{{
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnipppetsDir='/home/adv_zxy/.local/share/nvim/UltiSnips/'
-let g:UltiSnipsExpandTrigger="<C-E>"
-let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsSnippetsDir='~/.local/share/nvim/UltiSnips/'
+let g:UltiSnipsExpandTrigger="<C-e>"
+let g:UltiSnipsListSnippets="<C-l>"
 "}}}
 
 " vim-slime {{{
