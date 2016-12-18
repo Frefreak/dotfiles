@@ -43,6 +43,7 @@ highlight Search ctermbg=000000 ctermfg=darkred cterm=underline
 "}}}
 
 " general settings {{{
+set rtp+=~/.local/share/nvim
 set mouse=
 set fileencodings=utf8,cp936,gb18030,big5
 filetype plugin indent on
