@@ -38,8 +38,8 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let g:gruvbox_italic=1
 colorscheme gruvbox
 syntax enable
-highlight IncSearch ctermbg=000000 ctermfg=darkred cterm=underline
-highlight Search ctermbg=000000 ctermfg=darkred cterm=underline
+highlight IncSearch ctermbg=016 ctermfg=darkred cterm=underline
+highlight Search ctermbg=016 ctermfg=darkred cterm=underline
 "}}}
 
 " general settings {{{
@@ -192,11 +192,6 @@ augroup deoplete_special
 	au FileType python let g:deoplete#disable_auto_complete = 0
 	au FileType c,cpp let g:deoplete#disable_auto_complete = 0
 augroup end
-
-function! s:check_back_space() abort "{{{
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
 "}}}
 
 "}}}
@@ -242,10 +237,10 @@ let GtagsCscope_Quiet = 1
 " enable this to start writing nvim-hs plugin for nvim {{{
 let g:nvimhsmode = 0
 if nvimhsmode
-	call rpcrequest(rpcstart(expand('$HOME/bin/nvim-hs-devel.sh')), "PingNvimhs")
-	augroup neomake_enable
-		au!
-	augroup end
+    call rpcrequest(jobstart(expand('/home/adv_zxy/bin/nvim-hs-devel.sh'), {'rpc': v:true}), "PingNvimhs")
+    augroup nvim-hs
+	au!
+    augroup end
 endif
 "}}}
 
