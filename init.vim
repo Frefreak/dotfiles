@@ -98,6 +98,10 @@ augroup end
 augroup filetype_zsh
 	autocmd FileType zsh setlocal foldmethod=marker
 augroup end
+
+augroup md_report_pdf
+	autocmd BufWritePost \d\d\d\d-\d\d-\d\d.md call jobstart('pandoc_beamer ' . expand('%') . ' -o ' . expand('%:t:s?md$?pdf?'))
+augroup end
 "}}}
 
 " airline {{{

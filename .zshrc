@@ -50,7 +50,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode autojump command-not-found systemd)
+plugins=(git vi-mode autojump command-not-found systemd archlinux)
 
 # User configuration
 
@@ -116,6 +116,7 @@ alias pcg='proxychains -q git clone'
 alias site_deploy='stack exec -- site deploy'
 alias site_build='stack exec -- site build'
 alias torch-activate='. /home/adv_zxy/torch/install/bin/torch-activate'
+alias hoogle-ghc='hoogle server --port=3000 --database=~/.hoogle/ghc.hoo --local'
 
 mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
