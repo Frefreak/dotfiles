@@ -11,6 +11,7 @@ Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
 Plug 'benekastah/neomake'
 Plug 'zchee/deoplete-clang', { 'for' : 'cpp' }
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
+Plug 'davidhalter/jedi-vim', { 'for' : 'python' }
 Plug 'atweiden/vim-dragvisuals'
 Plug 'tpope/vim-fugitive'
 Plug 'Shougo/deoplete.nvim'
@@ -198,8 +199,6 @@ augroup deoplete_special
 augroup end
 "}}}
 
-"}}}
-
 " ghc-mod {{{
 noremap <leader>tw :GhcModTypeInsert<CR>
 noremap <leader>ts :GhcModSplitFunCase<CR>
@@ -248,8 +247,10 @@ if nvimhsmode
 endif
 "}}}
 
-" deoplete-jedi {{{
+" jedi {{{
 let deoplete#sources#jedi#show_docstring = 1
+let g:jedi#completions_enabled = 0
+autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 "}}}
 
 " deoplete-clang {{{
