@@ -79,7 +79,7 @@ augroup filetye_python
 augroup end
 
 augroup filetype_haskell
-	autocmd FileType haskell setlocal tabstop=8 expandtab softtabstop=4 shiftwidth=4 shiftround
+	autocmd FileType haskell,lhaskell setlocal tabstop=8 expandtab softtabstop=4 shiftwidth=4 shiftround
 	autocmd FileType cabal setlocal ts=2 expandtab sw=2 sts=2
 	autocmd FileType hamlet setlocal expandtab softtabstop=2 shiftwidth=2 shiftround
 augroup end
