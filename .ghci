@@ -6,8 +6,12 @@
 :set -XGADTs
 :set -fdefer-type-errors
 import qualified Data.Text as T
-import qualified Data.ByteString.Lazy.Char8 as LBS
+import qualified Data.Text.IO as TIO
 import qualified Data.ByteString.Char8 as BS
+import qualified Data.ByteString.Lazy.Char8 as LBS
+import Data.Bits (xor, (.&.), (.|.))
+import Data.List
+import Data.List.Split
 import Data.Char
 import Network.HTTP.Req
 import Control.Exception
