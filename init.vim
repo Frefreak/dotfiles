@@ -273,7 +273,7 @@ cnoremap kj <C-c>
 " Key mapping {{{
 vnoremap ty "+y
 nnoremap tp "+p
-
+cmap w!! w !sudo tee % > /dev/null
 " }}}
 
 " fzf {{{
