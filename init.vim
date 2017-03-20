@@ -1,7 +1,7 @@
 " vim-plug {{{
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'scrooloose/nerdcommenter'
-Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
@@ -74,6 +74,10 @@ augroup filetype_web
 	autocmd Filetype html,xhtml nnoremap <buffer> <localleader>ft Vatzf
 augroup end
 
+augroup filetye_vim
+	autocmd FileType vim setlocal shiftwidth=4 tabstop=4
+augroup end
+
 augroup filetye_python
 	autocmd FileType python setlocal shiftwidth=4 tabstop=4
 augroup end
@@ -103,13 +107,79 @@ augroup end
 augroup md_report_pdf
 	autocmd BufWritePost \d\d\d\d-\d\d-\d\d.md call jobstart('pandoc_beamer ' . expand('%') . ' -o ' . expand('%:t:s?md$?pdf?'))
 augroup end
+
+function! F_focus_lost()
+	let g:focus_losted = 1
+	highlight Normal ctermbg=None
+endfunction
+
+function! F_focus_gained()
+endfunction
+
+" TODO make this work
+augroup dim_background
+	" autocmd FocusLost * :call F_focus_lost()
+	" autocmd FocusGained * :call F_focus_gained()
+augroup end
+
 "}}}
 
-" airline {{{
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
+" lightline {{{
+set noshowmode
+let g:lightline = {
+	\ 'colorscheme': 'gruvbox',
+	\ 'active': {
+	\	'left': [ ['mode', 'paste'],
+	\			  ['fugitive', 'filename'] ],
+	\ },
+	\ 'component_function': {
+	\   'fugitive': 'LightlineFugitive',
+	\	'readonly': 'LightlineReadonly',
+	\   'modified': 'LightlineModified',
+	\   'filename': 'LightlineFilename'
+	\ },
+	\ 'component': {
+	\ 'lineinfo': ' %3l:%-2v',
+	\ },
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' },
+	\ }
+
+function! LightlineModified()
+	if &filetype == "help"
+		return ""
+    elseif &modified
+		return "+"
+	elseif &modifiable
+		return ""
+	else
+		return ""
+	endif
+endfunction
+
+function! LightlineReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LightlineFugitive()
+	if exists("*fugitive#head")
+		let branch = fugitive#head()
+		return branch !=# '' ? ' '.branch : ''
+	endif
+	return ''
+endfunction
+
+function! LightlineFilename()
+	return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+		 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+		 \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
 "}}}
 
 " vim-latex {{{
@@ -124,7 +194,7 @@ imap `w \omega
 
 " neco-ghc {{{
 let g:haskellmode_completion_ghc = 0
-"autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc " this seems unnecessary
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc " this seems unnecessary
 "}}}
 
 " from Damian Conway, More Instantly Better Vim - OSCON 2013 {{{
