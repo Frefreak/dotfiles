@@ -1,0 +1,17 @@
+snippet compinit "python2/3 initialization" b
+from __future__ import print_function
+import string
+
+try:
+	input = raw_input
+except NameError:
+	pass
+endsnippet
+
+snippet pyd "pylint disable" b
+# pylint: disable=${1:no-name-in-module}
+endsnippet
+
+snippet pye "pylint disable" b
+# pylint: enable=${1:no-name-in-module}
+endsnippet
