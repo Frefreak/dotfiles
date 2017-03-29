@@ -379,13 +379,10 @@ function! MarkdownPreview()
 	:echom fnamemodify(@%, ':s?md?html?') . " saved"
 endfunction
 
-" wrap visual text with 't' tag via ultisnips
-function! Wrap()
-       :call UltiSnips#SaveLastVisualSelection()
+function! ToggleFlag()
+	exec "normal! 0f#bdiw2wviwpbbhhp0"
 endfunction
-
-command! Wrap :call Wrap()
-vnoremap <leader>tt :call UltiSnips#SaveLastVisualSelection()<CR>gvxot<C-R>=UltiSnips#ExpandSnippet()<CR>
+nnoremap <leader>tt :call ToggleFlag()<CR>
 
 function! RepeatLastCommand()
 	if !exists("b:tmux_target_pane")
