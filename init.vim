@@ -29,13 +29,13 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 "}}}
 
 " display related {{{
 set background=dark
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let g:gruvbox_italic=1
 colorscheme gruvbox
 syntax enable
@@ -324,7 +324,7 @@ autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 "}}}
 
 " deoplete-clang {{{
-let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so.3.9"
+let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so.4.0"
 let g:deoplete#sources#clang#clang_header="/usr/include/clang"
 "}}}
 
@@ -343,6 +343,7 @@ cnoremap kj <C-c>
 " Key mapping {{{
 vnoremap ty "+y
 nnoremap tp "+p
+nnoremap a9 v<esc>ea(<esc>A)<esc>gv<esc>
 cmap w!! w !sudo tee % > /dev/null
 " }}}
 
