@@ -99,8 +99,8 @@ setopt noincappendhistory
 setopt nosharehistory
 setopt magic_equal_subst
 
-eval $(dircolors)
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# eval $(dircolors)
+# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 alias ls='ls --color=auto'
 alias cm='cmake'
@@ -124,7 +124,6 @@ ghc () { stack --verbosity slient exec -- ghc $* }
 ghci () { stack --verbosity slient exec -- ghci $* }
 ghc-pkg () { stack --verbosity slient exec -- ghc-pkg $* }
 clash () { stack --verbosity slient exec -- clash $* }
-hawk () { stack --verbosity slient exec -- hawk $* }
 n () {
 	if [[ ${1##*.} == "hs" || ${1##*.} == "lhs" ]];
 		then stack --verbosity slient exec -- nvim $*;

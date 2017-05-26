@@ -9,7 +9,7 @@ Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius'
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
 Plug 'benekastah/neomake'
-Plug 'zchee/deoplete-clang', { 'for' : 'cpp' }
+Plug 'zchee/deoplete-clang', { 'for' : ['cpp', 'c'] }
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'davidhalter/jedi-vim', { 'for' : 'python' }
 Plug 'atweiden/vim-dragvisuals'
@@ -30,6 +30,7 @@ Plug 'roxma/vim-tmux-clipboard'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'embear/vim-localvimrc'
 call plug#end()
 "}}}
 
@@ -354,6 +355,7 @@ nnoremap <silent> <leader>a :Ag<CR>
 " }}}
 
 " neomake {{{
+let g:neomake_c_enabled_makers = ['clang']
 let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
     \ + ["-std=c++1z"]
