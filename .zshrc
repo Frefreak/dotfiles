@@ -147,7 +147,7 @@ bindkey ""  history-beginning-search-forward
 bindkey "." insert-last-word
 bindkey -M viins 'kj' vi-cmd-mode
 bindkey -M vicmd 'H' beginning-of-line
-bindkey -M vicmd 'L' end-of-line 
+bindkey -M vicmd 'L' end-of-line
 
 export PATH=$PATH:/home/adv_zxy/x-tools7h/arm-unknown-linux-gnueabihf/bin
 export MANPAGER="nvim -c 'set ft=man' -c 'call clearmatches()' -"
