@@ -131,31 +131,29 @@ let g:lightline = {
 	\ 'colorscheme': 'gruvbox',
 	\ 'active': {
 	\	'left': [ ['mode', 'paste'],
-	\			  ['fugitive', 'filename'] ],
+	\			  ['fugitive', 'filename', 'modified'] ],
 	\ },
 	\ 'component_function': {
 	\   'fugitive': 'LightlineFugitive',
 	\	'readonly': 'LightlineReadonly',
-	\   'modified': 'LightlineModified',
 	\   'filename': 'LightlineFilename'
 	\ },
 	\ 'component': {
-	\ 'lineinfo': ' %3l:%-2v',
+	\ 	'lineinfo': ' %3l:%-2v',
+	\   'modified': '%#ModifiedColor#%{LightlineModified()}',
 	\ },
 	\ 'separator': { 'left': '', 'right': '' },
 	\ 'subseparator': { 'left': '', 'right': '' },
 	\ }
 
 function! LightlineModified()
-	if &filetype == "help"
-		return ""
-    elseif &modified
-		return "+"
-	elseif &modifiable
-		return ""
-	else
-		return ""
-	endif
+	let map = { 'V': 'n', "\<C-v>": 'n', 's': 'n', 'v': 'n', "\<C-s>": 'n', 'c': 'n', 'R': 'n'}
+	let mode = get(map, mode()[0], mode()[0])
+	let bgcolor = {'n': 239, 'i': 239}
+	let color = get(bgcolor, mode, bgcolor.n)
+	exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d cterm=bold',
+		\ color)
+	return &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! LightlineReadonly()
@@ -178,8 +176,7 @@ endfunction
 
 function! LightlineFilename()
 	return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-		 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-		 \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+		 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]')
 endfunction
 "}}}
 
