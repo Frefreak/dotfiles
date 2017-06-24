@@ -13,11 +13,9 @@ import Data.Bits (xor, (.&.), (.|.))
 import Data.List
 import Data.List.Split
 import Data.Char
-import Network.HTTP.Req
-import Control.Exception
 import System.Process
 import System.IO
-instance MonadHttp IO where handleHttpException = throwIO
+
 :{
 paste :: String -> IO ()
 paste s = do
