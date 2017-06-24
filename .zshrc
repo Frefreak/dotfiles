@@ -154,8 +154,8 @@ export MANPAGER="nvim -c 'set ft=man' -c 'call clearmatches()' -"
 export VIMRC="/home/adv_zxy/.config/nvim/init.vim"
 
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-. /usr/share/bash-completion/completions/stack
-eval "$(pandoc --bash-completion)"
+eval /usr/share/bash-completion/completions/stack
+eval /usr/share/bash-completion/completions/pandoc
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
