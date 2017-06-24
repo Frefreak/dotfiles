@@ -122,6 +122,7 @@ mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x
 compdef mm=make
 ghc () { stack --verbosity slient exec -- ghc $* }
 ghci () { stack --verbosity slient exec -- ghci $* }
+runhaskell () { stack --verbosity slient exec -- runhaskell $* }
 ghc-pkg () { stack --verbosity slient exec -- ghc-pkg $* }
 clash () { stack --verbosity slient exec -- clash $* }
 n () {
