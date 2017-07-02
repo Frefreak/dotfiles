@@ -24,13 +24,16 @@ Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php'] }
+Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php', 'css', 'vue'] }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'embear/vim-localvimrc'
+Plug 'kelwin/vim-smali'
+Plug 'leafgarland/typescript-vim'
+Plug 'posva/vim-vue'
 call plug#end()
 "}}}
 
@@ -71,8 +74,8 @@ augroup end
 autocmd CompleteDone * pclose
 
 augroup filetype_web
-	autocmd Filetype html,xhtml,javascript  setlocal sw=2 ts=2 expandtab sts=2 shiftround
-	autocmd Filetype html,xhtml nnoremap <buffer> <localleader>ft Vatzf
+	autocmd Filetype html,xhtml,javascript,css,vue  setlocal sw=2 ts=2 expandtab sts=2 shiftround
+	autocmd Filetype html,xhtml,css nnoremap <buffer> <localleader>ft Vatzf
 augroup end
 
 augroup filetye_vim
