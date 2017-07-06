@@ -113,17 +113,23 @@ augroup md_report_pdf
 augroup end
 
 function! F_focus_lost()
-	let g:focus_losted = 1
-	highlight Normal ctermbg=None
+	let g:gruvbox_contrast_dark="hard"
+	colorscheme gruvbox
+	call lightline#init()
+	call lightline#update()
 endfunction
 
 function! F_focus_gained()
+	let g:gruvbox_contrast_dark="medium"
+	colorscheme gruvbox
+	call lightline#init()
+	call lightline#update()
 endfunction
 
 " TODO make this work
 augroup dim_background
-	" autocmd FocusLost * :call F_focus_lost()
-	" autocmd FocusGained * :call F_focus_gained()
+	autocmd FocusLost * :call F_focus_lost()
+	autocmd FocusGained * :call F_focus_gained()
 augroup end
 
 "}}}
@@ -367,6 +373,8 @@ let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
 " nerdcommenter {{{
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
+vmap <M-/> <plug>NERDCommenterToggle
+nmap <M-/> <plug>NERDCommenterToggle
 " }}}
 
 " Some other stuffs {{{
