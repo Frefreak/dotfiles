@@ -1,7 +1,16 @@
+"is it day or night
+let s:night = eval(strftime("%H")) > 18
+
 " vim-plug {{{
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'scrooloose/nerdcommenter'
+if s:night
+	Plug 'dracula/vim', {'as': 'dracula'}
+else
+	Plug 'morhetz/gruvbox'
+endif
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
+Plug 'scrooloose/nerdcommenter'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
@@ -18,7 +27,6 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/vimproc.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'morhetz/gruvbox'
 Plug 'jpalardy/vim-slime'
 Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
@@ -30,8 +38,6 @@ Plug 'roxma/vim-tmux-clipboard'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'embear/vim-localvimrc'
-Plug 'kelwin/vim-smali'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 call plug#end()
@@ -39,9 +45,13 @@ call plug#end()
 
 " display related {{{
 set background=dark
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:gruvbox_italic=1
-colorscheme gruvbox
+set termguicolors
+if s:night
+	color dracula
+else
+	let g:gruvbox_italic=1
+	color gruvbox
+endif
 syntax enable
 "}}}
 
@@ -55,6 +65,78 @@ set softtabstop=8
 set shiftwidth=8
 set cursorline
 set inccommand=split
+"}}}
+
+" lightline {{{
+set noshowmode
+let s:theme = s:night? 'Dracula' : 'gruvbox'
+let g:lightline = {
+	\ 'colorscheme': s:theme,
+	\ 'active': {
+	\	'left': [ ['mode', 'paste'],
+	\			  ['fugitive', 'filename', 'modified'] ],
+	\ },
+	\ 'component_function': {
+	\   'fugitive': 'LightlineFugitive',
+	\	'readonly': 'LightlineReadonly',
+	\   'filename': 'LightlineFilename'
+	\ },
+	\ 'component': {
+	\ 	'lineinfo': ' %3l:%-2v',
+	\   'modified': '%#ModifiedColor#%{LightlineModified()}',
+	\ },
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' },
+	\ }
+
+if s:night
+	function! LightlineModified()
+		let map = { 'V': 'v', "\<C-v>": 'v', 's': 'n', 'v': 'n', "\<C-s>": 'n',
+					\ 'c': 'n', 'R': 'n'}
+		let mode = get(map, mode()[0], mode()[0])
+		let bgcolor = {'n': [236, '#44475a'], 'i': [236, '#44475a'],
+					\ 'v': [236, '#44475a']}
+		let color = get(bgcolor, mode, bgcolor.n)
+		exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
+			\ color[0], color[1])
+		return &modified ? '+' : &modifiable ? '' : '-'
+	endfunction
+else
+	function! LightlineModified()
+		let map = { 'V': 'v', "\<C-v>": 'v', 's': 'n', 'v': 'n', "\<C-s>": 'n',
+					\ 'c': 'n', 'R': 'n'}
+		let mode = get(map, mode()[0], mode()[0])
+		let bgcolor = {'n': [239, '#504945'], 'i': [239, '#504945'],
+					\ 'v': [243, '#7c6f64']}
+		let color = get(bgcolor, mode, bgcolor.n)
+		exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
+			\ color[0], color[1])
+		return &modified ? '+' : &modifiable ? '' : '-'
+	endfunction
+endif
+
+function! LightlineReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LightlineFugitive()
+	if exists("*fugitive#head")
+		let branch = fugitive#head()
+		return branch !=# '' ? ' '.branch : ''
+	endif
+	return ''
+endfunction
+
+function! LightlineFilename()
+	return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+		 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]')
+endfunction
 "}}}
 
 " reset cursor to last location {{{
@@ -111,79 +193,24 @@ augroup md_report_pdf
 augroup end
 
 function! F_focus_lost()
-	let g:gruvbox_contrast_dark="hard"
-	colorscheme gruvbox
-	call lightline#init()
-	call lightline#update()
+	hi Normal guibg=#121212
 endfunction
 
-function! F_focus_gained()
-	let g:gruvbox_contrast_dark="medium"
-	colorscheme gruvbox
-	call lightline#init()
-	call lightline#update()
-endfunction
+if s:night
+	function! F_focus_gained()
+		hi Normal guibg=#282a36
+	endfunction
+else
+	function! F_focus_gained()
+		hi Normal guibg=#282828
+	endfunction
+endif
 
 augroup dim_background
 	autocmd FocusLost * :call F_focus_lost()
 	autocmd FocusGained * :call F_focus_gained()
 augroup end
 
-"}}}
-
-" lightline {{{
-set noshowmode
-let g:lightline = {
-	\ 'colorscheme': 'gruvbox',
-	\ 'active': {
-	\	'left': [ ['mode', 'paste'],
-	\			  ['fugitive', 'filename', 'modified'] ],
-	\ },
-	\ 'component_function': {
-	\   'fugitive': 'LightlineFugitive',
-	\	'readonly': 'LightlineReadonly',
-	\   'filename': 'LightlineFilename'
-	\ },
-	\ 'component': {
-	\ 	'lineinfo': ' %3l:%-2v',
-	\   'modified': '%#ModifiedColor#%{LightlineModified()}',
-	\ },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' },
-	\ }
-
-function! LightlineModified()
-	let map = { 'V': 'n', "\<C-v>": 'n', 's': 'n', 'v': 'n', "\<C-s>": 'n', 'c': 'n', 'R': 'n'}
-	let mode = get(map, mode()[0], mode()[0])
-	let bgcolor = {'n': 239, 'i': 239}
-	let color = get(bgcolor, mode, bgcolor.n)
-	exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d cterm=bold',
-		\ color)
-	return &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightlineReadonly()
-    if &filetype == "help"
-        return ""
-    elseif &readonly
-        return ""
-    else
-        return ""
-    endif
-endfunction
-
-function! LightlineFugitive()
-	if exists("*fugitive#head")
-		let branch = fugitive#head()
-		return branch !=# '' ? ' '.branch : ''
-	endif
-	return ''
-endfunction
-
-function! LightlineFilename()
-	return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-		 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]')
-endfunction
 "}}}
 
 " vim-latex {{{
@@ -210,7 +237,7 @@ autocmd Filetype xhtml,html call clearmatches() " html is special
 nnoremap <silent> n   n:call HLNext(0.01)<cr>
 nnoremap <silent> N   N:call HLNext(0.01)<cr>
 
-highlight BlinkHighlight ctermbg=darkred ctermfg=000000
+highlight BlinkHighlight ctermbg=green ctermfg=000000
 function! _HLNext (blinktime)
 	let [bufnum, lnum, col, off] = getpos('.')
 	let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
