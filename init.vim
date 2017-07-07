@@ -43,8 +43,6 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:gruvbox_italic=1
 colorscheme gruvbox
 syntax enable
-highlight IncSearch ctermbg=016 ctermfg=darkred cterm=underline
-highlight Search ctermbg=016 ctermfg=darkred cterm=underline
 "}}}
 
 " general settings {{{
@@ -126,7 +124,6 @@ function! F_focus_gained()
 	call lightline#update()
 endfunction
 
-" TODO make this work
 augroup dim_background
 	autocmd FocusLost * :call F_focus_lost()
 	autocmd FocusGained * :call F_focus_gained()
