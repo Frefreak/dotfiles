@@ -1,5 +1,6 @@
 "is it day or night
-let s:night = eval(strftime("%H")) > 18
+let s:curtime = eval(strftime("%H"))
+let s:night = s:curtime > 18 || s:curtime < 6
 
 " vim-plug {{{
 call plug#begin('~/.local/share/nvim/plugged')
