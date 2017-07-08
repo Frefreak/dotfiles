@@ -1,6 +1,6 @@
 "is it day or night
 let s:curtime = eval(strftime("%H"))
-let s:night = s:curtime > 18 || s:curtime < 6
+let s:night = s:curtime >= 18 || s:curtime < 6
 
 " vim-plug {{{
 call plug#begin('~/.local/share/nvim/plugged')
@@ -238,7 +238,7 @@ autocmd Filetype xhtml,html call clearmatches() " html is special
 nnoremap <silent> n   n:call HLNext(0.01)<cr>
 nnoremap <silent> N   N:call HLNext(0.01)<cr>
 
-highlight BlinkHighlight ctermbg=green ctermfg=000000
+highlight BlinkHighlight guibg=#000000 guifg=#ffffff
 function! _HLNext (blinktime)
 	let [bufnum, lnum, col, off] = getpos('.')
 	let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
@@ -393,6 +393,7 @@ let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
 let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
 let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
     \ + ['-d', 'missing-docstring,invalid-name,maybe-no-member']
+let g:neomake_open_list = 2
 " }}}
 
 " nerdcommenter {{{
