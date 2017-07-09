@@ -199,7 +199,9 @@ augroup md_report_pdf
 augroup end
 
 function! F_focus_lost()
-	hi Normal guibg=#121212
+  if (!exists("g:nodim"))
+	  hi Normal guibg=#121212
+  endif
 endfunction
 
 if s:night
@@ -213,8 +215,8 @@ else
 endif
 
 augroup dim_background
-	autocmd FocusLost * :call F_focus_lost()
-	autocmd FocusGained * :call F_focus_gained()
+  autocmd FocusLost * :call F_focus_lost()
+  autocmd FocusGained * :call F_focus_gained()
 augroup end
 
 "}}}
@@ -398,7 +400,7 @@ let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
 let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
 let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
     \ + ['-d', 'missing-docstring,invalid-name,maybe-no-member']
-let g:neomake_open_list = 2
+" let g:neomake_open_list = 2
 " }}}
 
 " nerdcommenter {{{
