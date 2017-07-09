@@ -99,24 +99,18 @@ setopt noincappendhistory
 setopt nosharehistory
 setopt magic_equal_subst
 
-# eval $(dircolors)
-# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
 alias ls='ls --color=auto'
 alias cm='cmake'
 alias m='make'
 alias grep="grep -P --color=auto"
 alias jf='journalctl -f'
 alias sudo='sudo '
-alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias a2='aria2c'
 alias pc='proxychains -q'
 alias pca='proxychains -q aria2c'
 alias pcg='proxychains -q git clone'
 alias site_deploy='stack exec -- site deploy'
 alias site_build='stack exec -- site build'
-alias torch-activate='. /home/adv_zxy/torch/install/bin/torch-activate'
-alias hoogle-ghc='hoogle server --port=3000 --database=~/.hoogle/ghc.hoo --local'
 
 mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
@@ -150,9 +144,9 @@ bindkey -M viins 'kj' vi-cmd-mode
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
 
-export PATH=$PATH:/home/adv_zxy/x-tools7h/arm-unknown-linux-gnueabihf/bin
+export PATH=$PATH:$HOME/x-tools7h/arm-unknown-linux-gnueabihf/bin
 export MANPAGER="nvim -c 'set ft=man' -c 'call clearmatches()' -"
-export VIMRC="/home/adv_zxy/.config/nvim/init.vim"
+export VIMRC="$HOME/.config/nvim/init.vim"
 
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval /usr/share/bash-completion/completions/stack
@@ -161,6 +155,14 @@ eval /usr/share/bash-completion/completions/pandoc
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
+
+## set konsole colorscheme
+if [ "x"$KONSOLE_DBUS_SERVICE != "x" ]; then
+  time_h=$(date +%H)
+	if [ $((time_h)) -ge 18 ] || [ $((time_h)) -lt 6 ]; then
+    konsoleprofile colors=Dracula
+  fi
+fi
 
 ## fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'

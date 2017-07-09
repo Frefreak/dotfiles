@@ -1,3 +1,5 @@
+" vim: foldmethod=marker sw=2 ts=2 sts=2 expandtab
+
 "is it day or night
 let s:curtime = eval(strftime("%H"))
 let s:night = s:curtime >= 18 || s:curtime < 6
@@ -172,7 +174,7 @@ augroup end
 
 augroup filetype_haskell
 	autocmd FileType haskell,lhaskell setlocal tabstop=8 expandtab softtabstop=4 shiftwidth=4 shiftround
-	autocmd FileType cabal setlocal ts=2 expandtab sw=2 sts=2
+	autocmd FileType cabal setlocal ts=2 sw=2 sts=2 expandtab
 	autocmd FileType hamlet setlocal expandtab softtabstop=2 shiftwidth=2 shiftround
 augroup end
 
@@ -189,7 +191,7 @@ augroup filetype_html
 augroup end
 
 augroup filetype_zsh
-	autocmd FileType zsh setlocal foldmethod=marker
+	autocmd FileType zsh setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
 augroup end
 
 augroup md_report_pdf
@@ -345,7 +347,7 @@ let GtagsCscope_Quiet = 1
 " enable this to start writing nvim-hs plugin for nvim {{{
 let g:nvimhsmode = 0
 if nvimhsmode
-    call rpcrequest(jobstart(expand('/home/adv_zxy/bin/nvim-hs-devel.sh'), {'rpc': v:true}), "PingNvimhs")
+    call rpcrequest(jobstart(expand('$HOME/bin/nvim-hs-devel.sh'), {'rpc': v:true}), "PingNvimhs")
     augroup nvim-hs
 	au!
     augroup end
