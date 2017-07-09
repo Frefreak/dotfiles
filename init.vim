@@ -1,6 +1,9 @@
 "is it day or night
 let s:curtime = eval(strftime("%H"))
 let s:night = s:curtime >= 18 || s:curtime < 6
+if $NIGHT != ''
+	let s:night = $NIGHT
+endif
 
 " vim-plug {{{
 call plug#begin('~/.local/share/nvim/plugged')
@@ -9,7 +12,6 @@ if s:night
 else
 	Plug 'morhetz/gruvbox'
 endif
-Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
@@ -41,6 +43,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
+Plug 'MarcWeber/vim-addon-local-vimrc'
 call plug#end()
 "}}}
 
