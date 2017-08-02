@@ -1,0 +1,18 @@
+# vim: foldmethod=marker
+# Keybindings and macros {{{
+# }}}
+set ssl_force_tls = yes
+set header_cache = ~/.cache/mutt
+set message_cachedir = "~/.cache/mutt"
+unset imap_passive
+set imap_keepalive = 300
+set mail_check = 60
+set mbox_type=Maildir
+
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.mutt/vultr.rc<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.mutt/gmail.rc<enter><change-folder>!<enter>'
+macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
+
+folder-hook carso.nz source ~/.mutt/vultr.rc
+folder-hook gmail.com source ~/.mutt/gmail.rc
+source ~/.mutt/gmail.rc
