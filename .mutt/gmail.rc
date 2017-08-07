@@ -1,6 +1,7 @@
 set imap_user=frefreak.zxy@gmail.com
 set my_pass=`pass gmail_mutt`
 set imap_pass=$my_pass
+unset record
 unset folder
 set folder="imaps://imap.gmail.com"
 set from="adv_zxy <frefreak.zxy@gmail.com>"
