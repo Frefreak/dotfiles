@@ -7,6 +7,20 @@ using namespace std;
 #define Y second
 #define forl(i, s, e) for (int i = s; i < e; i++)
 
+template <typename T>
+void inline piter(T iterable)
+{
+	int cnt = 0;
+	for (auto i: iterable) {
+		if (cnt == 0)
+			cout << i;
+		else
+			cout << ' ' << i;
+		cnt++;
+	}
+	cout << '\n';
+}
+
 int main(void)
 {
 	ios_base::sync_with_stdio(false);
