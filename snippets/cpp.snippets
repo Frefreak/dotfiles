@@ -7,6 +7,17 @@ using namespace std;
 #define Y second
 #define forl(i, s, e) for (int i = s; i < e; i++)
 
+int main(void)
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	$0
+	return 0;
+}
+endsnippet
+
+snippet piter "print iterable" 
 template <typename T>
 void inline piter(T iterable)
 {
@@ -20,13 +31,5 @@ void inline piter(T iterable)
 	}
 	cout << '\n';
 }
-
-int main(void)
-{
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	$0
-	return 0;
-}
+$0
 endsnippet
