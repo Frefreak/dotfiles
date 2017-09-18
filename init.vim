@@ -363,7 +363,7 @@ autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 "}}}
 
 " deoplete-clang {{{
-let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so.4.0"
+let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so.5.0"
 let g:deoplete#sources#clang#clang_header="/usr/include/clang"
 "}}}
 
@@ -401,6 +401,7 @@ let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
 let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
     \ + ['-d', 'missing-docstring,invalid-name,maybe-no-member']
 " let g:neomake_open_list = 2
+let g:clang_diagsopt = ''
 " }}}
 
 " nerdcommenter {{{
