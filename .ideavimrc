@@ -1,0 +1,32 @@
+inoremap <c-u> <esc>viwUea
+
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>ee
+nnoremap <leader>( viw<esc>a)<esc>bi(<esc>ee
+vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>`>2l
+vnoremap <leader>( <esc>`>a)<esc>`<i(<esc>`>2l
+
+nnoremap ; :
+nnoremap : ;
+
+nnoremap H 0
+nnoremap L $
+
+inoremap jk <esc>
+
+onoremap in( :<c-u>execute "normal! /(\r:noh\rvi("<CR>
+onoremap il( :<c-u>execute "normal! ?)\r:noh\rvi)"<CR>
+onoremap an( :<c-u>execute "normal! /(\r:noh\rva("<CR>
+onoremap al( :<c-u>execute "normal! ?)\r:noh\rva)"<CR>
+
+onoremap in{ :<c-u>execute "normal! /{\r:noh\rvi{"<CR>
+onoremap il{ :<c-u>execute "normal! ?}\r:noh\rvi}"<CR>
+onoremap an{ :<c-u>execute "normal! /{\r:noh\rva{"<CR>
+onoremap al{ :<c-u>execute "normal! ?}\r:noh\rva}"<CR>
+
+onoremap in" :<c-u>execute "normal! /\"\r:noh\rvi\""<CR>
+onoremap il" :<c-u>execute "normal! ?\"\r:noh\rvi\""<CR>
+onoremap an" :<c-u>execute "normal! /\"\r:noh\rva\""<CR>
+onoremap al" :<c-u>execute "normal! ?\"\r:noh\rva\""<CR>
