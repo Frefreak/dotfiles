@@ -1,19 +1,8 @@
 " vim: foldmethod=marker sw=2 ts=2 sts=2 expandtab
 
-"is it day or night
-let s:curtime = eval(strftime("%H"))
-let s:night = s:curtime >= 18 || s:curtime < 6
-if $NIGHT != ''
-	let s:night = $NIGHT
-endif
-
 " vim-plug {{{
 call plug#begin('~/.local/share/nvim/plugged')
-if s:night
-	Plug 'dracula/vim', {'as': 'dracula'}
-else
-	Plug 'morhetz/gruvbox'
-endif
+Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
@@ -52,12 +41,7 @@ call plug#end()
 " display related {{{
 set background=dark
 set termguicolors
-if s:night
-	color dracula
-else
-	let g:gruvbox_italic=1
-	color gruvbox
-endif
+color dracula
 syntax enable
 "}}}
 
@@ -75,7 +59,7 @@ set inccommand=split
 
 " lightline {{{
 set noshowmode
-let s:theme = s:night? 'Dracula' : 'gruvbox'
+let s:theme = 'Dracula'
 let g:lightline = {
 	\ 'colorscheme': s:theme,
 	\ 'active': {
@@ -95,31 +79,17 @@ let g:lightline = {
 	\ 'subseparator': { 'left': '', 'right': '' },
 	\ }
 
-if s:night
-	function! LightlineModified()
-		let map = { 'V': 'v', "\<C-v>": 'v', 's': 'n', 'v': 'n', "\<C-s>": 'n',
-					\ 'c': 'n', 'R': 'n'}
-		let mode = get(map, mode()[0], mode()[0])
-		let bgcolor = {'n': [236, '#44475a'], 'i': [236, '#44475a'],
-					\ 'v': [236, '#44475a']}
-		let color = get(bgcolor, mode, bgcolor.n)
-		exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
-			\ color[0], color[1])
-		return &modified ? '+' : &modifiable ? '' : '-'
-	endfunction
-else
-	function! LightlineModified()
-		let map = { 'V': 'v', "\<C-v>": 'v', 's': 'n', 'v': 'n', "\<C-s>": 'n',
-					\ 'c': 'n', 'R': 'n'}
-		let mode = get(map, mode()[0], mode()[0])
-		let bgcolor = {'n': [239, '#504945'], 'i': [239, '#504945'],
-					\ 'v': [243, '#7c6f64']}
-		let color = get(bgcolor, mode, bgcolor.n)
-		exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
-			\ color[0], color[1])
-		return &modified ? '+' : &modifiable ? '' : '-'
-	endfunction
-endif
+function! LightlineModified()
+  let map = { 'V': 'v', "\<C-v>": 'v', 's': 'n', 'v': 'n', "\<C-s>": 'n',
+        \ 'c': 'n', 'R': 'n'}
+  let mode = get(map, mode()[0], mode()[0])
+  let bgcolor = {'n': [236, '#44475a'], 'i': [236, '#44475a'],
+        \ 'v': [236, '#44475a']}
+  let color = get(bgcolor, mode, bgcolor.n)
+  exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
+    \ color[0], color[1])
+  return &modified ? '+' : &modifiable ? '' : '-'
+endfunction
 
 function! LightlineReadonly()
     if &filetype == "help"
@@ -196,27 +166,6 @@ augroup end
 
 augroup md_report_pdf
 	autocmd BufWritePost \d\d\d\d-\d\d-\d\d.md call jobstart('pandoc_beamer ' . expand('%') . ' -o ' . expand('%:t:s?md$?pdf?'))
-augroup end
-
-function! F_focus_lost()
-  if (!exists("g:nodim"))
-	  hi Normal guibg=#121212
-  endif
-endfunction
-
-if s:night
-	function! F_focus_gained()
-		hi Normal guibg=#282a36
-	endfunction
-else
-	function! F_focus_gained()
-		hi Normal guibg=#282828
-	endfunction
-endif
-
-augroup dim_background
-  autocmd FocusLost * :call F_focus_lost()
-  autocmd FocusGained * :call F_focus_gained()
 augroup end
 
 "}}}
@@ -389,6 +338,7 @@ cmap w!! w !sudo tee % > /dev/null
 " fzf {{{
 nnoremap <silent> <leader>f :FZF -m<CR>
 nnoremap <silent> <leader>h :History<CR>
+nnoremap <silent> <leader>l :Lines<CR>
 nnoremap <silent> <leader>a :Ag<CR>
 " }}}
 
