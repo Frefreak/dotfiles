@@ -333,6 +333,7 @@ vnoremap ty "+y
 nnoremap tp "+p
 nnoremap a9 v<esc>ea(<esc>A)<esc>gv<esc>
 cmap w!! w !sudo tee % > /dev/null
+nnoremap cp :e %:h<enter>
 " }}}
 
 " fzf {{{
