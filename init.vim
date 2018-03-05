@@ -6,19 +6,21 @@ Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
-Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
-Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
+" Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
+" Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
 Plug 'benekastah/neomake'
-Plug 'zchee/deoplete-clang', { 'for' : ['cpp', 'c'] }
 Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
 Plug 'davidhalter/jedi-vim', { 'for' : 'python' }
 Plug 'atweiden/vim-dragvisuals'
 Plug 'tpope/vim-fugitive'
-Plug 'Shougo/deoplete.nvim'
+Plug 'tpope/vim-rhubarb'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jpalardy/vim-slime'
@@ -35,6 +37,12 @@ Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 Plug 'MarcWeber/vim-addon-local-vimrc'
+Plug 'idris-hackers/idris-vim', { 'for': ['idr'] }
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 call plug#end()
 "}}}
 
@@ -311,9 +319,38 @@ let g:jedi#completions_enabled = 0
 autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 "}}}
 
-" deoplete-clang {{{
-let g:deoplete#sources#clang#libclang_path="/usr/lib/libclang.so.5.0"
-let g:deoplete#sources#clang#clang_header="/usr/include/clang"
+" LanguageClient-neovim {{{
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'cpp': ['/bin/cquery', '--log-file=/tmp/cq.log']
+    \ }
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath = '/home/adv_zxy/.config/nvim/settings.json'
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" nn <silent> <M-.> :call LanguageClient_textDocument_definition()<cr>
+" nn <silent> <M-,> :call LanguageClient_textDocument_references()<cr>
+" nn <f2> :call LanguageClient_textDocument_rename()<cr>
+" nn <leader>ji :Denite documentSymbol<cr>
+" nn <leader>jI :Denite workspaceSymbol<cr>
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" augroup LanguageClient_config
+  " au!
+  " au BufEnter * let b:Plugin_LanguageClient_started = 0
+  " au User LanguageClientStarted setl signcolumn=yes
+  " au User LanguageClientStarted let b:Plugin_LanguageClient_started = 1
+  " au User LanguageClientStopped setl signcolumn=auto
+  " au User LanguageClientStopped let b:Plugin_LanguageClient_stopped = 0
+  " au CursorMoved * if b:Plugin_LanguageClient_started | call LanguageClient_textDocument_hover() | endif
+" augroup END
+
 "}}}
 
 " learn vimscript the hard way {{{
@@ -374,11 +411,6 @@ function! MarkdownPreview()
 	:silent :execute "!markdownPreview %"
 	:echom fnamemodify(@%, ':s?md?html?') . " saved"
 endfunction
-
-function! ToggleFlag()
-	exec "normal! 0f#bdiw2wviwpbbhhp0"
-endfunction
-nnoremap <leader>tt :call ToggleFlag()<CR>
 
 function! RepeatLastCommand()
 	if !exists("b:tmux_target_pane")
