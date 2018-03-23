@@ -216,5 +216,8 @@ ud() {
   curl http://api.urbandictionary.com/v0/define\?term\="$1" 2>/dev/null | jq
 }
 
-# }}}
+ukill () {
+  [ -n "$1" ] && sudo kill -9 `pidof $1`
+}
 
+#}}}
