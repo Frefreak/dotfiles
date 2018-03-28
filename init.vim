@@ -324,7 +324,8 @@ autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
 set hidden
 
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['/bin/cquery', '--log-file=/tmp/cq.log']
+    \ 'cpp': ['/bin/cquery', '--log-file=/tmp/cq.log'],
+    \ 'haskell': ['hie', '--lsp']
     \ }
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath = '/home/adv_zxy/.config/nvim/settings.json'

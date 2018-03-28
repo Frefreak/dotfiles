@@ -103,6 +103,7 @@ setopt magic_equal_subst
 alias ls='ls --color=auto'
 alias cm='cmake'
 alias m='make'
+alias n='nvim'
 alias grep="grep -P --color=auto"
 alias jf='journalctl -f'
 alias sudo='sudo '
@@ -112,6 +113,7 @@ alias pca='proxychains -q aria2c'
 alias pcg='proxychains -q git clone'
 alias site_deploy='stack exec -- site deploy'
 alias site_build='stack exec -- site build'
+alias nvsmi='nvidia-smi'
 
 mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
@@ -120,12 +122,6 @@ ghci () { stack --verbosity slient exec -- ghci $* }
 runhaskell () { stack --verbosity slient exec -- runhaskell $* }
 ghc-pkg () { stack --verbosity slient exec -- ghc-pkg $* }
 clash () { stack --verbosity slient exec -- clash $* }
-n () {
-	if [[ ${1##*.} == "hs" || ${1##*.} == "lhs" ]];
-		then stack --verbosity slient exec -- nvim $*;
-		else nvim $*;
-	fi
-}
 bv() {
 	xxd $* | n - -c "set ft=xxd"
 }
@@ -209,3 +205,10 @@ ffc() {
 }
 
 # }}}
+
+magnet-info() {
+  hash=$(echo "$1" | grep -oP "(?<=btih:).*?(?=&)")
+  echo "Magnet hash: $hash"
+  aria2c --bt-metadata-only=true --bt-save-metadata=true -q "$1"
+  aria2c "$hash.torrent" -S
+}
