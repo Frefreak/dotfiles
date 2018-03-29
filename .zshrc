@@ -211,5 +211,10 @@ magnet-info() {
   aria2c "$hash.torrent" -S
 }
 
+# urban dictionary
+ud() {
+  curl http://api.urbandictionary.com/v0/define\?term\="$1" 2>/dev/null | jq
+}
+
 # }}}
 
