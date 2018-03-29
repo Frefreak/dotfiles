@@ -1,4 +1,4 @@
-fpath=($fpath /usr/share/doc/radare2/zsh)
+fpath=($fpath /usr/share/doc/radare2/zsh ~/.zfunc)
 # {{{ oh-my-zsh
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh/
@@ -204,11 +204,12 @@ ffc() {
 	[[ -n $args[1] ]] && print -z "n" $args
 }
 
-# }}}
-
 magnet-info() {
   hash=$(echo "$1" | grep -oP "(?<=btih:).*?(?=&)")
   echo "Magnet hash: $hash"
   aria2c --bt-metadata-only=true --bt-save-metadata=true -q "$1"
   aria2c "$hash.torrent" -S
 }
+
+# }}}
+
