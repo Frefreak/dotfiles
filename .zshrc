@@ -153,14 +153,6 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
 
-## set konsole colorscheme
-if [ "x"$KONSOLE_DBUS_SERVICE != "x" ]; then
-  time_h=$(date +%H)
-	if [ $((time_h)) -ge 18 ] || [ $((time_h)) -lt 6 ]; then
-    konsoleprofile colors=Dracula
-  fi
-fi
-
 ## fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
 source /usr/share/fzf/completion.zsh

@@ -102,6 +102,7 @@ setopt magic_equal_subst
 alias ls='ls --color=auto'
 alias cm='cmake'
 alias m='make'
+alias n='nvim'
 alias grep="grep -P --color=auto"
 alias jf='journalctl -f'
 alias sudo='sudo '
@@ -119,12 +120,6 @@ ghci () { stack --verbosity slient exec -- ghci $* }
 runhaskell () { stack --verbosity slient exec -- runhaskell $* }
 ghc-pkg () { stack --verbosity slient exec -- ghc-pkg $* }
 clash () { stack --verbosity slient exec -- clash $* }
-n () {
-	if [[ ${1##*.} == "hs" || ${1##*.} == "lhs" ]];
-		then stack --verbosity slient exec -- nvim $*;
-		else nvim $*;
-	fi
-}
 bv() {
 	xxd $* | n - -c "set ft=xxd"
 }
@@ -153,14 +148,6 @@ export VIMRC="$HOME/.config/nvim/init.vim"
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
-
-## set konsole colorscheme
-if [ "x"$KONSOLE_DBUS_SERVICE != "x" ]; then
-  time_h=$(date +%H)
-	if [ $((time_h)) -ge 18 ] || [ $((time_h)) -lt 6 ]; then
-    konsoleprofile colors=Dracula
-  fi
-fi
 
 ## fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
