@@ -157,11 +157,11 @@ augroup filetype_haskell
 augroup end
 
 augroup filetype_markdown
-	autocmd FileType markdown setlocal tabstop=8 expandtab softtabstop=4 shiftwidth=4 shiftround
+	autocmd FileType markdown setlocal tabstop=4 expandtab softtabstop=4 shiftwidth=4 shiftround
 augroup end
 
 augroup filetype_yaml
-	autocmd FileType yaml setlocal tabstop=8 softtabstop=4 shiftwidth=4 shiftround
+	autocmd FileType yaml setlocal tabstop=8 softtabstop=2 shiftwidth=2 shiftround
 augroup end
 
 augroup filetype_vim
