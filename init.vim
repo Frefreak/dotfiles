@@ -6,14 +6,10 @@ Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
-" Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
-" Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
 Plug 'benekastah/neomake'
-Plug 'zchee/deoplete-jedi', { 'for' : 'python' }
-Plug 'davidhalter/jedi-vim', { 'for' : 'python' }
 Plug 'atweiden/vim-dragvisuals'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -321,20 +317,16 @@ if nvimhsmode
 endif
 "}}}
 
-" jedi {{{
-let deoplete#sources#jedi#show_docstring = 1
-let g:jedi#completions_enabled = 0
-autocmd BufWinEnter '__doc__' setlocal bufhidden=delete
-"}}}
-
 " LanguageClient-neovim {{{
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
 let g:LanguageClient_serverCommands = {
+    \ 'c': ['/bin/cquery', '--log-file=/tmp/cq_c.log'],
     \ 'cpp': ['/bin/cquery', '--log-file=/tmp/cq.log'],
     \ 'haskell': ['hie', '--lsp'],
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls']
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'python': ['pyls', '--log-file=/tmp/pyls.log']
     \ }
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath = '/home/adv_zxy/.config/nvim/settings.json'
@@ -392,7 +384,7 @@ nnoremap <silent> <leader>a :Ag<CR>
 
 " neomake {{{
 let g:neomake_c_enabled_makers = ['clang']
-let g:neomake_cpp_enabled_makers = ['clang']
+let g:neomake_cpp_enabled_makers = ['clangcheck']
 let g:neomake_tex_enabled_makers = ['chktex']
 let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
     \ + ["-std=c++1z"]
