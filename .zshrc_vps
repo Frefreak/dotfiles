@@ -143,7 +143,8 @@ export PATH=$PATH:$HOME/x-tools7h/arm-unknown-linux-gnueabihf/bin
 export MANPAGER="nvim -c 'set ft=man' -c 'call clearmatches()' -"
 export VIMRC="$HOME/.config/nvim/init.vim"
 
-. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]] && . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -d /usr/share/zsh-syntax-highlighting ]] && . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
