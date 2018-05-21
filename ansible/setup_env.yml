@@ -1,0 +1,70 @@
+- name: add real target(s)
+  hosts: localhost
+  gather_facts: no
+  vars_prompt:
+    - name: target_host
+      prompt: enter target hosts ip/domain, seperated by space
+      private: no
+  tasks:
+    - name: add host(s)
+      add_host:
+        name: "{{ item }}"
+        group: real_target
+      loop: "{{ target_host.split() }}"
+
+- name: execute on target (init)
+  hosts: real_target
+  any_errors_fatal: true
+  become_user: root
+  tasks:
+    - name: get current user
+      local_action: command whoami
+      register: USER
+    - name: create wheel if not exist
+      become: yes
+      group:
+        name: wheel
+        state: present
+    - name: allow 'wheel' group to have passwordless sudo
+      become: yes
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+    - name: install zsh if not available (Ubuntu)
+      become: yes
+      when: ansible_os_family == "Debian"
+      apt:
+        name: zsh
+        state: latest
+    - name: install zsh if not available (Arch)
+      become: yes
+      when: ansible_os_family == "Archlinux"
+      pacman:
+        name: zsh
+        state: latest
+    - name: get zsh path
+      command: which zsh
+      register: ZSH
+    - name: add user and grant wheel
+      become: yes
+      user:
+        name: "{{ RUSER }}"
+        state: present
+        groups: wheel
+        shell: "{{ ZSH.stdout }}"
+    - name: copy ssh key
+      become: yes
+      authorized_key:
+        user: "{{ RUSER }}"
+        state: present
+        key: "{{ lookup('file', '/home/' + USER.stdout + '/.ssh/id_rsa.pub') }}"
+
+
+- name: run
+  remote_user: "{{ RUSER }}"
+  hosts: real_target
+  tasks:
+    - include_tasks: "{{ ansible_os_family | lower }}.yml"

@@ -1,0 +1,103 @@
+- name: some binaries for "debian"
+  become_user: root
+  become: yes
+  apt:
+    name:
+      - tmux
+      - git
+      - curl
+      - wget
+      - zsh-syntax-highlighting
+    state: latest
+- name: neovim prerequisite
+  become_user: root
+  become: yes
+  apt:
+    name:
+      - python-dev
+      - python-pip
+      - python3-dev
+      - python3-pip
+      - software-properties-common
+    state: latest
+
+- name: neovim ppa for ubuntu
+  become_user: root
+  become: yes
+  apt_repository:
+    repo: ppa:neovim-ppa/stable
+    update_cache: True
+
+- name: install neovim
+  become_user: root
+  become: yes
+  apt:
+    name: neovim
+    state: latest
+
+- name: oh-my-zsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  args: 
+    creates: .oh-my-zsh
+
+- name: download dotfiles
+  git:
+    depth: 1
+    dest: dotfiles
+    repo: https://github.com/Frefreak/dotfiles
+
+- name: tmux configuration
+  copy:
+    remote_src: yes
+    src: dotfiles/.tmux.conf
+    dest: .
+
+- name: zsh configuration
+  shell: cat dotfiles/.zshrc_vps >> .zshrc
+    && touch zshrc_appended
+  args:
+    creates: zshrc_appended
+
+- name: zsh theme
+  copy:
+    remote_src: yes
+    src: dotfiles/lambda.zsh-theme
+    dest: .oh-my-zsh/custom/themes
+
+- name: vim-plug
+  shell: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  args:
+    warn: no
+    creates: ~/.local/share/nvim/site/autoload/plug.vim
+
+- name: create nvim directory
+  file:
+    path: ~/.config/nvim
+    state: directory
+
+- name: copy init.vim
+  shell: cp dotfiles/init.vim ~/.config/nvim
+  args:
+    creates: ~/.config/nvim/init.vim
+
+- name: pip3 neovim
+  pip:
+    name: neovim
+    executable: pip3
+
+- name: pip2 neovim
+  pip:
+    name: neovim
+    executable: pip2
+
+- name: neovim plugin
+  shell: nvim -c 'PlugInstall' -c 'UpdateRemotePlugins' -c 'qall'
+    && touch plug_installed
+  args:
+    creates: plug_installed
+
+- name: copy snippets
+  shell: cp -r dotfiles/snippets ~/.local/share/nvim/UltiSnips
+  args:
+    creates: ~/.local/share/nvim/UltiSnips
