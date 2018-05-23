@@ -84,11 +84,13 @@
 - name: pip3 neovim
   pip:
     name: neovim
+    extra_args: --user
     executable: pip3
 
 - name: pip2 neovim
   pip:
     name: neovim
+    extra_args: --user
     executable: pip2
 
 - name: neovim plugin

@@ -10,6 +10,8 @@
       - zsh-syntax-highlighting
       - fzf
       - neovim
+      - python-pip
+      - python2-pip
     state: latest
 
 - name: oh-my-zsh
@@ -61,11 +63,13 @@
 - name: pip3 neovim
   pip:
     name: neovim
-    executable: pip3
+    extra_args: --user
+    executable: pip
 
 - name: pip2 neovim
   pip:
     name: neovim
+    extra_args: --user
     executable: pip2
 
 - name: neovim plugin
