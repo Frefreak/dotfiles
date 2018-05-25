@@ -388,7 +388,7 @@ let g:neomake_cpp_enabled_makers = ['clangcheck']
 let g:neomake_tex_enabled_makers = ['chktex']
 let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
     \ + ["-std=c++1z"]
-let g:neomake_haskell_enabled_makers = ['ghcmod', 'hlint']
+let g:neomake_haskell_enabled_makers = ['hlint']
 let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
     \ + ['-d', 'missing-docstring,invalid-name,maybe-no-member']
 " let g:neomake_open_list = 2
