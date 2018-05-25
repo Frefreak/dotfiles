@@ -113,7 +113,7 @@ alias pcg='proxychains -q git clone'
 alias site_deploy='stack exec -- site deploy'
 alias site_build='stack exec -- site build'
 
-mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
+mm () { make @* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
 ghc () { stack --verbosity slient exec -- ghc $* }
 ghci () { stack --verbosity slient exec -- ghci $* }
@@ -121,7 +121,7 @@ runhaskell () { stack --verbosity slient exec -- runhaskell $* }
 ghc-pkg () { stack --verbosity slient exec -- ghc-pkg $* }
 clash () { stack --verbosity slient exec -- clash $* }
 bv() {
-	xxd $* | n - -c "set ft=xxd"
+	xxd $@ | n - -c "set ft=xxd"
 }
 
 compdef n=nvim
@@ -192,4 +192,45 @@ ffc() {
 	[[ -n $args[1] ]] && print -z "n" $args
 }
 
-# }}}
+magnet-info() {
+  hash=$(echo "$1" | grep -oP "(?<=btih:).*?(?=&)")
+  echo "Magnet hash: $hash"
+  aria2c --bt-metadata-only=true --bt-save-metadata=true -q "$1"
+  aria2c "$hash.torrent" -S
+}
+
+# urban dictionary
+ud() {
+  curl http://api.urbandictionary.com/v0/define\?term\="$1" 2>/dev/null | jq
+}
+
+ukill () {
+  [ -n "$1" ] && sudo kill -9 `pidof $1`
+}
+
+pandoc_html() {
+  fst="$1"
+  shift
+  pandoc -s --mathjax -f markdown -t html "$fst" -o "${fst%%.*}.html" $@
+}
+
+pandoc_beamer() {
+  pandoc -f markdown -t beamer --standalone --latex-engine=xelatex \
+    -V theme:metropolis \
+    -V colortheme:beaver \
+    -V mainfont="Source Sans Pro" \
+    -V CJKmainfont="WenQuanYi Micro Hei" \
+    -V CJKoptions="AutoFakeBold,AutoFakeSlant" \
+    -V monofont="Fantasque Sans Mono" "$@"
+}
+pandoc_pdf() {
+  # fc-list :lang=zh
+  pandoc -f markdown -t latex --standalone --latex-engine=xelatex \
+    -V theme:metropolis \
+    -V colortheme:beaver \
+    -V mainfont="Source Sans Pro" \
+    -V CJKmainfont="FZSongS-Extended" \
+    -V CJKoptions="AutoFakeBold,AutoFakeSlant" \
+    -V monofont="Fantasque Sans Mono" "$@"
+}
+#}}}

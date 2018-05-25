@@ -115,7 +115,7 @@ alias site_deploy='stack exec -- site deploy'
 alias site_build='stack exec -- site build'
 alias nvsmi='nvidia-smi'
 
-mm () { make $* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
+mm () { make @* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
 ghc () { stack --verbosity slient exec -- ghc $* }
 ghci () { stack --verbosity slient exec -- ghci $* }
@@ -123,7 +123,7 @@ runhaskell () { stack --verbosity slient exec -- runhaskell $* }
 ghc-pkg () { stack --verbosity slient exec -- ghc-pkg $* }
 clash () { stack --verbosity slient exec -- clash $* }
 bv() {
-	xxd $* | n - -c "set ft=xxd"
+	xxd $@ | n - -c "set ft=xxd"
 }
 
 compdef n=nvim
@@ -212,4 +212,29 @@ ukill () {
   [ -n "$1" ] && sudo kill -9 `pidof $1`
 }
 
+pandoc_html() {
+  fst="$1"
+  shift
+  pandoc -s --mathjax -f markdown -t html "$fst" -o "${fst%%.*}.html" $@
+}
+
+pandoc_beamer() {
+  pandoc -f markdown -t beamer --standalone --latex-engine=xelatex \
+    -V theme:metropolis \
+    -V colortheme:beaver \
+    -V mainfont="Source Sans Pro" \
+    -V CJKmainfont="WenQuanYi Micro Hei" \
+    -V CJKoptions="AutoFakeBold,AutoFakeSlant" \
+    -V monofont="Fantasque Sans Mono" "$@"
+}
+pandoc_pdf() {
+  # fc-list :lang=zh
+  pandoc -f markdown -t latex --standalone --latex-engine=xelatex \
+    -V theme:metropolis \
+    -V colortheme:beaver \
+    -V mainfont="Source Sans Pro" \
+    -V CJKmainfont="FZSongS-Extended" \
+    -V CJKoptions="AutoFakeBold,AutoFakeSlant" \
+    -V monofont="Fantasque Sans Mono" "$@"
+}
 #}}}
