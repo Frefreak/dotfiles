@@ -1,0 +1,6 @@
+**/*-local.json
+**/*-server.json
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/.terraform/
+**/*.retry

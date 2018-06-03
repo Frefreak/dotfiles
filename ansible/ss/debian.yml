@@ -1,0 +1,40 @@
+# - name: install shadowsocks-libev on remote
+  # become: yes
+  # pacman:
+    # name: shadowsocks-libev
+    # state: latest
+
+- name: get hostname
+  shell: hostname
+  register: hostname
+
+- name: generate config files locally
+  connection: local
+  when: ansible_all_ipv6_address is defined
+  shadowsocks_libev:
+    server: "{{ansible_all_ipv4_addresses + ansible_all_ipv6_address}}"
+    name: "{{ hostname.stdout }}"
+    port: "{{ PORT }}"
+
+- name: generate config files locally
+  connection: local
+  when: ansible_all_ipv6_address is not defined
+  shadowsocks_libev:
+    server: "{{ansible_all_ipv4_addresses}}"
+    name: "{{ hostname.stdout }}"
+    port: "{{ PORT }}"
+
+- name: copy to remote
+  become_user: root
+  become: yes
+  copy:
+    src: "{{ hostname.stdout }}-server.json"
+    dest: /etc/shadowsocks-libev/
+
+- name: enable using systemd
+  become_user: root
+  become: yes
+  systemd:
+    name: shadowsocks-libev-server@{{hostname.stdout}}-server
+    enabled: true
+    state: restarted

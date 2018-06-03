@@ -1,0 +1,2 @@
+variable "hostname" {}
+variable "pubssh" {}

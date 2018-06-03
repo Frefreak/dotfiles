@@ -1,0 +1,18 @@
+- name: add real target(s)
+  hosts: localhost
+  gather_facts: no
+  vars_prompt:
+    - name: target_host
+      prompt: enter target hosts ip/domain, seperated by space
+      private: no
+  tasks:
+    - name: add host(s)
+      add_host:
+        name: "{{ item }}"
+        group: real_target
+      loop: "{{ target_host.split() }}"
+
+- name: run
+  hosts: real_target
+  tasks:
+    - include_tasks: "{{ ansible_os_family | lower }}.yml"
