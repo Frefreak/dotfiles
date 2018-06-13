@@ -111,11 +111,12 @@ alias a2='aria2c'
 alias pc='proxychains -q'
 alias pca='proxychains -q aria2c'
 alias pcg='proxychains -q git clone'
+alias dol='dolphin . >& /dev/null & disown'
 alias site_deploy='stack exec -- site deploy'
 alias site_build='stack exec -- site build'
 alias nvsmi='nvidia-smi'
 
-mm () { make @* 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
+mm () { make "$@" 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
 ghc () { stack --verbosity slient exec -- ghc $* }
 ghci () { stack --verbosity slient exec -- ghci $* }
@@ -230,11 +231,8 @@ pandoc_beamer() {
 pandoc_pdf() {
   # fc-list :lang=zh
   pandoc -f markdown -t latex --standalone --latex-engine=xelatex \
-    -V theme:metropolis \
-    -V colortheme:beaver \
-    -V mainfont="Source Sans Pro" \
     -V CJKmainfont="FZSongS-Extended" \
-    -V CJKoptions="AutoFakeBold,AutoFakeSlant" \
-    -V monofont="Fantasque Sans Mono" "$@"
+    -V CJKoptions="AutoFakeBold,AutoFakeSlant" "$@"
+    # -V monofont="Fantasque Sans Mono" "$@"
 }
 #}}}
