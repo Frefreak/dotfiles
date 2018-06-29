@@ -115,7 +115,8 @@ alias dol='dolphin . >& /dev/null & disown'
 alias site_deploy='stack exec -- site deploy'
 alias site_build='stack exec -- site build'
 alias nvsmi='nvidia-smi'
-
+alias s35_conn="bluetoothctl connect 41:22:11:07:C2:73 &"
+alias ccmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES"
 mm () { make "$@" 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
 ghc () { stack --verbosity slient exec -- ghc $* }
@@ -206,7 +207,9 @@ magnet-info() {
 
 # urban dictionary
 ud() {
-  curl http://api.urbandictionary.com/v0/define\?term\="$1" 2>/dev/null | jq
+  curl http://api.urbandictionary.com/v0/define\?term\="$1" 2>/dev/null | \
+    jq ".list | .[] | .definition" |& python -u -c \
+    "print(__import__('sys').stdin.buffer.read().decode('unicode_escape'))"
 }
 
 ukill () {

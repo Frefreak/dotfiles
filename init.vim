@@ -5,7 +5,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'vim-latex/vim-latex', { 'for': 'tex' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
@@ -23,7 +23,7 @@ Plug 'jpalardy/vim-slime'
 Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'wellle/targets.vim'
-Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php', 'css', 'vue'] }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'roxma/vim-tmux-clipboard'
@@ -168,12 +168,10 @@ augroup filetype_html
 	autocmd FileType html setlocal foldmethod=syntax
 augroup end
 
-augroup filetype_zsh
+augroup filetype_script
 	autocmd FileType zsh setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
-augroup end
-
-augroup filetype_tex
 	autocmd FileType tex setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
+	autocmd FileType lua setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
 augroup end
 
 augroup md_report_pdf
@@ -182,14 +180,7 @@ augroup end
 
 "}}}
 
-" vim-latex {{{
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='tex'
-let g:Tex_CompileRule_pdf='xelatex -interaction=nonstopmode $*'
-let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_MultipleCompileFormats='pdf'
-
-imap `w \omega
+" vimtex {{{
 "}}}
 
 " neco-ghc {{{
