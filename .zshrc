@@ -223,7 +223,7 @@ pandoc_html() {
 }
 
 pandoc_beamer() {
-  pandoc -f markdown -t beamer --standalone --latex-engine=xelatex \
+  pandoc -f markdown -t beamer --standalone --pdf-engine=xelatex \
     -V theme:metropolis \
     -V colortheme:beaver \
     -V mainfont="Source Sans Pro" \
@@ -233,7 +233,7 @@ pandoc_beamer() {
 }
 pandoc_pdf() {
   # fc-list :lang=zh
-  pandoc -f markdown -t latex --standalone --latex-engine=xelatex \
+  pandoc -f markdown -t latex --standalone --pdf-engine=xelatex \
     -V CJKmainfont="FZSongS-Extended" \
     -V CJKoptions="AutoFakeBold,AutoFakeSlant" "$@"
     # -V monofont="Fantasque Sans Mono" "$@"

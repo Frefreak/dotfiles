@@ -315,7 +315,7 @@ set hidden
 let g:LanguageClient_serverCommands = {
     \ 'c': ['/bin/cquery', '--log-file=/tmp/cq_c.log'],
     \ 'cpp': ['/bin/cquery', '--log-file=/tmp/cq.log'],
-    \ 'haskell': ['hie', '--lsp'],
+    \ 'haskell': ['stack', 'exec', '--', 'hie-wrapper', '--lsp'],
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ 'python': ['pyls', '--log-file=/tmp/pyls.log']
     \ }
