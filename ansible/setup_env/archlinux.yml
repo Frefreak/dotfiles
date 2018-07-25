@@ -40,7 +40,7 @@
 - name: zsh theme
   copy:
     remote_src: yes
-    src: dotfiles/lambda.zsh-theme
+    src: dotfiles/themes/lambda.zsh-theme
     dest: .oh-my-zsh/custom/themes
 
 - name: vim-plug
