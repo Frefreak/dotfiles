@@ -219,7 +219,8 @@ ukill () {
 pandoc_html() {
   fst="$1"
   shift
-  pandoc -s --mathjax -f markdown -t html "$fst" -o "${fst%%.*}.html" $@
+  pandoc --self-contained --css /home/adv_zxy/pandoc/gh-pandoc.css --mathjax -f markdown -t html \
+    "$fst" -o "${fst%%.*}.html" $@
 }
 
 pandoc_beamer() {
