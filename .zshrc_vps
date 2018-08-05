@@ -50,7 +50,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode autojump command-not-found systemd archlinux shrink-path)
+plugins=(git vi-mode command-not-found systemd archlinux shrink-path)
 
 # User configuration
 
@@ -201,7 +201,9 @@ magnet-info() {
 
 # urban dictionary
 ud() {
-  curl http://api.urbandictionary.com/v0/define\?term\="$1" 2>/dev/null | jq
+  curl http://api.urbandictionary.com/v0/define\?term\="$1" 2>/dev/null | \
+    jq ".list | .[] | .definition" |& python -u -c \
+    "print(__import__('sys').stdin.buffer.read().decode('unicode_escape'))"
 }
 
 ukill () {
@@ -211,11 +213,12 @@ ukill () {
 pandoc_html() {
   fst="$1"
   shift
-  pandoc -s --mathjax -f markdown -t html "$fst" -o "${fst%%.*}.html" $@
+  pandoc --self-contained --css /home/adv_zxy/pandoc/gh-pandoc.css --mathjax -f markdown -t html \
+    "$fst" -o "${fst%%.*}.html" $@
 }
 
 pandoc_beamer() {
-  pandoc -f markdown -t beamer --standalone --latex-engine=xelatex \
+  pandoc -f markdown -t beamer --standalone --pdf-engine=xelatex \
     -V theme:metropolis \
     -V colortheme:beaver \
     -V mainfont="Source Sans Pro" \
@@ -225,12 +228,10 @@ pandoc_beamer() {
 }
 pandoc_pdf() {
   # fc-list :lang=zh
-  pandoc -f markdown -t latex --standalone --latex-engine=xelatex \
-    -V theme:metropolis \
-    -V colortheme:beaver \
-    -V mainfont="Source Sans Pro" \
+  pandoc -f markdown -t latex --standalone --pdf-engine=xelatex \
     -V CJKmainfont="FZSongS-Extended" \
-    -V CJKoptions="AutoFakeBold,AutoFakeSlant" \
-    -V monofont="Fantasque Sans Mono" "$@"
+    -V CJKoptions="AutoFakeBold,AutoFakeSlant" "$@"
+    # -V monofont="Fantasque Sans Mono" "$@"
 }
 #}}}
+eval "$(fasd --init auto)"

@@ -174,6 +174,10 @@ augroup filetype_script
 	autocmd FileType lua setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
 augroup end
 
+augroup filetype_fix
+  autocmd FileType plaintex set ft=tex
+augroup end
+
 augroup md_report_pdf
 	autocmd BufWritePost \d\d\d\d-\d\d-\d\d.md call jobstart('pandoc_beamer ' . expand('%') . ' -o ' . expand('%:t:s?md$?pdf?'))
 augroup end
