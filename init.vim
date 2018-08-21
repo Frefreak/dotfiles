@@ -24,7 +24,7 @@ Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'wellle/targets.vim'
 Plug 'machakann/vim-sandwich'
-Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php', 'css', 'vue'] }
+Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php', 'css', 'vue', 'xml'] }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'junegunn/fzf'
@@ -172,6 +172,7 @@ augroup filetype_script
 	autocmd FileType zsh setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
 	autocmd FileType tex setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
 	autocmd FileType lua setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
+	autocmd FileType php setlocal foldmethod=marker ts=4 sw=4 sts=4 expandtab
 augroup end
 
 augroup filetype_fix

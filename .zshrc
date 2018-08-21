@@ -115,7 +115,6 @@ alias dol='dolphin . >& /dev/null & disown'
 alias site_deploy='stack exec -- site deploy'
 alias site_build='stack exec -- site build'
 alias nvsmi='nvidia-smi'
-alias s35_conn="bluetoothctl connect 41:22:11:07:C2:73 &"
 alias ccmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES"
 mm () { make "$@" 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
@@ -147,9 +146,11 @@ export PATH=$PATH:$HOME/x-tools7h/arm-unknown-linux-gnueabihf/bin
 export MANPAGER="nvim -c 'set ft=man' -c 'call clearmatches()' -"
 export VIMRC="$HOME/.config/nvim/init.vim"
 
-. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-eval /usr/share/bash-completion/completions/stack
-eval /usr/share/bash-completion/completions/pandoc
+[[ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]] && . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -d /usr/share/zsh-syntax-highlighting ]] && . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+command -v pandoc >/dev/null 2>&1 && eval "$(pandoc --bash-completion)"
+command -v stack >/dev/null 2>&1 && eval "$(stack --bash-completion-script stack)"
+command -v fasd >/dev/null 2>&1 && eval "$(fasd --init auto)"
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
@@ -157,7 +158,7 @@ ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
 
 ## fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
-source /usr/share/fzf/completion.zsh
+[[ -f /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
 
 # fh - repeat history
 fh() {
@@ -240,4 +241,3 @@ pandoc_pdf() {
     # -V monofont="Fantasque Sans Mono" "$@"
 }
 #}}}
-eval "$(fasd --init auto)"
