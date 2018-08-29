@@ -35,6 +35,7 @@ Plug 'posva/vim-vue'
 Plug 'MarcWeber/vim-addon-local-vimrc'
 Plug 'idris-hackers/idris-vim', { 'for': ['idr'] }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+Plug 'manicmaniac/coconut.vim'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -143,7 +144,8 @@ augroup filetye_vim
 augroup end
 
 augroup filetye_python
-	autocmd FileType python setlocal shiftwidth=4 tabstop=4
+	autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
+	autocmd FileType coconut setlocal shiftwidth=4 tabstop=4 expandtab
 augroup end
 
 augroup filetype_haskell
