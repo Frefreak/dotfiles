@@ -160,6 +160,26 @@ ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
 export FZF_DEFAULT_COMMAND='ag -g ""'
 [[ -f /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
 
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+fe() {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+
+vg() {
+  local file
+
+  file=$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')
+
+  if [[ -n $file ]]
+  then
+     zsh -c "${EDITOR:-vim} $file"
+  fi
+}
+
 # fh - repeat history
 fh() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
@@ -236,8 +256,8 @@ pandoc_beamer() {
 pandoc_pdf() {
   # fc-list :lang=zh
   pandoc -f markdown -t latex --standalone --pdf-engine=xelatex \
-    -V CJKmainfont="FZSongS-Extended" \
-    -V CJKoptions="AutoFakeBold,AutoFakeSlant" "$@"
-    # -V monofont="Fantasque Sans Mono" "$@"
+    -V CJKmainfont="WenQuanYi Micro Hei" \
+    -V CJKoptions="AutoFakeBold,AutoFakeSlant" "$@" \
+    -V monofont="Fantasque Sans Mono" "$@"
 }
 #}}}

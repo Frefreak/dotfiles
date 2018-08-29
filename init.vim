@@ -196,7 +196,7 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc " this seems unneces
 " from Damian Conway, More Instantly Better Vim - OSCON 2013 {{{
 " ColorColumn
 call matchadd('ColorColumn', '\%81v', 100)
-autocmd Filetype xhtml,html call clearmatches() " html is special
+autocmd Filetype xhtml,html,php call clearmatches() " html is special
 
 " jump to next
 nnoremap <silent> n   n:call HLNext(0.01)<cr>
@@ -372,10 +372,46 @@ nnoremap cp :e %:h<enter>
 " }}}
 
 " fzf {{{
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+
+" Augmenting Ag command using fzf#vim#with_preview function
+"   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
+"     * For syntax-highlighting, Ruby and any of the following tools are required:
+"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
+"       - CodeRay: http://coderay.rubychan.de/
+"       - Rouge: https://github.com/jneen/rouge
+"
+"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
+"   :Ag! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
 nnoremap <silent> <leader>f :FZF -m<CR>
 nnoremap <silent> <leader>h :History<CR>
 nnoremap <silent> <leader>l :Lines<CR>
-nnoremap <silent> <leader>a :Ag<CR>
+nnoremap <silent> <leader>ag :Ag<CR>
+nnoremap <silent> <leader>rg :Rg<CR>
+
 " }}}
 
 " neomake {{{
