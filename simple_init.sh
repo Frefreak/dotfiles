@@ -6,7 +6,7 @@ alias m='make'
 alias grep='grep -P --color=auto'
 alias sudo='sudo '
 # alias yscl='yum --disablerepo="*" --enablerepo="*scl*"'
-export PS1="\\[^[[32;1m\\][\\u@\\h \\w]\\$ \\[^[[0m\\]"
+export PS1="\\[[32;1m\\][\\u@\\h \\w]\\$ \\[[0m\\]"
 export PATH=/opt/rh/rh-python36/root/usr/bin:\$PATH
 export LANG="en_US.UTF-8"
 EOF
@@ -18,7 +18,7 @@ syntax on
 nnoremap H ^
 nnoremap L $
 
-inoremap kj ^[
+inoremap kj 
 cnoremap kj <C-c>
 
 vnoremap ty "+y
@@ -37,8 +37,8 @@ EOF
 BASHRC_B64=$(echo "$BASHRC" | base64)
 VIMRC_B64=$(echo "$VIMRC" | base64)
 TOTAL=$(cat << EOF
-echo '$BASHRC_B64' | base64 -d >> .bashrc
-echo '$VIMRC_B64' | base64 -d >> .vimrc2
+echo '$BASHRC_B64' | base64 -d >> ~/.bashrc
+echo '$VIMRC_B64' | base64 -d >> ~/.vimrc2
 EOF
 )
 TOTAL_B64=$(echo "$TOTAL" | base64 | tr -d '\n')
