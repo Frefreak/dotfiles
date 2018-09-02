@@ -432,6 +432,7 @@ let g:clang_diagsopt = ''
 " nerdcommenter {{{
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
+let g:NERDCustomDelimiters = { 'coconut': { 'left': '#' } }
 vmap <M-/> <plug>NERDCommenterToggle
 nmap <M-/> <plug>NERDCommenterToggle
 " }}}
