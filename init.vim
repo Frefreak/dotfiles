@@ -190,11 +190,6 @@ augroup end
 " vimtex {{{
 "}}}
 
-" neco-ghc {{{
-let g:haskellmode_completion_ghc = 0
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc " this seems unnecessary
-"}}}
-
 " from Damian Conway, More Instantly Better Vim - OSCON 2013 {{{
 " ColorColumn
 call matchadd('ColorColumn', '\%81v', 100)
