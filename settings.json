@@ -1,0 +1,56 @@
+{
+    "csharp.format.enable": false,
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["H"],
+            "after": ["^"],
+        },
+        {
+            "before": ["L"],
+            "after": ["$"]
+        },
+        {
+            "before": [";"],
+            "after": [":"],
+        },
+        {
+            "before": [":"],
+            "after": [";"],
+        },
+        {
+            "before": ["t", "p"],
+            "after": ["\"", "+", "p"]
+        },
+        {
+            "before": ["v"],
+            "after": ["<C-v>"]
+        },
+        {
+            "before": ["<C-v>"],
+            "after": ["v"]
+        },
+    ],
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+            "before": ["k", "j"],
+            "after": ["<esc>"]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["v"],
+            "after": ["<C-v>"]
+        },
+        {
+            "before": ["<C-v>"],
+            "after": ["v"]
+        },
+        {
+            "before": ["t", "y"],
+            "after": ["\"", "+", "y"],
+        }
+    ],
+    
+}
