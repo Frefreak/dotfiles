@@ -14,6 +14,7 @@ EOF
 
 VIMRC=$(cat <<EOF
 syntax on
+set fileencodings=utf8,cp936,gb18030,big5
 
 nnoremap H ^
 nnoremap L $
