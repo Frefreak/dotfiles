@@ -33,6 +33,9 @@ nnoremap <C-V>     v
 
 vnoremap    v   <C-V>
 vnoremap <C-V>     v
+
+cmap w!! w !sudo tee % > /dev/null
+nnoremap cp :e %:h<enter>
 EOF
 )
 BASHRC_B64=$(echo "$BASHRC" | base64)
