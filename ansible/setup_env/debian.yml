@@ -93,12 +93,6 @@
     extra_args: --user
     executable: pip2
 
-- name: neovim plugin
-  shell: nvim -c 'PlugInstall' -c 'UpdateRemotePlugins' -c 'qall'
-    && touch plug_installed
-  args:
-    creates: plug_installed
-
 - name: copy snippets
   shell: cp -r dotfiles/snippets ~/.local/share/nvim/UltiSnips
   args:
