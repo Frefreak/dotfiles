@@ -313,6 +313,7 @@ endif
 " LanguageClient-neovim {{{
 " Required for operations modifying multiple buffers like rename.
 set hidden
+let g:LanguageClient_diagnosticsEnable = 0
 
 let g:LanguageClient_serverCommands = {
     \ 'c': ['/bin/cquery', '--log-file=/tmp/cq_c.log'],
@@ -422,6 +423,10 @@ let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
     \ + ['-d', 'missing-docstring,invalid-name,maybe-no-member']
 " let g:neomake_open_list = 2
 let g:clang_diagsopt = ''
+let g:neomake_warning_sign = {
+   \   'text': '❗',
+   \   'texthl': 'NeomakeWarningSign',
+   \ }
 " }}}
 
 " nerdcommenter {{{
