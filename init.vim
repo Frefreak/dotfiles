@@ -262,13 +262,6 @@ augroup deoplete_special
 augroup end
 "}}}
 
-" ghc-mod {{{
-noremap <leader>tw :GhcModTypeInsert<CR>
-noremap <leader>ts :GhcModSplitFunCase<CR>
-noremap <leader>tq :GhcModType<CR>
-noremap <leader>te :GhcModTypeClear<CR>
-"}}}
-
 " vim-hdevtools {{{
 augroup filetype_haskell
 	au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
