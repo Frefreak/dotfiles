@@ -38,11 +38,44 @@ cmap w!! w !sudo tee % > /dev/null
 nnoremap cp :e %:h<enter>
 EOF
 )
+
+INPUTRC=$(cat <<EOF
+# Use Vi, not Emacs, style editing
+set editing-mode vi
+
+# Show all completions as soon as I press tab, even if there's more than one
+set show-all-if-ambiguous on
+# Ignore case
+set completion-ignore-case on
+
+###########################################################
+# Keymaps for when we're in command mode (e.g., after hitting ESC)
+set keymap vi-command
+Control-p: history-search-backward
+Control-n: history-search-forward
+H: beginning-of-line
+L: end-of-line
+
+
+###########################################################
+# Keymaps for when we're in insert (i.e., typing stuff in) mode
+set keymap vi-insert
+
+"kj": vi-movement-mode
+Control-p: history-search-backward
+Control-n: history-search-forward
+"\e.": yank-last-arg
+
+EOF
+)
+
 BASHRC_B64=$(echo "$BASHRC" | base64)
 VIMRC_B64=$(echo "$VIMRC" | base64)
+INPUTRC_B64=$(echo "$INPUTRC" | base64)
 TOTAL=$(cat << EOF
 echo '$BASHRC_B64' | base64 -d >> ~/.bashrc
 echo '$VIMRC_B64' | base64 -d >> ~/.vimrc2
+echo '$INPUTRC_B64' | base64 -d >> ~/.inputrc
 EOF
 )
 TOTAL_B64=$(echo "$TOTAL" | base64 | tr -d '\n')
