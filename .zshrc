@@ -51,7 +51,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode command-not-found systemd archlinux shrink-path)
+plugins=(git vi-mode urltools fasd gradle command-not-found systemd archlinux shrink-path)
 
 # User configuration
 
