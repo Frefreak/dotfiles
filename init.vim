@@ -35,11 +35,11 @@ Plug 'posva/vim-vue'
 Plug 'MarcWeber/vim-addon-local-vimrc'
 Plug 'idris-hackers/idris-vim', { 'for': ['idr'] }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
-Plug 'manicmaniac/coconut.vim'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 call plug#end()
 "}}}
 
@@ -64,7 +64,7 @@ set inccommand=split
 
 " lightline {{{
 set noshowmode
-let s:theme = 'Dracula'
+let s:theme = 'dracula'
 let g:lightline = {
 	\ 'colorscheme': s:theme,
 	\ 'active': {
@@ -141,11 +141,11 @@ augroup end
 
 augroup filetye_vim
 	autocmd FileType vim setlocal shiftwidth=4 tabstop=4
+  autocmd FileType vimwiki setlocal shiftwidth=4 tabstop=4 expandtab
 augroup end
 
 augroup filetye_python
 	autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
-	autocmd FileType coconut setlocal shiftwidth=4 tabstop=4 expandtab
 augroup end
 
 augroup filetype_haskell
@@ -311,6 +311,7 @@ let g:LanguageClient_diagnosticsEnable = 0
 let g:LanguageClient_serverCommands = {
     \ 'c': ['/bin/cquery', '--log-file=/tmp/cq_c.log'],
     \ 'cpp': ['/bin/cquery', '--log-file=/tmp/cq.log'],
+    \ 'cc': ['/bin/cquery', '--log-file=/tmp/cq.log'],
     \ 'haskell': ['stack', 'exec', '--', 'hie-wrapper', '--lsp'],
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ 'python': ['pyls', '--log-file=/tmp/pyls.log']
@@ -409,6 +410,7 @@ nnoremap <silent> <leader>rg :Rg<CR>
 let g:neomake_c_enabled_makers = ['clang']
 let g:neomake_cpp_enabled_makers = ['clangcheck']
 let g:neomake_tex_enabled_makers = ['chktex']
+let g:neomake_python_enabled_makers = ['pylint']
 let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
     \ + ["-std=c++1z"]
 let g:neomake_haskell_enabled_makers = ['hlint']
@@ -432,6 +434,7 @@ nmap <M-/> <plug>NERDCommenterToggle
 
 " Some other stuffs {{{
 
+command! SSS :syntax sync fromstart
 " Markdown preview using github api, markdownPreview is an external executable
 command! MarkdownPreview :call MarkdownPreview()
 "augroup filetype_markdown
