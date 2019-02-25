@@ -142,7 +142,6 @@ bindkey -M viins 'kj' vi-cmd-mode
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
 
-export PATH=$PATH:$HOME/x-tools7h/arm-unknown-linux-gnueabihf/bin
 export MANPAGER="nvim -c 'set ft=man' -c 'call clearmatches()' -"
 export VIMRC="$HOME/.config/nvim/init.vim"
 
@@ -159,6 +158,7 @@ ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
 ## fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
 [[ -f /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
+[[ -f /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
