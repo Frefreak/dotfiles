@@ -174,6 +174,7 @@ augroup filetype_script
 	autocmd FileType zsh setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
 	autocmd FileType tex setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
 	autocmd FileType lua setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
+	autocmd FileType groovy setlocal foldmethod=marker ts=4 sw=4 sts=4 expandtab
 	autocmd FileType php setlocal foldmethod=marker ts=4 sw=4 sts=4 expandtab
 augroup end
 
@@ -314,13 +315,16 @@ let g:LanguageClient_serverCommands = {
     \ 'cc': ['/bin/cquery', '--log-file=/tmp/cq.log'],
     \ 'haskell': ['stack', 'exec', '--', 'hie-wrapper', '--lsp'],
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'python': ['pyls', '--log-file=/tmp/pyls.log']
+    \ 'python': ['pyls', '--log-file=/tmp/pyls.log'],
     \ }
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath = '/home/adv_zxy/.config/nvim/settings.json'
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition({
+    \ 'gotoCmd': 'bo vsplit',
+    \ })<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 " nn <silent> <M-.> :call LanguageClient_textDocument_definition()<cr>
 " nn <silent> <M-,> :call LanguageClient_textDocument_references()<cr>
@@ -432,6 +436,18 @@ vmap <M-/> <plug>NERDCommenterToggle
 nmap <M-/> <plug>NERDCommenterToggle
 " }}}
 
+" netrw {{{
+" let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 25
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
+"}}}
+
 " Some other stuffs {{{
 
 command! SSS :syntax sync fromstart
@@ -462,3 +478,4 @@ endfunction
 inoremap `l λ
 set timeoutlen=500
 "}}}
+
