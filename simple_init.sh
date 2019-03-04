@@ -7,7 +7,6 @@ alias grep='grep -P --color=auto'
 alias sudo='sudo '
 # alias yscl='yum --disablerepo="*" --enablerepo="*scl*"'
 export PS1="\\[[32;1m\\][\\u@\\h \\w]\\$ \\[[0m\\]"
-export PATH=/opt/rh/rh-python36/root/usr/bin:\$PATH
 export LANG="en_US.UTF-8"
 EOF
 )
