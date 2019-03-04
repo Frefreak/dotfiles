@@ -40,6 +40,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 call plug#end()
 "}}}
 
