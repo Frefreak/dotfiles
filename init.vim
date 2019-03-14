@@ -15,8 +15,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vimproc.vim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jpalardy/vim-slime'
@@ -41,6 +39,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'ianding1/leetcode.vim'
 call plug#end()
 "}}}
 
@@ -277,6 +276,8 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir='~/.local/share/nvim/UltiSnips/'
 let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsListSnippets="<C-l>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "}}}
 
 " vim-slime {{{
@@ -332,9 +333,9 @@ nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 " nn <f2> :call LanguageClient_textDocument_rename()<cr>
 " nn <leader>ji :Denite documentSymbol<cr>
 " nn <leader>jI :Denite workspaceSymbol<cr>
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " augroup LanguageClient_config
   " au!
@@ -480,3 +481,8 @@ inoremap `l λ
 set timeoutlen=500
 "}}}
 
+" LeetCode {{{
+let g:leetcode_solution_filetype = 'scala'
+let g:leetcode_username = 'frefreak.zxy@gmail.com'
+
+"}}}

@@ -260,4 +260,10 @@ pandoc_pdf() {
     -V CJKoptions="AutoFakeBold,AutoFakeSlant" "$@" \
     -V monofont="Fantasque Sans Mono" "$@"
 }
+
+# jq from clipboard
+jqc() {
+  xclip -out | head -c 8192 | jq "$@"
+}
+
 #}}}
