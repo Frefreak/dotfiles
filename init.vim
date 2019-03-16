@@ -317,10 +317,12 @@ let g:LanguageClient_serverCommands = {
     \ 'cc': ['/bin/cquery', '--log-file=/tmp/cq.log'],
     \ 'haskell': ['stack', 'exec', '--', 'hie-wrapper', '--lsp'],
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'python': ['pyls', '--log-file=/tmp/pyls.log'],
+    \ 'python': ['pyls', '-v', '--log-file=/tmp/pyls.log'],
     \ }
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath = '/home/adv_zxy/.config/nvim/settings.json'
+" call LanguageClient#setLoggingLevel('DEBUG')
+let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 "nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
