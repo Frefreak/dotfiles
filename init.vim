@@ -335,9 +335,6 @@ nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 " nn <f2> :call LanguageClient_textDocument_rename()<cr>
 " nn <leader>ji :Denite documentSymbol<cr>
 " nn <leader>jI :Denite workspaceSymbol<cr>
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " augroup LanguageClient_config
   " au!
