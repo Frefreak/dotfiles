@@ -1,0 +1,18 @@
+{
+	"initializationOptions": {
+		"cacheDirectory": "/tmp/cquery"
+	},
+	"pyls": {
+		"plugins": {
+			"pyflakes": { "enabled": false },
+			"pycodestyle": { "enabled": false },
+			"pydocstyle": { "enabled": false },
+			"autopep8": { "enabled": false },
+			"yapf": { "enabled": false },
+			"jedi_completion": {
+				"include_params": false
+			}
+
+		}
+	}
+}
