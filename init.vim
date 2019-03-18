@@ -330,6 +330,7 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition({
     \ 'gotoCmd': 'bo vsplit',
     \ })<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
 " nn <silent> <M-.> :call LanguageClient_textDocument_definition()<cr>
 " nn <silent> <M-,> :call LanguageClient_textDocument_references()<cr>
 " nn <f2> :call LanguageClient_textDocument_rename()<cr>
