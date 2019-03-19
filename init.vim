@@ -9,7 +9,7 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
 Plug 'atweiden/vim-dragvisuals'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -128,9 +128,9 @@ augroup END
 "}}}
 
 " some auto commands {{{
-augroup neomake_enable
-	autocmd! BufWritePost * Neomake
-augroup end
+" augroup neomake_enable
+	" autocmd! BufWritePost * Neomake
+" augroup end
 
 autocmd CompleteDone * pclose
 
@@ -309,7 +309,7 @@ endif
 " LanguageClient-neovim {{{
 " Required for operations modifying multiple buffers like rename.
 set hidden
-let g:LanguageClient_diagnosticsEnable = 0
+let g:LanguageClient_diagnosticsEnable = 1
 
 let g:LanguageClient_serverCommands = {
     \ 'c': ['/bin/cquery', '--log-file=/tmp/cq_c.log'],
@@ -325,11 +325,12 @@ let g:LanguageClient_settingsPath = '/home/adv_zxy/.config/nvim/settings.json'
 let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition({
-    \ 'gotoCmd': 'bo vsplit',
+    \ 'gotoCmd': 'bo split',
     \ })<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> GF :call LanguageClient_textDocument_formatting()<CR>
 set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
 " nn <silent> <M-.> :call LanguageClient_textDocument_definition()<cr>
 " nn <silent> <M-,> :call LanguageClient_textDocument_references()<cr>
@@ -413,22 +414,22 @@ nnoremap <silent> <leader>rg :Rg<CR>
 " }}}
 
 " neomake {{{
-let g:neomake_c_enabled_makers = ['clang']
-let g:neomake_cpp_enabled_makers = ['clangcheck']
-let g:neomake_tex_enabled_makers = ['chktex']
-let g:neomake_python_enabled_makers = ['pylint']
-let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
-    \ + ["-std=c++1z"]
-let g:neomake_haskell_enabled_makers = ['hlint']
-let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
-    \ + ['-d', 'missing-docstring,invalid-name,maybe-no-member']
+" let g:neomake_c_enabled_makers = ['clang']
+" let g:neomake_cpp_enabled_makers = ['clangcheck']
+" let g:neomake_tex_enabled_makers = ['chktex']
+" let g:neomake_python_enabled_makers = ['pylint']
+" let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
+    " \ + ["-std=c++1z"]
+" let g:neomake_haskell_enabled_makers = ['hlint']
+" let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
+    " \ + ['-d', 'missing-docstring,invalid-name,maybe-no-member']
 " let g:neomake_open_list = 2
-let g:clang_diagsopt = ''
-let g:neomake_warning_sign = {
-   \   'text': '❗',
-   \   'texthl': 'NeomakeWarningSign',
-   \ }
-" }}}
+" let g:clang_diagsopt = ''
+" let g:neomake_warning_sign = {
+   " \   'text': '❗',
+   " \   'texthl': 'NeomakeWarningSign',
+   " \ }
+"}}}
 
 " nerdcommenter {{{
 let g:NERDSpaceDelims = 1
