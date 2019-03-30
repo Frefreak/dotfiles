@@ -330,7 +330,7 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition({
     \ })<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> GF :call LanguageClient_textDocument_formatting()<CR>
+nnoremap <silent> FMT :call LanguageClient_textDocument_formatting()<CR>
 set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
 " nn <silent> <M-.> :call LanguageClient_textDocument_definition()<cr>
 " nn <silent> <M-,> :call LanguageClient_textDocument_references()<cr>
