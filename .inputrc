@@ -11,6 +11,8 @@ set completion-ignore-case on
 set keymap vi-command
 Control-p: history-search-backward
 Control-n: history-search-forward
+H: beginning-of-line
+L: end-of-line
 
 
 ###########################################################
