@@ -5,9 +5,11 @@ alias n='vim -S ~/.vimrc2'
 alias m='make'
 alias grep='grep -P --color=auto'
 alias sudo='sudo '
+alias ls='ls --color=auto'
 # alias yscl='yum --disablerepo="*" --enablerepo="*scl*"'
 export PS1="\\[[32;1m\\][\\u@\\h \\w]\\$ \\[[0m\\]"
 export LANG="en_US.UTF-8"
+export TERM=xterm-256color
 EOF
 )
 
