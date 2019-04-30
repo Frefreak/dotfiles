@@ -264,7 +264,10 @@ pandoc_pdf() {
 
 # jq from clipboard
 jqc() {
-  xclip -out | head -c 8192 | jq "$@"
+  xclip -selection clipboard -out | head -c 8192 | jq "$@"
 }
 
+export EDITOR=nvim
+fpath=(/usr/share/doc/radare2/zsh /home/adv_zxy/.zfunc $fpath)
+autoload -U compinit && compinit
 #}}}
