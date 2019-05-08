@@ -15,3 +15,17 @@ endsnippet
 snippet pye "pylint disable" b
 # pylint: enable=${1:no-name-in-module}
 endsnippet
+
+snippet ipy "start ipython"
+import IPython
+IPython.embed()
+endsnippet
+
+snippet addpath "add custom sys.path"
+try:
+	sys
+except NameError:
+	import sys
+sys.path.append('/home/adv_zxy/${1:scripts/work}')
+$0
+endsnippet
