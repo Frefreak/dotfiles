@@ -14,7 +14,7 @@ bind pager j next-line
 bind pager k previous-line
 
 macro pager \cb <pipe-entry>'urlscan'<enter> 'Follow links with urlscan'
-macro attach 'V' "<pipe-entry>cat >/tmp/mail.html && google-chrome-stable /tmp/mail.html<enter>"
+macro attach 'V' "<pipe-entry>cat >/tmp/mail.html && xdg-open /tmp/mail.html<enter>"
 bind index,pager B sidebar-toggle-visible
 # }}}
 
@@ -52,6 +52,9 @@ set mail_check = 60
 set mbox_type=Maildir
 set mime_forward
 set mailcap_path = ~/.mutt/mailcap
+set sort_aux=last-date-received       
+set sort=threads
+set sort_re
 auto_view text/html
 alternative_order text/plain text/html
 

@@ -1,5 +1,5 @@
 set imap_user=adv_zxy
-set my_pass=`pass id`
+set my_pass=`pass vultr_adv_zxy`
 set imap_pass=$my_pass
 unset folder
 set folder="imaps://carso.nz"

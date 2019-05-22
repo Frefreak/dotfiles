@@ -151,6 +151,7 @@ export VIMRC="$HOME/.config/nvim/init.vim"
 command -v pandoc >/dev/null 2>&1 && eval "$(pandoc --bash-completion)"
 command -v stack >/dev/null 2>&1 && eval "$(stack --bash-completion-script stack)"
 command -v fasd >/dev/null 2>&1 && eval "$(fasd --init auto)"
+command -v test >/dev/null 2>&1 && eval $(thefuck --alias)
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
