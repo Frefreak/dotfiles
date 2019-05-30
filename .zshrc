@@ -1,4 +1,3 @@
-fpath=($fpath /usr/share/doc/radare2/zsh ~/.zfunc)
 # {{{ oh-my-zsh
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh/
