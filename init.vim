@@ -4,6 +4,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'itchyny/lightline.vim'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
@@ -13,7 +14,6 @@ Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
 Plug 'atweiden/vim-dragvisuals'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vimproc.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -33,10 +33,6 @@ Plug 'posva/vim-vue'
 Plug 'MarcWeber/vim-addon-local-vimrc'
 Plug 'idris-hackers/idris-vim', { 'for': ['idr'] }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'ianding1/leetcode.vim'
@@ -120,6 +116,71 @@ function! LightlineFilename()
 endfunction
 "}}}
 
+" coc.nvim {{{
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap FMT <Plug>(coc-format)
+nmap FMT <Plug>(coc-format)
+
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+"}}}
+
 " reset cursor to last location {{{
 augroup resCur
   autocmd!
@@ -174,6 +235,7 @@ augroup filetype_script
 	autocmd FileType zsh setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
 	autocmd FileType tex setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
 	autocmd FileType lua setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
+  autocmd FileType cpp setlocal shiftwidth=2 tabstop=2 expandtab
 	autocmd FileType groovy setlocal foldmethod=marker ts=4 sw=4 sts=4 expandtab
 	autocmd FileType php setlocal foldmethod=marker ts=4 sw=4 sts=4 expandtab
 augroup end
@@ -186,9 +248,6 @@ augroup md_report_pdf
 	autocmd BufWritePost \d\d\d\d-\d\d-\d\d.md call jobstart('pandoc_beamer ' . expand('%') . ' -o ' . expand('%:t:s?md$?pdf?'))
 augroup end
 
-"}}}
-
-" vimtex {{{
 "}}}
 
 " from Damian Conway, More Instantly Better Vim - OSCON 2013 {{{
@@ -241,28 +300,6 @@ vmap  <expr>  <UP>     DVB_Drag('up')
 "vmap  <expr>  D        DVB_Duplicate()
 "}}}
 
-" deoplete {{{
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 1
-
-inoremap <silent><expr> <Tab>
-		\ pumvisible() ? "\<C-n>" :
-		\ <SID>check_back_space() ? "\<TAB>" :
-		\ deoplete#mappings#manual_complete()
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-function! s:check_back_space() abort "{{{
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~ '\s'
-	endfunction
-"}}}
-
-augroup deoplete_special
-	au FileType haskell let g:deoplete#disable_auto_complete = 0
-	au FileType python let g:deoplete#disable_auto_complete = 0
-	au FileType c,cpp let g:deoplete#disable_auto_complete = 0
-augroup end
-"}}}
-
 " vim-hdevtools {{{
 augroup filetype_haskell
 	au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
@@ -304,50 +341,6 @@ if nvimhsmode
 	au!
     augroup end
 endif
-"}}}
-
-" LanguageClient-neovim {{{
-" Required for operations modifying multiple buffers like rename.
-set hidden
-let g:LanguageClient_diagnosticsEnable = 1
-
-let g:LanguageClient_serverCommands = {
-    \ 'c': ['/bin/cquery', '--log-file=/tmp/cq_c.log'],
-    \ 'cpp': ['/bin/cquery', '--log-file=/tmp/cq.log'],
-    \ 'cc': ['/bin/cquery', '--log-file=/tmp/cq.log'],
-    \ 'haskell': ['stack', 'exec', '--', 'hie-wrapper', '--lsp'],
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'python': ['pyls', '-v', '--log-file=/tmp/pyls.log'],
-    \ }
-let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = '/home/adv_zxy/.config/nvim/settings.json'
-" call LanguageClient#setLoggingLevel('DEBUG')
-let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition({
-    \ 'gotoCmd': 'bo split',
-    \ })<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> FMT :call LanguageClient_textDocument_formatting()<CR>
-set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
-" nn <silent> <M-.> :call LanguageClient_textDocument_definition()<cr>
-" nn <silent> <M-,> :call LanguageClient_textDocument_references()<cr>
-" nn <f2> :call LanguageClient_textDocument_rename()<cr>
-" nn <leader>ji :Denite documentSymbol<cr>
-" nn <leader>jI :Denite workspaceSymbol<cr>
-
-" augroup LanguageClient_config
-  " au!
-  " au BufEnter * let b:Plugin_LanguageClient_started = 0
-  " au User LanguageClientStarted setl signcolumn=yes
-  " au User LanguageClientStarted let b:Plugin_LanguageClient_started = 1
-  " au User LanguageClientStopped setl signcolumn=auto
-  " au User LanguageClientStopped let b:Plugin_LanguageClient_stopped = 0
-  " au CursorMoved * if b:Plugin_LanguageClient_started | call LanguageClient_textDocument_hover() | endif
-" augroup END
-
 "}}}
 
 " learn vimscript the hard way {{{
