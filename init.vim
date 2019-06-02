@@ -215,11 +215,15 @@ augroup filetype_haskell
 	autocmd FileType hamlet setlocal expandtab softtabstop=2 shiftwidth=2 shiftround
 augroup end
 
+augroup filetype_cmake
+	autocmd FileType cmake setlocal tabstop=4 expandtab softtabstop=4 shiftwidth=4 shiftround
+augroup end
+
 augroup filetype_markdown
 	autocmd FileType markdown setlocal tabstop=4 expandtab softtabstop=4 shiftwidth=4 shiftround
 augroup end
 
-augroup filetype_yaml
+augroup filetype_config
 	autocmd FileType yaml setlocal tabstop=8 softtabstop=2 shiftwidth=2 shiftround
 augroup end
 
