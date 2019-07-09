@@ -203,21 +203,7 @@ uniqNoSort() {
 
 # filter file opened by nvim
 ff() {
-	filename=$(n --headless -c 'echo join(v:oldfiles, "\n")' +q |& \
-		tr -d '' | uniqNoSort | fzf +s)
-  [[ -n $filename ]] && print -z "n" "'$(echo $filename | xargs)'"
-}
-
-# filter file content opened by nvim
-ffc() {
-	filename=$(n --headless -c 'echo join(v:oldfiles, "\n")' +q |&\
-		grep -v "scp://|https?://|man://|ftp://" | tr -d '' |\
-		uniqNoSort |\
-		xargs -I{} sh -c "test -f '{}' && test -r '{}' && echo '{}'" |\
-		xargs ag --nobreak --noheading . | fzf +s |\
-		awk -F':' '{print $1, "+"$2}')
-	args=("${(@s: :)filename}")
-	[[ -n $args[1] ]] && print -z "n" $args
+  n -c 'History'
 }
 
 magnet-info() {
