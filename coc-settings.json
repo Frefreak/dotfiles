@@ -1,21 +1,40 @@
 {
- "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-      "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls"
-         }
-       }
+  "languageserver": {
+     "ccls": {
+       "command": "ccls",
+       "filetypes": ["c", "cpp", "objc", "objcpp"],
+       "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+       "initializationOptions": {
+          "cache": {
+            "directory": "/tmp/ccls"
+          }
+        }
+    },
+    "golang": {
+      "command": "~/go/bin/gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    },
+    "haskell": {
+      "command": "hie-wrapper",
+      "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
+      "filetypes": ["hs", "lhs", "haskell"],
+      "initializationOptions": {},
+      "settings": {
+	  "languageServerHaskell": {
+		  "hlintOn": false,
+		  "maxNumberOfProblems": 10,
+		  "completionSnippetsOn": true
+	  }
+      }
     }
   },
  "python.formatting.provider": "black",
+ "python.linting.pylintArgs": ["--load-plugins", "pylint_flask,pylint_django"],
  "list.insertMappings": {
 	 "<C-D>": "feedkeys:\\<esc>"
  },
-  "diagnostic-languageserver.filetypes": {
-    "sh": "shellcheck"
-  }
+ "diagnostic-languageserver.filetypes": {
+  "sh": "shellcheck"
+ }
 }
