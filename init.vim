@@ -196,8 +196,7 @@ augroup END
 autocmd CompleteDone * pclose
 
 augroup filetype_web
-	autocmd Filetype html,xhtml,javascript,css,vue  setlocal sw=2 ts=2 expandtab sts=2 shiftround
-	autocmd Filetype html,xhtml,css nnoremap <buffer> <localleader>ft Vatzf
+	autocmd Filetype html,xhtml,javascript,css,typescript,vue  setlocal sw=2 ts=2 expandtab sts=2 shiftround
 augroup end
 
 augroup filetye_vim
@@ -205,8 +204,9 @@ augroup filetye_vim
   autocmd FileType vimwiki setlocal shiftwidth=4 tabstop=4 expandtab
 augroup end
 
-augroup filetye_python
+augroup filetye_dev
 	autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
+	autocmd FileType go setlocal shiftwidth=4 tabstop=4 expandtab
 augroup end
 
 augroup filetype_haskell
@@ -225,6 +225,7 @@ augroup end
 
 augroup filetype_config
 	autocmd FileType yaml setlocal tabstop=8 softtabstop=2 shiftwidth=2 shiftround
+	autocmd FileType json setlocal tabstop=8 softtabstop=2 shiftwidth=2 shiftround
 augroup end
 
 augroup filetype_vim
@@ -295,6 +296,11 @@ nnoremap <C-V>     v
 
 vnoremap    v   <C-V>
 vnoremap <C-V>     v
+
+nnoremap <Down> 5j
+nnoremap <Up>   5k
+nnoremap <Left> 5h
+nnoremap <Right> 5l
 
 " dragvisual
 vmap  <expr>  <LEFT>   DVB_Drag('left')
