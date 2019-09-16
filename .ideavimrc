@@ -14,7 +14,7 @@ nnoremap : ;
 nnoremap H 0
 nnoremap L $
 
-inoremap jk <esc>
+inoremap kj <esc>
 
 onoremap in( :<c-u>execute "normal! /(\r:noh\rvi("<CR>
 onoremap il( :<c-u>execute "normal! ?)\r:noh\rvi)"<CR>
