@@ -3,12 +3,7 @@
      "ccls": {
        "command": "ccls",
        "filetypes": ["c", "cpp", "objc", "objcpp"],
-       "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-       "initializationOptions": {
-          "cache": {
-            "directory": "/tmp/ccls"
-          }
-        }
+       "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"]
     },
     "golang": {
       "command": "~/go/bin/gopls",
@@ -16,21 +11,26 @@
       "filetypes": ["go"]
     },
     "haskell": {
-      "command": "hie-wrapper",
-      "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
-      "filetypes": ["hs", "lhs", "haskell"],
-      "initializationOptions": {},
-      "settings": {
-	  "languageServerHaskell": {
-		  "hlintOn": false,
-		  "maxNumberOfProblems": 10,
-		  "completionSnippetsOn": true
-	  }
-      }
+      "command": "ghcide",
+      "args": [
+        "--lsp"
+      ],
+      "rootPatterns": [
+        ".stack.yaml",
+        ".hie-bios",
+        "BUILD.bazel",
+        "cabal.config",
+        "package.yaml"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ]
     }
   },
  "python.formatting.provider": "black",
- "python.linting.pylintArgs": ["--load-plugins", "pylint_flask,pylint_django"],
+ "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
  "list.insertMappings": {
 	 "<C-D>": "feedkeys:\\<esc>"
  },

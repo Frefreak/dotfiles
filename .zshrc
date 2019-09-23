@@ -50,7 +50,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode urltools fasd gradle command-not-found systemd archlinux shrink-path)
+plugins=(git vi-mode urltools fasd command-not-found systemd archlinux shrink-path)
 
 # User configuration
 
@@ -103,6 +103,7 @@ alias ls='ls --color=auto'
 alias cm='cmake'
 alias m='make'
 alias n='nvim'
+alias nh='stack exec -- nvim'
 alias grep="grep -P --color=auto"
 alias jf='journalctl -f'
 alias sudo='sudo '
@@ -127,7 +128,7 @@ bv() {
 	xxd $@ | n - -c "set ft=xxd"
 }
 
-compdef n=nvim
+setopt complete_aliases
 compdef bv=xxd
 
 SAVEHIST=1000
@@ -231,6 +232,14 @@ pandoc_html() {
     "$fst" -o "${fst%%.*}.html" $@
 }
 
+# used when doing an example showcase to step to next folder
+nn() {
+  cd $(folder_view.py next)
+}
+pp() {
+  cd $(folder_view.py prev)
+}
+
 pandoc_beamer() {
   pandoc -f markdown -t beamer --standalone --pdf-engine=xelatex \
     -V theme:metropolis \
@@ -250,7 +259,7 @@ pandoc_pdf() {
 
 # jq from clipboard
 jqc() {
-  xclip -selection clipboard -out | head -c 8192 | jq "$@"
+  xclip -selection clipboard -out | head -c 32768 | jq "$@"
 }
 
 export EDITOR=nvim
