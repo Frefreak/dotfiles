@@ -4,7 +4,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'itchyny/lightline.vim'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
@@ -34,8 +34,9 @@ Plug 'MarcWeber/vim-addon-local-vimrc'
 Plug 'idris-hackers/idris-vim', { 'for': ['idr'] }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
 Plug 'ianding1/leetcode.vim'
+Plug 'mesonbuild/meson', {'rtp': 'data/syntax-highlighting/vim'}
 call plug#end()
 "}}}
 
