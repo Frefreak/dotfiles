@@ -123,7 +123,6 @@ ghc () { stack --verbosity slient exec -- ghc $* }
 ghci () { stack --verbosity slient exec -- ghci $* }
 runhaskell () { stack --verbosity slient exec -- runhaskell $* }
 ghc-pkg () { stack --verbosity slient exec -- ghc-pkg $* }
-clash () { stack --verbosity slient exec -- clash $* }
 bv() {
 	xxd $@ | n - -c "set ft=xxd"
 }
