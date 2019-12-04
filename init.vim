@@ -37,6 +37,7 @@ Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
 Plug 'ianding1/leetcode.vim'
 Plug 'mesonbuild/meson', {'rtp': 'data/syntax-highlighting/vim'}
+Plug 'beyondmarc/glsl.vim'
 call plug#end()
 "}}}
 
