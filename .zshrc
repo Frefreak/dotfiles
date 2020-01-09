@@ -127,7 +127,6 @@ bv() {
 	xxd $@ | n - -c "set ft=xxd"
 }
 
-setopt complete_aliases
 compdef bv=xxd
 
 SAVEHIST=1000
