@@ -38,6 +38,7 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
 Plug 'ianding1/leetcode.vim'
 Plug 'mesonbuild/meson', {'rtp': 'data/syntax-highlighting/vim'}
 Plug 'beyondmarc/glsl.vim'
+Plug 'justinmk/vim-sneak'
 call plug#end()
 "}}}
 
@@ -494,3 +495,12 @@ let g:leetcode_solution_filetype = 'scala'
 let g:leetcode_username = 'frefreak.zxy@gmail.com'
 
 "}}}
+
+" vim-sandwich {{{
+runtime macros/sandwich/keymap/surround.vim
+"}}}
+
+" sneak {{{
+let g:sneak#s_next = 1
+"}}}
+
