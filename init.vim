@@ -39,6 +39,9 @@ Plug 'ianding1/leetcode.vim'
 Plug 'mesonbuild/meson', {'rtp': 'data/syntax-highlighting/vim'}
 Plug 'beyondmarc/glsl.vim'
 Plug 'justinmk/vim-sneak'
+Plug 'junegunn/vim-easy-align'
+Plug 'tidalcycles/vim-tidal'
+Plug 'chr4/nginx.vim'
 call plug#end()
 "}}}
 
@@ -209,7 +212,8 @@ augroup end
 
 augroup filetye_dev
 	autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
-	autocmd FileType go setlocal shiftwidth=4 tabstop=4 expandtab
+	autocmd FileType go setlocal shiftwidth=4 tabstop=4
+	"autocmd FileType go setlocal shiftwidth=4 tabstop=4 expandtab
 augroup end
 
 augroup filetype_haskell
@@ -504,3 +508,6 @@ runtime macros/sandwich/keymap/surround.vim
 let g:sneak#s_next = 1
 "}}}
 
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+
+let g:python3_host_prog = '/usr/bin/python'
