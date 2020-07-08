@@ -11,7 +11,7 @@ vnoremap <leader>( <esc>`>a)<esc>`<i(<esc>`>2l
 nnoremap ; :
 nnoremap : ;
 
-nnoremap H 0
+nnoremap H ^
 nnoremap L $
 
 inoremap kj <esc>
@@ -30,3 +30,6 @@ onoremap in" :<c-u>execute "normal! /\"\r:noh\rvi\""<CR>
 onoremap il" :<c-u>execute "normal! ?\"\r:noh\rvi\""<CR>
 onoremap an" :<c-u>execute "normal! /\"\r:noh\rva\""<CR>
 onoremap al" :<c-u>execute "normal! ?\"\r:noh\rva\""<CR>
+
+vnoremap ty "+y
+nnoremap tp "+p
