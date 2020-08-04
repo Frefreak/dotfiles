@@ -42,6 +42,8 @@ Plug 'justinmk/vim-sneak'
 Plug 'junegunn/vim-easy-align'
 Plug 'tidalcycles/vim-tidal'
 Plug 'chr4/nginx.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 "}}}
 
@@ -202,7 +204,7 @@ augroup END
 autocmd CompleteDone * pclose
 
 augroup filetype_web
-	autocmd Filetype html,xhtml,javascript,css,typescript,vue  setlocal sw=2 ts=2 expandtab sts=2 shiftround
+	autocmd Filetype html,xhtml,javascript,css,typescript,vue,wast  setlocal sw=2 ts=2 expandtab sts=2 shiftround
 augroup end
 
 augroup filetye_vim
@@ -254,6 +256,10 @@ augroup end
 
 augroup filetype_fix
   autocmd FileType plaintex set ft=tex
+augroup end
+
+augroup filetype_nginx
+	autocmd Filetype nginx  setlocal sw=4 ts=4 expandtab sts=4
 augroup end
 
 augroup md_report_pdf
@@ -508,6 +514,15 @@ runtime macros/sandwich/keymap/surround.vim
 let g:sneak#s_next = 1
 "}}}
 
+" easy-align {{{
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
 
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+"}}}
+
+" misc {{{
 let g:python3_host_prog = '/usr/bin/python'
+"}}}
