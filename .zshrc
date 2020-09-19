@@ -2,11 +2,12 @@
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh/
 
+fpath+=$HOME/.zsh/pure
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="lambda"
+ZSH_THEME=""
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -262,4 +263,8 @@ jqc() {
 export EDITOR=nvim
 fpath=(/usr/share/doc/radare2/zsh /home/adv_zxy/.zfunc $fpath)
 autoload -U compinit && compinit
+
+autoload -U promptinit && promptinit
+zstyle :prompt:pure:git:stash show yes
+prompt pure
 #}}}
