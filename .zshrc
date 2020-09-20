@@ -51,7 +51,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode urltools fasd command-not-found systemd archlinux shrink-path)
+plugins=(git vi-mode urltools systemd archlinux shrink-path)
 
 # User configuration
 
@@ -230,6 +230,14 @@ pandoc_html() {
     "$fst" -o "${fst%%.*}.html" $@
 }
 
+pandoc_html_math() {
+  fst="$1"
+  shift
+  pandoc -s --css gh-pandoc.css --mathjax -f markdown -t html \
+    "$fst" -o "${fst%%.*}.html" $@
+}
+
+
 # used when doing an example showcase to step to next folder
 nn() {
   cd $(folder_view.py next)
@@ -245,14 +253,14 @@ pandoc_beamer() {
     -V mainfont="Source Sans Pro" \
     -V CJKmainfont="WenQuanYi Micro Hei" \
     -V CJKoptions="AutoFakeBold,AutoFakeSlant" \
-    -V monofont="Fantasque Sans Mono" "$@"
+    -V monofont="FantasqueSansMono Nerd Font Mono" "$@"
 }
 pandoc_pdf() {
   # fc-list :lang=zh
   pandoc -f markdown -t latex --standalone --pdf-engine=xelatex \
     -V CJKmainfont="WenQuanYi Micro Hei" \
     -V CJKoptions="AutoFakeBold,AutoFakeSlant" "$@" \
-    -V monofont="Fantasque Sans Mono" "$@"
+    -V monofont="FantasqueSansMono Nerd Font Mono" "$@"
 }
 
 # jq from clipboard
