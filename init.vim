@@ -68,17 +68,17 @@ set inccommand=split
 
 " lightline {{{
 set noshowmode
-let s:theme = 'dracula'
 let g:lightline = {
-	\ 'colorscheme': s:theme,
+	\ 'colorscheme': 'dracula',
 	\ 'active': {
 	\	'left': [ ['mode', 'paste'],
-	\			  ['fugitive', 'filename', 'modified'] ],
+	\			  ['fugitive', 'filename'] ],
 	\ },
 	\ 'component_function': {
 	\   'fugitive': 'LightlineFugitive',
-	\	'readonly': 'LightlineReadonly',
-	\   'filename': 'LightlineFilename'
+	\	  'readonly': 'LightlineReadonly',
+	\   'filename': 'LightlineFilename',
+	\   'modified': 'LightlineModified'
 	\ },
 	\ 'component': {
 	\ 	'lineinfo': ' %3l:%-2v',
@@ -89,15 +89,7 @@ let g:lightline = {
 	\ }
 
 function! LightlineModified()
-  let map = { 'V': 'v', "\<C-v>": 'v', 's': 'n', 'v': 'n', "\<C-s>": 'n',
-        \ 'c': 'n', 'R': 'n'}
-  let mode = get(map, mode()[0], mode()[0])
-  let bgcolor = {'n': [236, '#44475a'], 'i': [236, '#44475a'],
-        \ 'v': [236, '#44475a']}
-  let color = get(bgcolor, mode, bgcolor.n)
-  exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
-    \ color[0], color[1])
-  return &modified ? '+' : &modifiable ? '' : '-'
+  return &ft =~# 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! LightlineReadonly()
@@ -111,16 +103,19 @@ function! LightlineReadonly()
 endfunction
 
 function! LightlineFugitive()
-	if exists("*fugitive#head")
-		let branch = fugitive#head()
-		return branch !=# '' ? ' '.branch : ''
-	endif
-	return ''
+  if &ft !~? 'vimfiler' && exists('*FugitiveHead')
+    return FugitiveHead()
+  endif
+  return ''
 endfunction
 
 function! LightlineFilename()
-	return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-		 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]')
+  return (LightlineReadonly() !=# '' ? LightlineReadonly() . ' ' : '') .
+  \ (&ft ==# 'vimfiler' ? vimfiler#get_status_string() :
+  \  &ft ==# 'unite' ? unite#get_status_string() :
+  \  &ft ==# 'vimshell' ? vimshell#get_status_string() :
+  \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]') .
+  \ (LightlineModified() !=# '' ? ' ' . LightlineModified() : '')
 endfunction
 "}}}
 
@@ -204,7 +199,7 @@ augroup END
 autocmd CompleteDone * pclose
 
 augroup filetype_web
-	autocmd Filetype html,xhtml,javascript,css,typescript,vue,wast  setlocal sw=2 ts=2 expandtab sts=2 shiftround
+	autocmd Filetype html,xhtml,javascript,css,typescript,typescript.*,vue,wast  setlocal sw=2 ts=2 expandtab sts=2 shiftround
 augroup end
 
 augroup filetye_vim
