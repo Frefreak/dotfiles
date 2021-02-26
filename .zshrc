@@ -51,7 +51,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode urltools systemd archlinux shrink-path)
+plugins=(git vi-mode urltools systemd archlinux alias-finder web-search)
 
 # User configuration
 
@@ -275,4 +275,37 @@ autoload -U compinit && compinit
 autoload -U promptinit && promptinit
 zstyle :prompt:pure:git:stash show yes
 prompt pure
+
+
+stfu() {
+  $* >& /dev/null < /dev/null &
+}
+
+alias t='sudo /home/adv_zxy/xdp-tutorial/testenv/testenv.sh'
+export PATH="$PATH:/home/adv_zxy/.cargo/bin"
+export GIT_TERMINAL_PROMPT=1
+
+use_glibc_2.25() {
+  use_glibc.py $1 ~/prefix/glibc_2.25/lib ~/prefix/glibc_2.25/lib/ld-2.25.so $1.glibc_2.25
+  chmod a+x $1.glibc_2.25
+}
+
+core_enable() {
+  echo core | sudo tee /proc/sys/kernel/core_pattern
+}
+
+core_disable() {
+  echo '|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h' | sudo tee /proc/sys/kernel/core_pattern
+}
+
+export GOPRIVATE=git.code.oa.com
+# export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+alias venv='source venv/bin/activate'
+
+# temp
+export ZSH_ALIAS_FINDER_AUTOMATIC=true
+
+export PATH=$PATH:~/go/bin
+export PATH=$PATH:/usr/share/bcc/tools
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 #}}}
