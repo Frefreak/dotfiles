@@ -22,7 +22,7 @@ Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'wellle/targets.vim'
 Plug 'machakann/vim-sandwich'
-Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php', 'css', 'vue', 'xml'] }
+Plug 'mattn/emmet-vim', { 'for' : ['html', 'javascript', 'php', 'css', 'vue', 'xml', 'svelte'] }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'junegunn/fzf'
@@ -40,10 +40,12 @@ Plug 'mesonbuild/meson', {'rtp': 'data/syntax-highlighting/vim'}
 Plug 'beyondmarc/glsl.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'junegunn/vim-easy-align'
-Plug 'tidalcycles/vim-tidal'
 Plug 'chr4/nginx.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+" Plug 'tounaishouta/coq.vim'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 call plug#end()
 "}}}
 
@@ -72,13 +74,14 @@ let g:lightline = {
 	\ 'colorscheme': 'dracula',
 	\ 'active': {
 	\	'left': [ ['mode', 'paste'],
-	\			  ['fugitive', 'filename'] ],
+	\			  ['fugitive', 'filename', 'cocstatus'] ],
 	\ },
 	\ 'component_function': {
 	\   'fugitive': 'LightlineFugitive',
 	\	  'readonly': 'LightlineReadonly',
 	\   'filename': 'LightlineFilename',
-	\   'modified': 'LightlineModified'
+	\   'modified': 'LightlineModified',
+  \   'cocstatus': 'coc#status',
 	\ },
 	\ 'component': {
 	\ 	'lineinfo': ' %3l:%-2v',
@@ -91,6 +94,9 @@ let g:lightline = {
 function! LightlineModified()
   return &ft =~# 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
+
+" Use auocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 function! LightlineReadonly()
     if &filetype == "help"

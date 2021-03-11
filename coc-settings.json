@@ -30,11 +30,15 @@
     }
   },
  "python.formatting.provider": "black",
+ "python.linting.mypyEnabled": true,
+ "python.linting.mypyArgs": ["--ignore-missing"],
+ "python.linting.pylintEnabled": true,
  "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
  "list.insertMappings": {
 	 "<C-D>": "feedkeys:\\<esc>"
  },
  "diagnostic-languageserver.filetypes": {
   "sh": "shellcheck"
- }
+ },
+ "rust-analyzer.server.path": "/usr/bin/rust-analyzer"
 }
