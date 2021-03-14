@@ -138,6 +138,10 @@ bindkey -v
 bindkey "" history-beginning-search-backward
 bindkey ""  history-beginning-search-forward
 bindkey "." insert-last-word
+insert-last-word-forward() zle insert-last-word 1
+zle -N insert-last-word-forward
+bindkey ';' insert-last-word-forward
+
 bindkey -M viins 'kj' vi-cmd-mode
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
