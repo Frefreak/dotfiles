@@ -46,6 +46,7 @@ Plug 'peitalin/vim-jsx-typescript'
 " Plug 'tounaishouta/coq.vim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
+Plug 'godlygeek/tabular'
 call plug#end()
 "}}}
 
@@ -522,6 +523,10 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+"}}}
+
+" vimwiki {{{
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'index': 'index', 'ext': '.md'}]
 "}}}
 
 " misc {{{
