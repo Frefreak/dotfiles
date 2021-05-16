@@ -1,0 +1,12 @@
+[user]
+	email = frefreak.zxy@gmail.com
+	name = Frefreak
+	signingkey = EA59602A4EBD46F83F33144370E20D6C16EDA3F0
+[pull]
+	rebase = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[url "git://"]
+	insteadOf = https://
+[commit]
+	gpgsign = true
