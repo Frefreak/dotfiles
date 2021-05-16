@@ -51,11 +51,11 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode urltools systemd archlinux alias-finder web-search)
+plugins=(git vi-mode urltools systemd archlinux z kubectl alias-finder web-search)
 
 # User configuration
 
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:/usr/share/bcc/tools/:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -148,6 +148,7 @@ bindkey -M vicmd 'L' end-of-line
 
 export MANPAGER="nvim -c 'set ft=man' -c 'call clearmatches()' -"
 export VIMRC="$HOME/.config/nvim/init.vim"
+export GPG_TTY=$(tty)
 
 [[ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]] && . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -d /usr/share/zsh-syntax-highlighting ]] && . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
