@@ -3,14 +3,12 @@
 " vim-plug {{{
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'dracula/vim', {'as': 'dracula'}
-Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pbrisbin/vim-syntax-shakespeare', { 'for' : ['haskell', 'hamlet', 'julius', 'lucius'] }
 Plug 'bitc/vim-hdevtools', { 'for' : 'haskell' }
 Plug 'urso/haskell_syntax.vim', { 'for' : 'haskell' }
-" Plug 'benekastah/neomake'
 Plug 'atweiden/vim-dragvisuals'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -18,7 +16,6 @@ Plug 'Shougo/vimproc.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jpalardy/vim-slime'
-Plug 'aceofall/gtags.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'wellle/targets.vim'
 Plug 'machakann/vim-sandwich'
@@ -34,7 +31,7 @@ Plug 'MarcWeber/vim-addon-local-vimrc'
 Plug 'idris-hackers/idris-vim', { 'for': ['idr'] }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
 Plug 'ianding1/leetcode.vim'
 Plug 'mesonbuild/meson', {'rtp': 'data/syntax-highlighting/vim'}
 Plug 'beyondmarc/glsl.vim'
@@ -43,7 +40,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'chr4/nginx.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-" Plug 'tounaishouta/coq.vim'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
 Plug 'godlygeek/tabular'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -52,73 +48,13 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-media-files.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'glepnir/dashboard-nvim'
+Plug 'glepnir/galaxyline.nvim', {'branch': 'main'}
+Plug 'akinsho/nvim-bufferline.lua'
 call plug#end()
-"}}}
-
-" telescope {{{
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-"}}}
-
-" treesitter {{{
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-  },
-  rainbow = {
-    enable = true,
-    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-    max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-        ["ap"] = "@parameter.outer",
-        ["ip"] = "@parameter.inner",
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ["<leader>a"] = "@parameter.inner",
-      },
-      swap_previous = {
-        ["<leader>A"] = "@parameter.inner",
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        ["]m"] = "@function.outer",
-        ["]]"] = "@class.outer",
-      },
-      goto_next_end = {
-        ["]M"] = "@function.outer",
-        ["]["] = "@class.outer",
-      },
-      goto_previous_start = {
-        ["[m"] = "@function.outer",
-        ["[["] = "@class.outer",
-      },
-      goto_previous_end = {
-        ["[M"] = "@function.outer",
-        ["[]"] = "@class.outer",
-      },
-    },
-  },
-}
-EOF
 "}}}
 
 " display related {{{
@@ -138,63 +74,6 @@ set softtabstop=8
 set shiftwidth=8
 set cursorline
 set inccommand=split
-"}}}
-
-" lightline {{{
-set noshowmode
-let g:lightline = {
-	\ 'colorscheme': 'dracula',
-	\ 'active': {
-	\	'left': [ ['mode', 'paste'],
-	\			  ['fugitive', 'filename', 'cocstatus'] ],
-	\ },
-	\ 'component_function': {
-	\   'fugitive': 'LightlineFugitive',
-	\	  'readonly': 'LightlineReadonly',
-	\   'filename': 'LightlineFilename',
-	\   'modified': 'LightlineModified',
-  \   'cocstatus': 'coc#status',
-	\ },
-	\ 'component': {
-	\ 	'lineinfo': ' %3l:%-2v',
-	\   'modified': '%#ModifiedColor#%{LightlineModified()}',
-	\ },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' },
-	\ }
-
-function! LightlineModified()
-  return &ft =~# 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-" Use auocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
-function! LightlineReadonly()
-    if &filetype == "help"
-        return ""
-    elseif &readonly
-        return ""
-    else
-        return ""
-    endif
-endfunction
-
-function! LightlineFugitive()
-  if &ft !~? 'vimfiler' && exists('*FugitiveHead')
-    return FugitiveHead()
-  endif
-  return ''
-endfunction
-
-function! LightlineFilename()
-  return (LightlineReadonly() !=# '' ? LightlineReadonly() . ' ' : '') .
-  \ (&ft ==# 'vimfiler' ? vimfiler#get_status_string() :
-  \  &ft ==# 'unite' ? unite#get_status_string() :
-  \  &ft ==# 'vimshell' ? vimshell#get_status_string() :
-  \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]') .
-  \ (LightlineModified() !=# '' ? ' ' . LightlineModified() : '')
-endfunction
 "}}}
 
 " coc.nvim {{{
@@ -420,15 +299,6 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 nnoremap <leader>r :SlimeSend1 :r<CR>
 "}}}
 
-" gtags {{{
-set cscopetag
-set cscopeprg='gtags-cscope'
-
-let GtagsCscope_Auto_Load = 1
-let CtagsCscope_Auto_Map = 1
-let GtagsCscope_Quiet = 1
-"}}}
-
 " enable this to start writing nvim-hs plugin for nvim {{{
 let g:nvimhsmode = 0
 if nvimhsmode
@@ -494,33 +364,7 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-nnoremap <silent> <leader>f :FZF -m<CR>
-nnoremap <silent> <leader>h :History<CR>
-nnoremap <silent> <leader>l :Lines<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>m :Marks<CR>
-nnoremap <silent> <leader>ag :Ag<CR>
-nnoremap <silent> <leader>rg :Rg<CR>
-
 " }}}
-
-" neomake {{{
-" let g:neomake_c_enabled_makers = ['clang']
-" let g:neomake_cpp_enabled_makers = ['clangcheck']
-" let g:neomake_tex_enabled_makers = ['chktex']
-" let g:neomake_python_enabled_makers = ['pylint']
-" let g:neomake_cpp_clang_args = neomake#makers#ft#cpp#clang()['args']
-    " \ + ["-std=c++1z"]
-" let g:neomake_haskell_enabled_makers = ['hlint']
-" let g:neomake_python_pylint_args = neomake#makers#ft#python#pylint()['args']
-    " \ + ['-d', 'missing-docstring,invalid-name,maybe-no-member']
-" let g:neomake_open_list = 2
-" let g:clang_diagsopt = ''
-" let g:neomake_warning_sign = {
-   " \   'text': '❗',
-   " \   'texthl': 'NeomakeWarningSign',
-   " \ }
-"}}}
 
 " nerdcommenter {{{
 let g:NERDSpaceDelims = 1
@@ -529,18 +373,6 @@ let g:NERDCustomDelimiters = { 'coconut': { 'left': '#' } }
 vmap <M-/> <plug>NERDCommenterToggle
 nmap <M-/> <plug>NERDCommenterToggle
 " }}}
-
-" netrw {{{
-" let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-" let g:netrw_browse_split = 4
-" let g:netrw_altv = 1
-" let g:netrw_winsize = 25
-"augroup ProjectDrawer
-"  autocmd!
-"  autocmd VimEnter * :Vexplore
-"augroup END
-"}}}
 
 " Some other stuffs {{{
 
@@ -602,4 +434,14 @@ let g:vimwiki_list = [{'path': '~/vimwiki/', 'index': 'index', 'ext': '.md'}]
 
 " misc {{{
 let g:python3_host_prog = '/usr/bin/python'
+set mouse=a
+"}}}
+
+" lua stuffs {{{
+lua require('nvimTree')
+lua require('telescope-nvim')
+lua require('dashboard')
+lua require('treesitter-nvim')
+lua require('statusline')
+lua require('top-bufferline')
 "}}}
