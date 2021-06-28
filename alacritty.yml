@@ -401,7 +401,8 @@ key_bindings:
   #- { key: Minus,    mods: Control,       action: DecreaseFontSize }
 
   # (macOS only)
-  #- { key: Key0,   mods: Command, action: ResetFontSize    }
+  - { key: O,   mods: Command|Shift, action: SpawnNewInstance }
+  - { key: Period,   mods: Command, chars: "\x1b."}
   #- { key: Equals, mods: Command, action: IncreaseFontSize }
   #- { key: Add,    mods: Command, action: IncreaseFontSize }
   #- { key: Minus,  mods: Command, action: DecreaseFontSize }
