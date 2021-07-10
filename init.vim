@@ -444,4 +444,5 @@ lua require('dashboard')
 lua require('treesitter-nvim')
 lua require('statusline')
 lua require('top-bufferline')
+lua require('mappings')
 "}}}
