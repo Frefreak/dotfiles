@@ -403,6 +403,7 @@ key_bindings:
   # (macOS only)
   - { key: O,   mods: Command|Shift, action: SpawnNewInstance }
   - { key: Period,   mods: Command, chars: "\x1b."}
+  - { key: Semicolon,   mods: Command, chars: "\x1b;"}
   #- { key: Equals, mods: Command, action: IncreaseFontSize }
   #- { key: Add,    mods: Command, action: IncreaseFontSize }
   #- { key: Minus,  mods: Command, action: DecreaseFontSize }
