@@ -31,7 +31,6 @@ Plug 'MarcWeber/vim-addon-local-vimrc'
 Plug 'idris-hackers/idris-vim', { 'for': ['idr'] }
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'}
 Plug 'ianding1/leetcode.vim'
 Plug 'mesonbuild/meson', {'rtp': 'data/syntax-highlighting/vim'}
 Plug 'beyondmarc/glsl.vim'
@@ -99,6 +98,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gca <Plug>(coc-codeaction)
+vmap <silent> gca <Plug>(coc-codeaction-selected)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -139,6 +140,8 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" Do Action
+nnoremap <silent> <space><enter>  :<C-u>CocAction<CR>
 "}}}
 
 " reset cursor to last location {{{
@@ -406,9 +409,9 @@ set timeoutlen=500
 "}}}
 
 " LeetCode {{{
-let g:leetcode_solution_filetype = 'scala'
+let g:leetcode_solution_filetype = 'cpp'
 let g:leetcode_username = 'frefreak.zxy@gmail.com'
-
+let g:leetcode_browser = 'chrome'
 "}}}
 
 " vim-sandwich {{{
