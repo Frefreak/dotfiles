@@ -18,10 +18,6 @@ return require('packer').startup(function()
 		require('plugins.compe')
 	end}
 
-  use { "windwp/nvim-autopairs", after = "nvim-compe", config = function()
-    require "plugins.autopairs"
-  end}
-
 	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function()
 		require('plugins.treesitter')
 	end}

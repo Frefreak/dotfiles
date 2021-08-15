@@ -18,6 +18,7 @@ compe.setup {
     documentation = true,
     source = {
         buffer = {kind = "﬘", true},
+        path = true,
         -- luasnip = {kind = "﬌", true},
         nvim_lsp = true,
         nvim_lua = true,
