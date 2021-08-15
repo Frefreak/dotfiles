@@ -40,8 +40,6 @@ end
 _G.s_tab_complete = function()
     if vim.fn.pumvisible() == 1 then
         return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-        return t "<Plug>(vsnip-jump-prev)"
     else
         return t "<S-Tab>"
     end
@@ -53,7 +51,7 @@ function _G.completions()
             return vim.fn["compe#confirm"]("<CR>")
         end
     end
-    return vim.api.nvim_replace_termcodes('<cr>', true, false, true)
+    return t "<CR>"
 end
 
 --  compe mappings

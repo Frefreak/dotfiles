@@ -13,10 +13,13 @@ return require('packer').startup(function()
   end }
 
 	use {'kabouzeid/nvim-lspinstall', requires = {{'neovim/nvim-lspconfig'}}}
-
 	use {"hrsh7th/nvim-compe", event = "InsertEnter", config = function()
 		require('plugins.compe')
 	end}
+
+  use {'windwp/nvim-autopairs', after = 'nvim-compe', config = function()
+    require('plugins.autopairs')
+  end}
 
 	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function()
 		require('plugins.treesitter')
