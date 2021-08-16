@@ -205,9 +205,12 @@ uniqNoSort() {
 	perl -ne 'print unless $seen{$_}++'
 }
 
-# filter file opened by nvim
-ff() {
+fo() {
   n -c "lua require('telescope.builtin').oldfiles()"
+}
+
+ff() {
+  n -c "lua require('telescope.builtin').find_files()"
 }
 
 magnet-info() {
