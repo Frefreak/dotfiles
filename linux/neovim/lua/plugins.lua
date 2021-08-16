@@ -31,7 +31,6 @@ return require('packer').startup(function()
 		require('plugins.telescope-nvim')
 	end}
 
-  use {'mfussenegger/nvim-dap', requires = {{'nvim-lua/plenary.nvim'}}}
 	use {'kyazdani42/nvim-tree.lua', config = function()
 		require('plugins.nvimTree')
 	end, requires = {{'kyazdani42/nvim-web-devicons'}}}

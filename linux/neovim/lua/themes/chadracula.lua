@@ -27,7 +27,8 @@ local colors = {
     cyan = "#8BE9FD",
     statusline_bg = "#2b2d39",
     lightbg = "#343642",
-    lightbg2 = "#2f313d"
+    lightbg2 = "#2f313d",
+    comment = vim.g['dracula#palette'].comment[1],
 }
 
 return colors
