@@ -40,31 +40,18 @@ end
 _G.s_tab_complete = function()
     if vim.fn.pumvisible() == 1 then
         return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-        return t "<Plug>(vsnip-jump-prev)"
     else
         return t "<S-Tab>"
     end
 end
 
 function _G.completions()
-    local npairs
-    if
-        not pcall(
-            function()
-                npairs = require "nvim-autopairs"
-            end
-        )
-     then
-        return
-    end
-
     if vim.fn.pumvisible() == 1 then
         if vim.fn.complete_info()["selected"] ~= -1 then
             return vim.fn["compe#confirm"]("<CR>")
         end
     end
-    return npairs.check_break_line_char()
+    return t "<CR>"
 end
 
 --  compe mappings

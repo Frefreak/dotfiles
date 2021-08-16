@@ -21,6 +21,7 @@ local nord_blue = colors.nord_blue
 local blue = colors.blue
 local yellow = colors.yellow
 local purple = colors.purple
+local comment = colors.comment
 
 -- for guifg , bg
 
@@ -42,7 +43,8 @@ fg("IndentBlanklineChar", line)
 
 -- misc --
 fg("LineNr", grey)
-fg("Comment", grey_fg)
+fg("Comment", comment)
+fg("InLayHints", grey_fg)
 fg("NvimInternalError", red)
 fg("VertSplit", line)
 fg("EndOfBuffer", black)
@@ -60,11 +62,6 @@ cmd("hi! StatusLineNC gui=underline guifg=" .. line)
 -- line n.o
 cmd "hi clear CursorLine"
 fg("cursorlinenr", white)
-
--- git signs ---
-fg_bg("DiffAdd", nord_blue, "none")
-fg_bg("DiffChange", grey_fg, "none")
-fg_bg("DiffModified", nord_blue, "none")
 
 -- NvimTree
 fg("NvimTreeFolderIcon", blue)

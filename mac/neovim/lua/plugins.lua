@@ -18,8 +18,8 @@ return require('packer').startup(function()
 		require('plugins.compe')
 	end}
 
-  use { "windwp/nvim-autopairs", after = "nvim-compe", config = function()
-    require "plugins.autopairs"
+  use {'windwp/nvim-autopairs', after = 'nvim-compe', config = function()
+    require('plugins.autopairs')
   end}
 
 	use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function()
@@ -30,6 +30,7 @@ return require('packer').startup(function()
 	use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}, config = function()
 		require('plugins.telescope-nvim')
 	end}
+
 	use {'kyazdani42/nvim-tree.lua', config = function()
 		require('plugins.nvimTree')
 	end, requires = {{'kyazdani42/nvim-web-devicons'}}}
@@ -68,4 +69,8 @@ return require('packer').startup(function()
 	use {'terrortylor/nvim-comment', cmd = {"CommentToggle"}, config = function()
 		require("plugins.others").comment()
 	end}
+
+  use {'simrat39/rust-tools.nvim', config = function()
+    require("plugins.rust-tools")
+  end}
 end)

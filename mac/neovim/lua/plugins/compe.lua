@@ -3,6 +3,8 @@ if not present then
     return
 end
 
+vim.opt.completeopt="menuone,noselect"
+
 compe.setup {
     enabled = true,
     autocomplete = true,
@@ -18,6 +20,7 @@ compe.setup {
     documentation = true,
     source = {
         buffer = {kind = "﬘", true},
+        path = true,
         -- luasnip = {kind = "﬌", true},
         nvim_lsp = true,
         nvim_lua = true,

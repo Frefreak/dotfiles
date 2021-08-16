@@ -154,7 +154,6 @@ export GPG_TTY=$(tty)
 [[ -d /usr/share/zsh-syntax-highlighting ]] && . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 command -v pandoc >/dev/null 2>&1 && eval "$(pandoc --bash-completion)"
 command -v stack >/dev/null 2>&1 && eval "$(stack --bash-completion-script stack)"
-command -v fuck >/dev/null 2>&1 && eval $(thefuck --alias)
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
