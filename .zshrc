@@ -207,7 +207,7 @@ uniqNoSort() {
 
 # filter file opened by nvim
 ff() {
-  n -c 'History'
+  n -c "lua require('telescope.builtin').oldfiles()"
 }
 
 magnet-info() {
