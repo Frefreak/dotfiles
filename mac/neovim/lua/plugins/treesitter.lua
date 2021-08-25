@@ -7,4 +7,7 @@ ts_config.setup {
 	rainbow = {
 		enable = true
 	},
+  indent = {
+    enable = true,
+  }
 }
