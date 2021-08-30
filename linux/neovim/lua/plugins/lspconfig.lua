@@ -55,12 +55,8 @@ local function setup_servers()
     for _, lang in pairs(servers) do
         if lang == "efm" then
             require('plugins.efm').setup(on_attach)
-        elseif lang ~= "lua" then
-            lspconfig[lang].setup {
-                on_attach = on_attach,
-                capabilities = capabilities,
-                root_dir = vim.loop.cwd
-            }
+        elseif lang == 'rust' then
+            require('plugins.rust').setup(on_attach)
         elseif lang == "lua" then
             lspconfig[lang].setup {
                 root_dir = vim.loop.cwd,
@@ -78,6 +74,12 @@ local function setup_servers()
                         telemetry = {enable = false}
                     }
                 }
+            }
+        else
+            lspconfig[lang].setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+                root_dir = vim.loop.cwd
             }
         end
     end

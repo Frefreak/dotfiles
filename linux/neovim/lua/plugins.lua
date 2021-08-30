@@ -71,6 +71,5 @@ return require('packer').startup(function()
 	end}
 
   use {'simrat39/rust-tools.nvim', config = function()
-    require("plugins.rust-tools")
   end}
 end)
