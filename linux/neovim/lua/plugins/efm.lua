@@ -1,5 +1,6 @@
+local utils = require('utils')
 M = {}
-function M.setup(on_attach)
+function M.setup()
     require('lspconfig').efm.setup {
         init_options = {documentFormatting = true},
         settings = {
@@ -11,8 +12,7 @@ function M.setup(on_attach)
             }
         },
         filetypes = {"python", "lua"},
-        on_attach = on_attach,
-        capabilities = capabilities,
+        on_attach = utils.on_attach,
         root_dir = vim.loop.cwd
     }
 end
