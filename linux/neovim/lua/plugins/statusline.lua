@@ -110,17 +110,10 @@ gls.left[11] = {
 }
 
 gls.mid[1] = {
-  ShowLspClient = {
-    provider = 'GetLspClient',
-    condition = function ()
-      local tbl = {['dashboard'] = true,['']=true}
-      if tbl[vim.bo.filetype] then
-        return false
-      end
-      return true
-    end,
-    icon = ' LSP:',
-    highlight = {colors.cyan,colors.bg,'bold'}
+  ShowLspStatus = {
+    provider = function()
+        return require('lsp-status').status()
+    end
   }
 }
 
