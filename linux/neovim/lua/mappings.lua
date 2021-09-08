@@ -69,6 +69,8 @@ map("n", "<S-x>", ":bd!<CR>", opt) -- close tab
 -- move between tabs
 map("n", "<TAB>", ":BufferLineCycleNext<CR>", opt)
 map("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", opt)
+map("n", "<Space>bp", ":BufferLinePick<CR>", opt)
+map("n", "<Space>bpc", ":BufferLinePickClose<CR>", opt)
 
 -- use ESC to turn off search highlighting
 map("n", "<Esc>", ":noh<CR>", opt)

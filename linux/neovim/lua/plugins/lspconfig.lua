@@ -16,6 +16,15 @@ local function setup_servers()
     for _, lang in pairs(servers) do
         if lang == "efm" then
             require('plugins.efm').setup()
+        elseif lang == 'latex' then
+            require('plugins.latex').setup()
+        elseif lang == 'haskell' then
+            lspconfig['haskell'].setup {
+                on_attach = utils.on_attach,
+                capabilities = capabilities,
+                root_dir = vim.loop.cwd,
+                cmd_cwd = vim.loop.cwd(),
+            }
         elseif lang == "lua" then
             lspconfig[lang].setup {
                 root_dir = vim.loop.cwd,

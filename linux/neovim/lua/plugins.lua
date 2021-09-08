@@ -4,7 +4,9 @@ return require('packer').startup(function()
     use 'roxma/vim-tmux-clipboard'
     use {
         'neovim/nvim-lspconfig',
-        config = function() require('plugins.lspconfig') end
+        config = function()
+            require('plugins.lspconfig')
+        end
     }
     use {
         "onsails/lspkind-nvim",
@@ -104,7 +106,9 @@ return require('packer').startup(function()
     use 'honza/vim-snippets'
 
     use {'tpope/vim-fugitive', cmd = {"Git"}}
-    use {'lervag/vimtex', ft = 'tex'}
+    use {'lervag/vimtex', ft = 'tex', config = function()
+        vim.g.vimtex_compiler_method = 'tectonic'
+    end}
     use {
         'terrortylor/nvim-comment',
         cmd = {"CommentToggle"},
