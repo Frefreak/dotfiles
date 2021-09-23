@@ -146,7 +146,7 @@ bindkey -M viins 'kj' vi-cmd-mode
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
 
-export MANPAGER="nvim -c 'set ft=man' -c 'call clearmatches()' -"
+export MANPAGER="nvim +Man! -c 'call clearmatches()'"
 export VIMRC="$HOME/.config/nvim/init.vim"
 export GPG_TTY=$(tty)
 
