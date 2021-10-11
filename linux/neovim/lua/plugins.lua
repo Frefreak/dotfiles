@@ -8,29 +8,26 @@ return require('packer').startup(function()
             require('plugins.lspconfig')
         end
     }
-    use {
-        "onsails/lspkind-nvim",
-        event = "BufEnter",
-        config = function() require("plugins.others").lspkind() end
-    }
-    use {
-        "ray-x/lsp_signature.nvim",
-        after = "nvim-lspconfig",
-        config = function() require("plugins.others").signature() end
-    }
 
     use {'kabouzeid/nvim-lspinstall', requires = {{'neovim/nvim-lspconfig'}}}
 
     use {
-        "hrsh7th/nvim-compe",
+        "hrsh7th/nvim-cmp",
         event = "InsertEnter",
-        config = function() require('plugins.compe') end
+        config = function() require('plugins.cmp') end
     }
 
     use {
-        'windwp/nvim-autopairs',
-        after = 'nvim-compe',
-        config = function() require('plugins.autopairs') end
+        "hrsh7th/cmp-nvim-lsp",
+        after = 'nvim-cmp',
+    }
+    use {
+        "hrsh7th/cmp-buffer",
+        after = 'nvim-cmp',
+    }
+    use {
+        "quangnguyen30192/cmp-nvim-ultisnips",
+        after = 'nvim-cmp',
     }
 
     use {
@@ -97,10 +94,12 @@ return require('packer').startup(function()
         config = function()
             vim.g.UltiSnipsEditSplit = "vertical"
             vim.g.UltiSnipsSnippetDirectories = {
-                "~/.local/share/nvim/UltiSnips/"
+                "~/.local/share/nvim/UltiSnips/",
             }
             vim.g.UltiSnipsExpandTrigger = "<C-e>"
             vim.g.UltiSnipsListSnippets = "<C-l>"
+
+            vim.api.nvim_command('set runtimepath+=~/.local/share/nvim/site/pack/packer/start/vim-snippets')
         end
     }
     use 'honza/vim-snippets'
