@@ -7,13 +7,6 @@ M.comment = function()
 	end
 end
 
-M.lspkind = function()
-    local present, lspkind = pcall(require, "lspkind")
-    if present then
-        lspkind.init()
-    end
-end
-
 M.signature = function()
     local present, lspsignature = pcall(require, "lsp_signature")
     if present then
@@ -33,7 +26,7 @@ M.signature = function()
                     border = "single" -- double, single, shadow, none
                 },
                 zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
-                padding = "" -- character to pad on left and right of signature can be ' ', or '|'  etc
+                padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
             }
         )
     end

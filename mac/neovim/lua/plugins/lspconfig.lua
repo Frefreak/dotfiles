@@ -3,6 +3,7 @@ local present2, lspinstall = pcall(require, "lspinstall")
 if not (present1 or present2) then return end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- lspInstall + lspconfig stuff
@@ -28,6 +29,7 @@ local function setup_servers()
         elseif lang == "lua" then
             lspconfig[lang].setup {
                 root_dir = vim.loop.cwd,
+                capabilities = capabilities,
                 settings = {
                     Lua = {
                         diagnostics = {globals = {"vim"}},
@@ -63,13 +65,13 @@ end
 
 -- replace the default lsp diagnostic symbols
 function lspSymbol(name, icon)
-    vim.fn.sign_define("LspDiagnosticsSign" .. name,
-                       {text = icon, numhl = "LspDiagnosticsDefault" .. name})
+    vim.fn.sign_define("DiagnosticSign" .. name,
+                       {text = icon, texthl = "DiagnosticSign" .. name})
 end
 
 lspSymbol("Error", "")
-lspSymbol("Warning", "")
-lspSymbol("Information", "")
+lspSymbol("Warn", "")
+lspSymbol("Info", "")
 lspSymbol("Hint", "")
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
