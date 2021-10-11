@@ -155,12 +155,15 @@ if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
   execute 'packadd packer.nvim'
 end
+
+require('packer').startup(function(use)
+  require('entry').init(use)
+
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end)
 EOF
 
-autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-
-let g:nvchad_theme = 'chadracula'
-lua require('plugins')
-lua require('mappings')
-lua require('highlights')
+lua require('setup')
 "}}}
