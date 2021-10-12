@@ -68,7 +68,6 @@ M.init = function(use)
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            vim.g.nvim_tree_respect_buf_cwd = 1
             require'nvim-tree'.setup {
                update_focused_file = {
                   enable = true,
@@ -83,6 +82,8 @@ M.init = function(use)
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-nvim-lua'
+    use 'onsails/lspkind-nvim'
     use 'quangnguyen30192/cmp-nvim-ultisnips'
     use {
         "ray-x/lsp_signature.nvim",

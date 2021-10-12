@@ -143,8 +143,24 @@ cmp.setup({
       { name = 'ultisnips' },
       { name = 'buffer' },
       { name = 'path' },
-    }
+      { name = 'nvim_lua' },
+    },
+    formatting = {
+      fields = { 'abbr', 'kind', 'menu' },
+      format = function(_, vim_item)
+        return vim_item
+      end,
+    },
+
   })
+
+-- lspkind
+local lspkind = require('lspkind')
+cmp.setup {
+  formatting = {
+    format = lspkind.cmp_format()
+  }
+}
 
 -- treesitter
 
