@@ -69,7 +69,7 @@ M.init = function(use)
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
             require'nvim-tree'.setup {
-               update_focused_file = {
+                update_focused_file = {
                   enable = true,
                   update_cwd = true,
                },
