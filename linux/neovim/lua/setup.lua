@@ -67,7 +67,7 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-local servers = { 'pyright', 'rust_analyzer', 'tsserver', 'clangd', 'gopls' }
+local servers = { 'pyright', 'tsserver', 'clangd', 'gopls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup({
     on_attach = on_attach,
@@ -77,7 +77,6 @@ for _, lsp in ipairs(servers) do
     }
   })
 end
-
 
 require('rust-tools').setup({
   tools = {

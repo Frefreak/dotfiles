@@ -51,7 +51,7 @@ M.init = function(use)
                 theme = 'dracula',
             },
             sections = {
-                lualine_x = {require'lsp-status'.status, 'encoding', 'fileformat', 'filetype'},
+                lualine_c = {'filename', require'lsp-status'.status},
             },
         }) end,
     }
