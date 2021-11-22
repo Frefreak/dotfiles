@@ -13,16 +13,13 @@ M.init = function(use)
         end
     }
     use {
-        'justinmk/vim-sneak',
-        config = function() vim.g['sneak#s_next'] = 1 end
-    }
-    use {
         'mattn/emmet-vim',
         ft = {'html', 'javascript', 'php', 'css', 'vue', 'xml', 'svelte'}
     }
 
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
+    use 'ggandor/lightspeed.nvim'
     use {
         'SirVer/ultisnips',
         config = function()
@@ -77,10 +74,9 @@ M.init = function(use)
             vim.g.nvim_tree_gitignore = 0
             vim.g.nvim_tree_git_hl = 0
             require'nvim-tree'.setup {
-                update_focused_file = {
-                  enable = true,
-                  update_cwd = true,
-               },
+                update_cwd = {
+                    enabled = true,
+                }
             }
         end
     }
