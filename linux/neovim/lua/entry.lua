@@ -1,6 +1,7 @@
 local M = {}
 
 M.init = function(use)
+    use 'vim-scripts/LargeFile'
     use 'wbthomason/packer.nvim'
     use {'dracula/vim', as = 'dracula'}
     use 'roxma/vim-tmux-clipboard'
@@ -71,7 +72,6 @@ M.init = function(use)
               files = 1, -- or 0,
               folder_arrows = 1 -- or 0
             }
-            vim.g.nvim_tree_gitignore = 0
             vim.g.nvim_tree_git_hl = 0
             require'nvim-tree'.setup {
                 update_cwd = {

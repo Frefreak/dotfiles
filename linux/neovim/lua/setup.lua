@@ -105,12 +105,11 @@ require('rust-tools').setup({
         on_attach = on_attach,
         capabilities = capabilities,
         flags = {debounce_text_changes = 150},
-        settings = {
-            ["rust-analyzer.diagnostics.disabled"] = { "inactive-code" },
-        },
-    },
+        settings = {["rust-analyzer.diagnostics.disabled"] = {"inactive-code"}}
+    }
 })
 
+local util = require 'lspconfig/util'
 require"lspconfig".efm.setup {
     init_options = {documentFormatting = true},
     on_attach = on_attach,
@@ -121,7 +120,10 @@ require"lspconfig".efm.setup {
             python = {{formatCommand = "black --quiet -", formatStdin = true}}
         }
     },
-    filetypes = {"lua", "python"}
+    filetypes = {"lua", "python"},
+    root_dir = function(fname)
+        return util.root_pattern(".git")(fname) or vim.fn.getcwd()
+    end
 }
 
 vim.cmd('hi InLayHints guifg=#5a5c68')
