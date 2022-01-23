@@ -17,11 +17,19 @@ map('n', '[b', ':BufferLineCyclePrev<CR>', {})
 -- These commands will move the current buffer backwards or forwards in the bufferline
 map('n', '<leader>>', ':BufferLineMoveNext<CR>', {})
 map('n', '<leader><', ':BufferLineMovePrev<CR>', {})
+map('n', 'gb', ':BufferLinePick<CR>', {})
 
 -- nvim-tree
+function open_file_dir()
+    local folder = vim.fn.expand('%:p:h')
+    vim.fn.chdir(folder)
+    vim.api.nvim_command(":NvimTreeOpen")
+end
+
 map('n', '<C-n>', ':NvimTreeToggle<CR>', {})
 map('n', '<leader>r', ':NvimTreeRefresh<CR>', {})
 map('n', '<leader>n', ':NvimTreeFindFile<CR>', {})
+map('n', '<leader>o', ':lua open_file_dir()<CR>', {})
 
 -- use ESC to turn off search highlighting
 map("n", "<Esc>", ":noh<CR>", opt)
@@ -117,7 +125,7 @@ require"lspconfig".efm.setup {
         rootMarkers = {".git/"},
         languages = {
             lua = {{formatCommand = "lua-format -i", formatStdin = true}},
-            python = {{formatCommand = "black --quiet -", formatStdin = true}}
+            python = {{formatCommand = "black --target-version py310 --quiet -", formatStdin = true}}
         }
     },
     filetypes = {"lua", "python"},
