@@ -58,7 +58,11 @@ M.init = function(use)
         'akinsho/bufferline.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            require('bufferline').setup()
+            require('bufferline').setup({
+                options = {
+                    diagnostics = 'nvim_lsp',
+                },
+            })
         end
     }
 
@@ -96,10 +100,6 @@ M.init = function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-    }
-    use {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        requires = {'nvim-treesitter/nvim-treesitter'}
     }
     use {
         'p00f/nvim-ts-rainbow',
