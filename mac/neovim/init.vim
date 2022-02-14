@@ -71,7 +71,7 @@ augroup end
 augroup filetype_script
 	autocmd FileType zsh setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
 	autocmd FileType tex setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
-	autocmd FileType lua setlocal foldmethod=marker ts=2 sw=2 sts=2 expandtab
+	autocmd FileType lua setlocal foldmethod=marker ts=4 sw=4 sts=4 expandtab
   autocmd FileType cpp setlocal shiftwidth=2 tabstop=2 expandtab
 	autocmd FileType groovy setlocal foldmethod=marker ts=4 sw=4 sts=4 expandtab
 	autocmd FileType php setlocal foldmethod=marker ts=4 sw=4 sts=4 expandtab
@@ -155,12 +155,15 @@ if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
   execute 'packadd packer.nvim'
 end
+
+require('packer').startup(function(use)
+  require('entry').init(use)
+
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end)
 EOF
 
-autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-
-let g:nvchad_theme = 'chadracula'
-lua require('plugins')
-lua require('mappings')
-lua require('highlights')
+lua require('setup')
 "}}}
