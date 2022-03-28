@@ -1,6 +1,7 @@
 local M = {}
 
 M.init = function(use)
+    use 'vim-scripts/LargeFile'
     use 'wbthomason/packer.nvim'
     use {'dracula/vim', as = 'dracula'}
     use 'roxma/vim-tmux-clipboard'
@@ -13,16 +14,13 @@ M.init = function(use)
         end
     }
     use {
-        'justinmk/vim-sneak',
-        config = function() vim.g['sneak#s_next'] = 1 end
-    }
-    use {
         'mattn/emmet-vim',
         ft = {'html', 'javascript', 'php', 'css', 'vue', 'xml', 'svelte'}
     }
 
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
+    use 'ggandor/lightspeed.nvim'
     use {
         'SirVer/ultisnips',
         config = function()
@@ -51,7 +49,7 @@ M.init = function(use)
                 theme = 'dracula',
             },
             sections = {
-                lualine_c = {'filename', require'lsp-status'.status},
+                lualine_c = {'filename', "require'lsp-status'.status()"},
             },
         }) end,
     }
@@ -60,7 +58,11 @@ M.init = function(use)
         'akinsho/bufferline.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            require('bufferline').setup()
+            require('bufferline').setup({
+                options = {
+                    diagnostics = 'nvim_lsp',
+                },
+            })
         end
     }
 
@@ -74,13 +76,11 @@ M.init = function(use)
               files = 1, -- or 0,
               folder_arrows = 1 -- or 0
             }
-            vim.g.nvim_tree_gitignore = 0
             vim.g.nvim_tree_git_hl = 0
             require'nvim-tree'.setup {
-                update_focused_file = {
-                  enable = true,
-                  update_cwd = true,
-               },
+                update_cwd = {
+                    enabled = true,
+                }
             }
         end
     }
@@ -100,10 +100,6 @@ M.init = function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-    }
-    use {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        requires = {'nvim-treesitter/nvim-treesitter'}
     }
     use {
         'p00f/nvim-ts-rainbow',
