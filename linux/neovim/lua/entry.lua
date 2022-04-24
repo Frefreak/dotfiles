@@ -17,6 +17,11 @@ M.init = function(use)
         'mattn/emmet-vim',
         ft = {'html', 'javascript', 'php', 'css', 'vue', 'xml', 'svelte'}
     }
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function() require('colorizer').setup() end,
+        ft = {'css', 'html', 'svelte', 'js'}
+    }
 
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
@@ -27,42 +32,43 @@ M.init = function(use)
             vim.g.UltiSnipsEditSplit = "vertical"
             vim.g.UltiSnipsExpandTrigger = "<C-e>"
             vim.g.UltiSnipsListSnippets = "<C-l>"
-            vim.api.nvim_command('set runtimepath+=~/.local/share/nvim/site/pack/packer/start/vim-snippets')
+            vim.api.nvim_command(
+                'set runtimepath+=~/.local/share/nvim/site/pack/packer/start/vim-snippets')
         end
     }
     use 'honza/vim-snippets'
     use {'tpope/vim-fugitive', cmd = {"Git"}}
-    use {'lervag/vimtex', ft = 'tex', config = function()
-        vim.g.vimtex_compiler_method = 'tectonic'
-    end}
-    use {'terrortylor/nvim-comment', cmd = 'CommentToggle',
-        config = function() require('nvim_comment').setup({
-            comment_empty = false,
-        }) end
+    use {
+        'lervag/vimtex',
+        ft = 'tex',
+        config = function() vim.g.vimtex_compiler_method = 'tectonic' end
+    }
+    use {
+        'terrortylor/nvim-comment',
+        cmd = 'CommentToggle',
+        config = function()
+            require('nvim_comment').setup({comment_empty = false})
+        end
     }
 
     use {
         'hoob3rt/lualine.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
-        config = function() require('lualine').setup({
-            options = {
-                theme = 'dracula',
-            },
-            sections = {
-                lualine_c = {'filename', "require'lsp-status'.status()"},
-            },
-        }) end,
+        config = function()
+            require('lualine').setup({
+                options = {theme = 'dracula'},
+                sections = {
+                    lualine_c = {'filename', "require'lsp-status'.status()"}
+                }
+            })
+        end
     }
 
     use {
         'akinsho/bufferline.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            require('bufferline').setup({
-                options = {
-                    diagnostics = 'nvim_lsp',
-                },
-            })
+            require('bufferline').setup({options = {diagnostics = 'nvim_lsp'}})
         end
     }
 
@@ -71,17 +77,13 @@ M.init = function(use)
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
             vim.g.nvim_tree_show_icons = {
-              git = 0,
-              folders = 1, -- or 0,
-              files = 1, -- or 0,
-              folder_arrows = 1 -- or 0
+                git = 0,
+                folders = 1, -- or 0,
+                files = 1, -- or 0,
+                folder_arrows = 1 -- or 0
             }
             vim.g.nvim_tree_git_hl = 0
-            require'nvim-tree'.setup {
-                update_cwd = {
-                    enabled = true,
-                }
-            }
+            require'nvim-tree'.setup {update_cwd = {enabled = true}}
         end
     }
 
@@ -95,25 +97,20 @@ M.init = function(use)
     use 'quangnguyen30192/cmp-nvim-ultisnips'
     use {
         "ray-x/lsp_signature.nvim",
-        config = function() require('lsp_signature').setup() end,
+        config = function() require('lsp_signature').setup() end
     }
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-    }
-    use {
-        'p00f/nvim-ts-rainbow',
-        requires = {'nvim-treesitter/nvim-treesitter'}
-    }
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'}}
     use 'nvim-lua/plenary.nvim'
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = {'nvim-lua/plenary.nvim'},
-    }
+    use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
     use 'simrat39/rust-tools.nvim'
-    use { 'nvim-lua/lsp-status.nvim', config = function()
-        require('lsp-status').register_progress()
-    end }
+    use {
+        'nvim-lua/lsp-status.nvim',
+        config = function()
+            require('lsp-status').config({status_symbol = 'ﮋ'})
+            require('lsp-status').register_progress()
+        end
+    }
 end
 
 return M
