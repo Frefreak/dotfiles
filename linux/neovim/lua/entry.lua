@@ -83,7 +83,7 @@ M.init = function(use)
                 folder_arrows = 1 -- or 0
             }
             vim.g.nvim_tree_git_hl = 0
-            require'nvim-tree'.setup {update_cwd = {enabled = true}}
+            require'nvim-tree'.setup {update_cwd = true}
         end
     }
 
