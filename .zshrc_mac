@@ -1,6 +1,6 @@
 # {{{ oh-my-zsh
 # Path to your oh-my-zsh installation.
-ZSH=/Users/adv_zxy/.oh-my-zsh/
+ZSH=~/.oh-my-zsh/
 
 fpath+=$HOME/.zsh/pure
 # Set name of the theme to load.
@@ -55,7 +55,7 @@ plugins=(git vi-mode urltools systemd z kubectl alias-finder web-search)
 
 # User configuration
 
-export PATH=$HOME/.cargo/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:/usr/share/bcc/tools/:/opt/homebrew/opt/llvm/bin:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:/opt/homebrew/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -118,6 +118,8 @@ alias site_build='stack exec -- site build'
 alias nvsmi='nvidia-smi'
 alias ccmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES"
 alias yaaw="hhttp -d /usr/share/webapps/yaaw/"
+alias python="/opt/homebrew/bin/python3"
+alias pip="/opt/homebrew/bin/pip3"
 mm () { make "$@" 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
 ghc () { stack --verbosity slient exec -- ghc $* }
@@ -275,41 +277,15 @@ jqc() {
 }
 
 export EDITOR=nvim
-# fpath=(/usr/share/doc/radare2/zsh /home/adv_zxy/.zfunc $fpath)
 autoload -U promptinit && promptinit
 zstyle :prompt:pure:git:stash show yes
 prompt pure
-
 
 stfu() {
   $* >& /dev/null < /dev/null &
 }
 
-alias t='sudo /home/adv_zxy/xdp-tutorial/testenv/testenv.sh'
-export PATH="$PATH:/home/adv_zxy/.cargo/bin"
 export GIT_TERMINAL_PROMPT=1
-
-use_glibc_2.25() {
-  use_glibc.py $1 ~/prefix/glibc_2.25/lib ~/prefix/glibc_2.25/lib/ld-2.25.so $1.glibc_2.25
-  chmod a+x $1.glibc_2.25
-}
-
-core_enable() {
-  echo core | sudo tee /proc/sys/kernel/core_pattern
-}
-
-core_disable() {
-  echo '|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h' | sudo tee /proc/sys/kernel/core_pattern
-}
-
-export GOPRIVATE=git.code.oa.com
-# export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 alias venv='source venv/bin/activate'
 
-# temp
-export ZSH_ALIAS_FINDER_AUTOMATIC=true
-
-export PATH=$PATH:~/go/bin
-export PATH=$PATH:/usr/share/bcc/tools
-[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 #}}}
