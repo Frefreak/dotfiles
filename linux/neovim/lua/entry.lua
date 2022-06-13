@@ -76,14 +76,20 @@ M.init = function(use)
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            vim.g.nvim_tree_show_icons = {
-                git = 0,
-                folders = 1, -- or 0,
-                files = 1, -- or 0,
-                folder_arrows = 1 -- or 0
+            require'nvim-tree'.setup {
+                update_cwd = true,
+                renderer = {
+                    icons = {
+                        show = {
+                            git = false,
+                            folder = true,
+                            file = false,
+                            folder_arrow = true
+                        }
+                    },
+                    highlight_git = false,
+                },
             }
-            vim.g.nvim_tree_git_hl = 0
-            require'nvim-tree'.setup {update_cwd = true}
         end
     }
 
