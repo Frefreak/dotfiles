@@ -36,6 +36,15 @@ map("n", "<Esc>", ":noh<CR>", opt)
 
 -- lsp
 local nvim_lsp = require('lspconfig')
+local nlspsettings = require('nlspsettings')
+
+nlspsettings.setup({
+  config_home = vim.fn.stdpath('config') .. '/nlsp-settings',
+  local_settings_dir = ".nlsp-settings",
+  local_settings_root_markers = { '.git' },
+  append_default_schemas = true,
+  loader = 'json'
+})
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -77,12 +86,12 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>e',
                    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',
                    opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
+    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>',
                    opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',
+    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>',
                    opts)
     buf_set_keymap('n', '<space>q',
-                   '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+                   '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
     buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>',
                    opts)
 end
@@ -113,7 +122,7 @@ require('rust-tools').setup({
         on_attach = on_attach,
         capabilities = capabilities,
         flags = {debounce_text_changes = 150},
-        settings = {["rust-analyzer.diagnostics.disabled"] = {"inactive-code"}}
+        settings = {}
     }
 })
 

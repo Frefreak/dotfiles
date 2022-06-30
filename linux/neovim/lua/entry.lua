@@ -94,6 +94,7 @@ M.init = function(use)
     }
 
     use 'neovim/nvim-lspconfig'
+    use 'tamago324/nlsp-settings.nvim'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
