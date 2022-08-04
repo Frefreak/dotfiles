@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,    KC_P,    KC_LBRC,  KC_RBRC, KC_BSLS,		\
       KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,    KC_SCLN, KC_QUOT,  KC_ENT,			\
       KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM,KC_DOT,  KC_SLSH, KC_RSFT,				\
-      KC_LCTL, KC_LGUI, KC_LALT,                  KC_SPC,                         F(0),    F(1),    F(2),  F(3), KC_RCTL),
+      KC_LCTL, KC_LGUI, KC_LALT,                  KC_SPC,                         MO(1),    MO(2),    TG(3),  MO(4), KC_RCTL),
 
   // 1: Function Layer
   Z64_Layout(
@@ -64,14 +64,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS, KC_TRNS,				\
       KC_TRNS, KC_TRNS, KC_TRNS,		  KC_TRNS,			  KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS)
 };
-
-// Custom Actions
-const uint16_t PROGMEM fn_actions[] = {
-    [0] = ACTION_LAYER_MOMENTARY(1),  // to F1 overlay
-    [1] = ACTION_LAYER_MOMENTARY(2),  // to F2 overlay
-    [2] = ACTION_LAYER_MOMENTARY(3),  // to F3 overlay
-};
-
 
 uint16_t *key_logs = NULL;
 
