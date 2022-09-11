@@ -39,11 +39,11 @@ local nvim_lsp = require('lspconfig')
 local nlspsettings = require('nlspsettings')
 
 nlspsettings.setup({
-  config_home = vim.fn.stdpath('config') .. '/nlsp-settings',
-  local_settings_dir = ".nlsp-settings",
-  local_settings_root_markers = { '.git' },
-  append_default_schemas = true,
-  loader = 'json'
+    config_home = vim.fn.stdpath('config') .. '/nlsp-settings',
+    local_settings_dir = ".nlsp-settings",
+    local_settings_root_markers = {'.git'},
+    append_default_schemas = true,
+    loader = 'json'
 })
 
 -- Use an on_attach function to only map the following keys
@@ -86,12 +86,10 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>e',
                    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',
                    opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>',
+    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>',
                    opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>',
-                   opts)
-    buf_set_keymap('n', '<space>q',
-                   '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
     buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>',
                    opts)
 end
@@ -108,18 +106,20 @@ for _, lsp in ipairs(servers) do
     })
 end
 
-require('rust-tools').setup({
+local rt = require('rust-tools')
+rt.setup({
     tools = {
-        autoSetHints = true,
-        hover_with_actions = true,
-
         runnables = {use_telescope = true},
         debuggables = {use_telescope = true},
-        inlay_hints = {highlight = "InLayHints"},
+        inlay_hints = {highlight = "InLayHints", auto = true},
         hover_actions = {auto_focus = true}
     },
     server = {
-        on_attach = on_attach,
+        on_attach = function(client, bufnr)
+            on_attach(client, bufnr)
+            vim.keymap.set("n", "<space>a", rt.hover_actions.hover_actions,
+                           {buffer = bufnr, silent = true, noremap = true})
+        end,
         capabilities = capabilities,
         flags = {debounce_text_changes = 150},
         settings = {}
@@ -134,7 +134,12 @@ require"lspconfig".efm.setup {
         rootMarkers = {".git/"},
         languages = {
             lua = {{formatCommand = "lua-format -i", formatStdin = true}},
-            python = {{formatCommand = "black --target-version py310 --quiet -", formatStdin = true}}
+            python = {
+                {
+                    formatCommand = "black --target-version py310 --quiet -",
+                    formatStdin = true
+                }
+            }
         }
     },
     filetypes = {"lua", "python"},
@@ -196,7 +201,7 @@ local ts_config = require('nvim-treesitter.configs')
 ts_config.setup {
     highlight = {enable = true, use_languagetree = true},
     rainbow = {enable = true},
-    indent = {enable = false},
+    indent = {enable = false}
 }
 
 -- telescope

@@ -36,4 +36,5 @@ nnoremap tp "+p
 
 nnoremap gi :action GotoImplementation<CR>
 nnoremap ga :action ShowIntentionActions<CR>
+nnoremap gu :action FindUsages<CR>
 nnoremap <space>rn :action RefactoringMenu<CR>

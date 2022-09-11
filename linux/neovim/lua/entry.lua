@@ -114,7 +114,7 @@ M.init = function(use)
     use {
         'nvim-lua/lsp-status.nvim',
         config = function()
-            require('lsp-status').config({status_symbol = 'ﮋ'})
+            require('lsp-status').config({status_symbol = 'λ'})
             require('lsp-status').register_progress()
         end
     }
