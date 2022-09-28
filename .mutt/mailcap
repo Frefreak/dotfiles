@@ -1,1 +1,2 @@
 text/html; elinks -dump -dump-color-mode 1; copiousoutput;
+image/*; feh %s;
