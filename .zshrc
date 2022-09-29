@@ -118,6 +118,8 @@ alias site_build='stack exec -- site build'
 alias nvsmi='nvidia-smi'
 alias ccmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES"
 alias yaaw="hhttp -d /usr/share/webapps/yaaw/"
+alias virsh='virsh -c qemu:///system'
+alias checksec='pwn checksec'
 mm () { make "$@" 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
 ghc () { stack --verbosity slient exec -- ghc $* }
