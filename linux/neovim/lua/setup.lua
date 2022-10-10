@@ -200,7 +200,6 @@ cmp.setup {formatting = {format = lspkind.cmp_format()}}
 local ts_config = require('nvim-treesitter.configs')
 ts_config.setup {
     highlight = {enable = true, use_languagetree = true},
-    rainbow = {enable = true},
     indent = {enable = false}
 }
 
@@ -210,3 +209,6 @@ map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', {})
 map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', {})
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', {})
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', {})
+
+-- leap.nvim
+require('leap').set_default_keymaps()

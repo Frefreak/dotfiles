@@ -25,7 +25,7 @@ M.init = function(use)
 
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
-    use 'ggandor/lightspeed.nvim'
+    -- use 'ggandor/leap.nvim'
     use {
         'SirVer/ultisnips',
         config = function()
@@ -107,7 +107,6 @@ M.init = function(use)
         config = function() require('lsp_signature').setup() end
     }
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use {'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'}}
     use 'nvim-lua/plenary.nvim'
     use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
     use 'simrat39/rust-tools.nvim'
