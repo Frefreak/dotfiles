@@ -25,7 +25,7 @@ M.init = function(use)
 
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
-    -- use 'ggandor/leap.nvim'
+    use 'ggandor/leap.nvim'
     use {
         'SirVer/ultisnips',
         config = function()
