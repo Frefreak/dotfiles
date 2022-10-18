@@ -25,7 +25,7 @@ M.init = function(use)
 
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
-    use 'ggandor/lightspeed.nvim'
+    use 'ggandor/leap.nvim'
     use {
         'SirVer/ultisnips',
         config = function()
@@ -76,18 +76,25 @@ M.init = function(use)
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            vim.g.nvim_tree_show_icons = {
-                git = 0,
-                folders = 1, -- or 0,
-                files = 1, -- or 0,
-                folder_arrows = 1 -- or 0
+            require'nvim-tree'.setup {
+                update_cwd = true,
+                renderer = {
+                    icons = {
+                        show = {
+                            git = false,
+                            folder = true,
+                            file = false,
+                            folder_arrow = true
+                        }
+                    },
+                    highlight_git = false,
+                },
             }
-            vim.g.nvim_tree_git_hl = 0
-            require'nvim-tree'.setup {update_cwd = true}
         end
     }
 
     use 'neovim/nvim-lspconfig'
+    use 'tamago324/nlsp-settings.nvim'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -100,14 +107,13 @@ M.init = function(use)
         config = function() require('lsp_signature').setup() end
     }
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use {'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'}}
     use 'nvim-lua/plenary.nvim'
     use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
     use 'simrat39/rust-tools.nvim'
     use {
         'nvim-lua/lsp-status.nvim',
         config = function()
-            require('lsp-status').config({status_symbol = 'ﮋ'})
+            require('lsp-status').config({status_symbol = 'λ'})
             require('lsp-status').register_progress()
         end
     }
