@@ -6,11 +6,12 @@ M.init = function(use)
     use {'dracula/vim', as = 'dracula'}
     use 'roxma/vim-tmux-clipboard'
     use {
-        'vimwiki/vimwiki',
+        'vimwiki/vimwiki', branch = 'dev',
         config = function()
             vim.g.vimwiki_list = {
                 {path = '~/vimwiki/', index = 'index', ext = '.md'}
             }
+            vim.g['vimwiki_global_ext'] = 0
         end
     }
     use {

@@ -94,9 +94,9 @@ local on_attach = function(client, bufnr)
                    opts)
 end
 
-capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = {'pyright', 'tsserver', 'clangd', 'gopls'}
+local servers = {'pyright', 'tsserver', 'clangd', 'gopls', 'sumneko_lua', 'hls'}
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
         on_attach = on_attach,
@@ -199,7 +199,6 @@ cmp.setup {formatting = {format = lspkind.cmp_format()}}
 local ts_config = require('nvim-treesitter.configs')
 ts_config.setup {
     highlight = {enable = true, use_languagetree = true},
-    indent = {enable = false}
 }
 
 -- telescope
