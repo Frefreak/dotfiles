@@ -11,7 +11,6 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
-fpath=(/usr/share/doc/radare2/zsh /home/$USER/.zfunc $fpath)
 autoload -U compinit && compinit
 autoload -U promptinit && promptinit
 autoload bashcompinit && bashcompinit
@@ -19,7 +18,7 @@ autoload bashcompinit && bashcompinit
 # }}}
 
 # {{{ User configuration
-export PATH=$HOME/.cargo/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:/usr/share/bcc/tools/:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:/usr/share/bcc/tools/:/opt/homebrew/bin:$PATH
 
 setopt extended_glob
 setopt no_histverify
