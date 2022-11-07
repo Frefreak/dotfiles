@@ -145,14 +145,8 @@ ud() {
 pandoc_html() {
   fst="$1"
   shift
-  pandoc --self-contained --css $HOME/pandoc/gh-pandoc.css --mathjax -f markdown -t html \
-    "$fst" -o "${fst%%.*}.html" $@
-}
-
-pandoc_html_math() {
-  fst="$1"
-  shift
-  pandoc -s --css gh-pandoc.css --mathjax -f markdown -t html \
+  pandoc --standalone --css $HOME/files/gh-pandoc.css \
+    --mathjax -f markdown -t html \
     "$fst" -o "${fst%%.*}.html" $@
 }
 
@@ -169,7 +163,7 @@ pandoc_pdf() {
   # fc-list :lang=zh
   pandoc -f markdown -t latex --standalone --pdf-engine=xelatex \
     -V CJKmainfont="Source Han Sans" \
-    -V CJKoptions="AutoFakeBold,AutoFakeSlant" "$@" \
+    -V CJKoptions="AutoFakeBold,AutoFakeSlant" \
     -V monofont="FantasqueSansMono Nerd Font Mono" "$@"
 }
 
