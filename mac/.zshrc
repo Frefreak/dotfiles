@@ -11,10 +11,10 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+fpath=($HOME/.zfunc $fpath)
 autoload -U compinit && compinit
 autoload -U promptinit && promptinit
 autoload bashcompinit && bashcompinit
-
 # }}}
 
 # {{{ User configuration
