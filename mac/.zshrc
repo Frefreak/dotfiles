@@ -65,7 +65,7 @@ export MANPAGER="nvim +Man! -c 'call clearmatches()'"
 export VIMRC="$HOME/.config/nvim/init.vim"
 export GPG_TTY=$(tty)
 
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix zsh-syntax-highlighting)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 command -v pandoc >/dev/null 2>&1 && eval "$(pandoc --bash-completion)"
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
@@ -74,8 +74,10 @@ ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
 
 ## fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
-[[ -f /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
-[[ -f /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
+[[ -f $(brew --prefix fzf)/shell/completion.zsh ]] && \
+  source $(brew --prefix fzf)/shell/completion.zsh
+[[ -f $(brew --prefix fzf)/shell/key-bindings.zsh ]] && \
+  source $(brew --prefix fzf)/shell/key-bindings.zsh
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
