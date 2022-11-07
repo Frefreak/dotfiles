@@ -11,7 +11,7 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
-fpath=(/usr/share/doc/radare2/zsh /home/$USER/.zfunc $fpath)
+fpath=(/usr/share/doc/radare2/zsh $HOME/.zfunc $fpath)
 autoload -U compinit && compinit
 autoload -U promptinit && promptinit
 autoload bashcompinit && bashcompinit
@@ -19,7 +19,8 @@ autoload bashcompinit && bashcompinit
 # }}}
 
 # {{{ User configuration
-export PATH=$HOME/.cargo/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:/usr/share/bcc/tools/:$PATH
+export PATH=~/.cargo/bin:~/go/bin:~/bin:~/.local/bin:/usr/share/bcc/tools/:$PATH
+[[ -f ~/.ghcup/env ]] && source ~/.ghcup/env
 
 setopt extended_glob
 setopt no_histverify
@@ -144,7 +145,7 @@ ud() {
 pandoc_html() {
   fst="$1"
   shift
-  pandoc --self-contained --css /home/$USER/pandoc/gh-pandoc.css --mathjax -f markdown -t html \
+  pandoc --self-contained --css $HOME/pandoc/gh-pandoc.css --mathjax -f markdown -t html \
     "$fst" -o "${fst%%.*}.html" $@
 }
 
@@ -183,7 +184,7 @@ stfu() {
   $* >& /dev/null < /dev/null &
 }
 
-alias t="sudo /home/$USER/xdp-tutorial/testenv/testenv.sh"
+alias t="sudo $HOME/xdp-tutorial/testenv/testenv.sh"
 export GIT_TERMINAL_PROMPT=1
 zstyle :prompt:pure:git:stash show yes
 prompt pure
@@ -204,3 +205,4 @@ export ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 [[ -f ~/.work_stuffs.zsh ]] && source ~/.work_stuffs.zsh
 #}}}
+

@@ -144,7 +144,7 @@ ud() {
 pandoc_html() {
   fst="$1"
   shift
-  pandoc --self-contained --css /home/$USER/pandoc/gh-pandoc.css --mathjax -f markdown -t html \
+  pandoc --self-contained --css $HOME/pandoc/gh-pandoc.css --mathjax -f markdown -t html \
     "$fst" -o "${fst%%.*}.html" $@
 }
 
@@ -183,7 +183,7 @@ stfu() {
   $* >& /dev/null < /dev/null &
 }
 
-alias t="sudo /home/$USER/xdp-tutorial/testenv/testenv.sh"
+alias t="sudo $HOME/xdp-tutorial/testenv/testenv.sh"
 export GIT_TERMINAL_PROMPT=1
 zstyle :prompt:pure:git:stash show yes
 prompt pure
