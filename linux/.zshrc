@@ -1,7 +1,6 @@
 # {{{ oh-my-zsh
 
 ZSH=/usr/share/oh-my-zsh/
-fpath+=$HOME/.zsh/pure
 ZSH_THEME=""
 DISABLE_AUTO_UPDATE="true"
 plugins=(git vi-mode urltools systemd archlinux z kubectl alias-finder web-search)
