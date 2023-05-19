@@ -1,7 +1,18 @@
 local M = {}
 
 M.init = function(use)
-    -- use 'github/copilot.vim'
+    use {
+      "zbirenbaum/copilot.lua",
+      cmd = "Copilot",
+      event = "InsertEnter",
+      config = function()
+        require("copilot").setup({
+            filetypes = {
+                gitcommit = true,
+            }
+        })
+      end,
+    }
     use 'vim-scripts/LargeFile'
     use 'wbthomason/packer.nvim'
     use {'dracula/vim', as = 'dracula'}

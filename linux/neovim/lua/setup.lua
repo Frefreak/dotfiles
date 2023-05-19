@@ -270,7 +270,3 @@ map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', {})
 
 -- leap.nvim
 require('leap').set_default_keymaps()
-
--- copilot
-map('i', '<leader>c', '<cmd>call copilot#Accept(" ")<cr>', {})
-vim.g.copilot_no_tab_map = 'v:true'
