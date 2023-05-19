@@ -1,6 +1,7 @@
 local M = {}
 
 M.init = function(use)
+    -- use 'github/copilot.vim'
     use 'vim-scripts/LargeFile'
     use 'wbthomason/packer.nvim'
     use {'dracula/vim', as = 'dracula'}

@@ -258,6 +258,7 @@ cmp.setup { formatting = { format = lspkind.cmp_format() } }
 local ts_config = require('nvim-treesitter.configs')
 ts_config.setup {
     highlight = { enable = true, use_languagetree = true },
+    indent = { enable = true },
 }
 
 -- telescope
@@ -269,3 +270,7 @@ map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', {})
 
 -- leap.nvim
 require('leap').set_default_keymaps()
+
+-- copilot
+map('i', '<leader>c', '<cmd>call copilot#Accept(" ")<cr>', {})
+vim.g.copilot_no_tab_map = 'v:true'
