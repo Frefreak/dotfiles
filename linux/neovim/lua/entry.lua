@@ -2,38 +2,38 @@ local M = {}
 
 M.init = function(use)
     use {
-      "zbirenbaum/copilot.lua",
-      cmd = "Copilot",
-      event = "InsertEnter",
-      config = function()
-        require("copilot").setup({
-            filetypes = {
-                gitcommit = true,
-            }
-        })
-      end,
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                filetypes = {
+                    gitcommit = true,
+                }
+            })
+        end,
     }
     use 'vim-scripts/LargeFile'
     use 'wbthomason/packer.nvim'
-    use {'dracula/vim', as = 'dracula'}
+    use { 'dracula/vim', as = 'dracula' }
     use 'roxma/vim-tmux-clipboard'
     use {
         'vimwiki/vimwiki', branch = 'dev',
         config = function()
             vim.g.vimwiki_list = {
-                {path = '~/vimwiki/', index = 'index', ext = '.md'}
+                { path = '~/vimwiki/', index = 'index', ext = '.md' }
             }
             vim.g['vimwiki_global_ext'] = 0
         end
     }
     use {
         'mattn/emmet-vim',
-        ft = {'html', 'javascript', 'php', 'css', 'vue', 'xml', 'svelte'}
+        ft = { 'html', 'javascript', 'php', 'css', 'vue', 'xml', 'svelte' }
     }
     use {
         'norcalli/nvim-colorizer.lua',
         config = function() require('colorizer').setup() end,
-        ft = {'css', 'html', 'svelte', 'js'}
+        ft = { 'css', 'html', 'svelte', 'js' }
     }
 
     use 'tpope/vim-surround'
@@ -50,7 +50,7 @@ M.init = function(use)
         end
     }
     use 'honza/vim-snippets'
-    use {'tpope/vim-fugitive', cmd = {"Git"}}
+    use { 'tpope/vim-fugitive', cmd = { "Git" } }
     use {
         'lervag/vimtex',
         ft = 'tex',
@@ -60,18 +60,18 @@ M.init = function(use)
         'terrortylor/nvim-comment',
         cmd = 'CommentToggle',
         config = function()
-            require('nvim_comment').setup({comment_empty = false})
+            require('nvim_comment').setup({ comment_empty = false })
         end
     }
 
     use {
         'hoob3rt/lualine.nvim',
-        requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         config = function()
             require('lualine').setup({
-                options = {theme = 'dracula'},
+                options = { theme = 'dracula' },
                 sections = {
-                    lualine_c = {'filename', "require'lsp-status'.status()"}
+                    lualine_c = { 'filename', "require'lsp-status'.status()" }
                 }
             })
         end
@@ -81,7 +81,7 @@ M.init = function(use)
         'akinsho/bufferline.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            require('bufferline').setup({options = {diagnostics = 'nvim_lsp'}})
+            require('bufferline').setup({ options = { diagnostics = 'nvim_lsp' } })
         end
     }
 
@@ -89,7 +89,7 @@ M.init = function(use)
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            require'nvim-tree'.setup {
+            require 'nvim-tree'.setup {
                 update_cwd = true,
                 renderer = {
                     icons = {
@@ -118,14 +118,14 @@ M.init = function(use)
         "ray-x/lsp_signature.nvim",
         config = function() require('lsp_signature').setup() end
     }
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'nvim-lua/plenary.nvim'
-    use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
-    use 'simrat39/rust-tools.nvim'
+    use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+    use { 'mrcjkb/rustaceanvim', ft = 'rust' }
     use {
         'nvim-lua/lsp-status.nvim',
         config = function()
-            require('lsp-status').config({status_symbol = 'λ'})
+            require('lsp-status').config({ status_symbol = 'λ' })
             require('lsp-status').register_progress()
         end
     }
