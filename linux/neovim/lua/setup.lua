@@ -63,7 +63,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    if vim.bo.filetype ~= 'rust' then
+        vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    end
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<space>f', function()
       vim.lsp.buf.format { async = true }
@@ -201,6 +203,19 @@ cmp.setup({
         format = function(_, vim_item) return vim_item end
     }
 })
+
+
+-- rustaceanvim
+if vim.bo.filetype == 'rust' then
+    vim.keymap.set(
+      {"n", "v"},
+      "<space>ca",
+      function()
+        vim.cmd.RustLsp('codeAction');
+      end,
+      { silent = true, buffer = bufnr }
+    )
+end
 
 -- lspkind
 local lspkind = require('lspkind')
