@@ -215,6 +215,11 @@ if vim.bo.filetype == 'rust' then
       end,
       { silent = true, buffer = bufnr }
     )
+    vim.keymap.set('n', '<leader>rd', function()
+        vim.cmd.RustLsp('externalDocs');
+    end,
+      { silent = true, buffer = bufnr }
+    )
 end
 
 -- lspkind
