@@ -113,7 +113,7 @@ M.init = function(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-nvim-lua'
     use 'onsails/lspkind-nvim'
-    use 'quangnguyen30192/cmp-nvim-ultisnips'
+    -- use 'quangnguyen30192/cmp-nvim-ultisnips'
     use {
         "ray-x/lsp_signature.nvim",
         config = function() require('lsp_signature').setup() end

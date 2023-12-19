@@ -167,7 +167,7 @@ vim.o.completeopt = 'menu,menuone,noselect'
 
 local cmp = require 'cmp'
 cmp.setup({
-    snippet = { expand = function(args) vim.fn["UltiSnips#Anon"](args.body) end },
+    -- snippet = { expand = function(args) vim.fn["UltiSnips#Anon"](args.body) end },
     mapping = {
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -195,7 +195,9 @@ cmp.setup({
         end
     },
     sources = {
-        { name = 'nvim_lsp' }, { name = 'ultisnips' }, { name = 'buffer' },
+        { name = 'nvim_lsp' },
+        -- { name = 'ultisnips' },
+        { name = 'buffer' },
         { name = 'path' }, { name = 'nvim_lua' }
     },
     formatting = {
@@ -204,6 +206,10 @@ cmp.setup({
     }
 })
 
+
+-- lspkind
+local lspkind = require('lspkind')
+cmp.setup { formatting = { format = lspkind.cmp_format() } }
 
 -- rustaceanvim
 if vim.bo.filetype == 'rust' then
@@ -221,10 +227,6 @@ if vim.bo.filetype == 'rust' then
       { silent = true, buffer = bufnr }
     )
 end
-
--- lspkind
-local lspkind = require('lspkind')
-cmp.setup { formatting = { format = lspkind.cmp_format() } }
 
 -- treesitter
 
