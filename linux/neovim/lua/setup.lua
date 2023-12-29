@@ -95,6 +95,9 @@ require('lspconfig').pyright.setup({
     flags = { debounce_text_changes = 150 }
 })
 
+require('lspconfig').gdscript.setup({
+    filetypes = { "gd", "gdscript", "gdscript3", "gdshader"},
+})
 
 local util = require 'lspconfig/util'
 require "lspconfig".efm.setup {

@@ -30,14 +30,15 @@ augroup filetype_web
 	autocmd Filetype html,xhtml,javascript,css,typescript,typescript.*,vue,wast  setlocal sw=2 ts=2 expandtab sts=2 shiftround
 augroup end
 
-augroup filetye_vim
+augroup filetype_vim
 	autocmd FileType vim setlocal shiftwidth=4 tabstop=4
   autocmd FileType vimwiki setlocal shiftwidth=4 tabstop=4 expandtab
 augroup end
 
-augroup filetye_dev
+augroup filetype_dev
 	autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 	autocmd FileType go setlocal shiftwidth=4 tabstop=4
+	autocmd FileType gdscript,gdshader setlocal shiftwidth=4 tabstop=4
 	"autocmd FileType go setlocal shiftwidth=4 tabstop=4 expandtab
 augroup end
 
