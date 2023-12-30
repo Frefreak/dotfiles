@@ -240,6 +240,9 @@ ts_config.setup {
 }
 
 -- telescope
+require('telescope').setup {}
+require('telescope').load_extension('fzf')
+
 -- Find files using Telescope command-line sugar.
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', {})
 map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', {})
