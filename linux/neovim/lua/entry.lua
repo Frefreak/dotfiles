@@ -10,6 +10,7 @@ M.init = function(use)
         end
     }
     use 'vim-scripts/LargeFile'
+    use { 'Frefreak/gdscript-indent', ft = {'gdscript'} }
     use 'wbthomason/packer.nvim'
     use {'dracula/vim', as = 'dracula'}
     use 'roxma/vim-tmux-clipboard'
