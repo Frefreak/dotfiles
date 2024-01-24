@@ -1,5 +1,26 @@
 " vim: foldmethod=marker sw=2 ts=2 sts=2 expandtab
 
+" lazy.nvim & LUA stuffs {{{
+lua << EOF
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+local entry = require('entry')
+require('lazy').setup(entry)
+EOF
+
+"}}}
+
 " display related {{{
 set background=dark
 set termguicolors
@@ -145,26 +166,4 @@ command! SSS :syntax sync formstart
 let g:python3_host_prog = '/usr/bin/python3'
 "}}}
 
-" packer & LUA stuffs {{{
-lua << EOF
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
-end
-
-require('packer').startup(function(use)
-  require('entry').init(use)
-
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
-EOF
-
 lua require('setup')
-"}}}

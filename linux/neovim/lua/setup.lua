@@ -96,10 +96,23 @@ require('lspconfig').pyright.setup({
 })
 
 require('lspconfig').gdscript.setup({
-    filetypes = { "gd", "gdscript", "gdscript3", "gdshader"},
+    filetypes = { "gd", "gdscript", "gdscript3", "gdshader" },
+})
+
+
+-- go.nvim
+require('go').setup()
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.go",
+    callback = function()
+        require('go.format').goimport()
+    end,
+    group = format_sync_grp,
 })
 
 local util = require 'lspconfig/util'
+
 require "lspconfig".efm.setup {
     init_options = { documentFormatting = true },
     on_attach = on_attach,
@@ -199,7 +212,7 @@ cmp.setup({
     },
     sources = {
         { name = 'nvim_lsp' },
-        { name = 'ultisnips'},
+        { name = 'ultisnips' },
         { name = 'buffer' },
         { name = 'path' }, { name = 'nvim_lua' }
     },
@@ -215,21 +228,24 @@ local lspkind = require('lspkind')
 cmp.setup { formatting = { format = lspkind.cmp_format() } }
 
 -- rustaceanvim
-if vim.bo.filetype == 'rust' then
-    vim.keymap.set(
-        { "n", "v" },
-        "<space>ca",
-        function()
-            vim.cmd.RustLsp('codeAction');
-        end,
-        { silent = true, buffer = bufnr }
-    )
-    vim.keymap.set('n', '<leader>rd', function()
-            vim.cmd.RustLsp('externalDocs');
-        end,
-        { silent = true, buffer = bufnr }
-    )
-end
+vim.api.nvim_create_autocmd("BufReadPre", {
+    pattern = "*.rs",
+    callback = function()
+        vim.keymap.set(
+            { "n", "v" },
+            "<space>ca",
+            function()
+                vim.cmd.RustLsp('codeAction');
+            end,
+            { silent = true, buffer = bufnr }
+        )
+        vim.keymap.set('n', '<leader>rd', function()
+                vim.cmd.RustLsp('externalDocs');
+            end,
+            { silent = true, buffer = bufnr }
+        )
+    end,
+})
 
 -- treesitter
 
