@@ -40,7 +40,7 @@ M = {
     'ggandor/leap.nvim',
     {
         'SirVer/ultisnips',
-        config = function()
+        init = function()
             vim.g.UltiSnipsEditSplit = "vertical"
             vim.g.UltiSnipsExpandTrigger = "<C-e>"
             vim.g.UltiSnipsListSnippets = "<C-l>"
