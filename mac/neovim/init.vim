@@ -1,5 +1,26 @@
 " vim: foldmethod=marker sw=2 ts=2 sts=2 expandtab
 
+" lazy.nvim & LUA stuffs {{{
+lua << EOF
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+local entry = require('entry')
+require('lazy').setup(entry)
+EOF
+
+"}}}
+
 " display related {{{
 set background=dark
 set termguicolors
@@ -30,14 +51,15 @@ augroup filetype_web
 	autocmd Filetype html,xhtml,javascript,css,typescript,typescript.*,vue,wast  setlocal sw=2 ts=2 expandtab sts=2 shiftround
 augroup end
 
-augroup filetye_vim
+augroup filetype_vim
 	autocmd FileType vim setlocal shiftwidth=4 tabstop=4
   autocmd FileType vimwiki setlocal shiftwidth=4 tabstop=4 expandtab
 augroup end
 
-augroup filetye_dev
+augroup filetype_dev
 	autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 	autocmd FileType go setlocal shiftwidth=4 tabstop=4
+	autocmd FileType gdscript,gdshader setlocal shiftwidth=4 tabstop=4
 	"autocmd FileType go setlocal shiftwidth=4 tabstop=4 expandtab
 augroup end
 
@@ -141,29 +163,7 @@ cmap w!! w !sudo tee % > /dev/null
 nnoremap cp :e %:h<enter>
 
 command! SSS :syntax sync formstart
-let g:python3_host_prog = '/opt/homebrew/bin/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 "}}}
-
-" packer & LUA stuffs {{{
-lua << EOF
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
-end
-
-require('packer').startup(function(use)
-  require('entry').init(use)
-
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
-EOF
 
 lua require('setup')
-"}}}
