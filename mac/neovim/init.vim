@@ -163,7 +163,7 @@ cmap w!! w !sudo tee % > /dev/null
 nnoremap cp :e %:h<enter>
 
 command! SSS :syntax sync formstart
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
 "}}}
 
 lua require('setup')

@@ -45,7 +45,7 @@ M = {
             vim.g.UltiSnipsExpandTrigger = "<C-e>"
             vim.g.UltiSnipsListSnippets = "<C-l>"
             vim.api.nvim_command(
-                'set runtimepath+=~/.local/share/nvim/site/pack/packer/start/vim-snippets')
+                'set runtimepath+=~/.local/share/nvim/lazy/vim-snippets')
         end
     },
     'honza/vim-snippets',
