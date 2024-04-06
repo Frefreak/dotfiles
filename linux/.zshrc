@@ -1,23 +1,41 @@
 # {{{ oh-my-zsh
 
-ZSH=/usr/share/oh-my-zsh/
-ZSH_THEME=""
-DISABLE_AUTO_UPDATE="true"
-plugins=(git vi-mode urltools systemd archlinux z kubectl alias-finder web-search)
-source $ZSH/oh-my-zsh.sh
-ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
-if [[ ! -d $ZSH_CACHE_DIR ]]; then
-  mkdir $ZSH_CACHE_DIR
-fi
+# ZSH=~/.oh-my-zsh/
+# fpath+=$HOME/.zsh/pure
+# ZSH_THEME=""
+# DISABLE_AUTO_UPDATE="true"
+# source $ZSH/oh-my-zsh.sh
+# ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
+# if [[ ! -d $ZSH_CACHE_DIR ]]; then
+#   mkdir $ZSH_CACHE_DIR
+# fi
 
 fpath=(/usr/share/doc/radare2/zsh $HOME/.zfunc $fpath)
+fpath+=($HOME/.zsh/pure)
 autoload -U compinit && compinit
 autoload -U promptinit && promptinit
 autoload bashcompinit && bashcompinit
 
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+prompt pure
+
+zi snippet OMZP::git
+zi snippet OMZP::vi-mode
+zi snippet OMZP::urltools
+zi snippet OMZP::systemd
+zi snippet OMZP::archlinux
+zi snippet OMZP::z
+zi snippet OMZP::kubectl
+zi snippet OMZP::alias-finder
+zi snippet OMZP::web-search
 # }}}
 
 # {{{ User configuration
+
 export PATH=~/.cargo/bin:~/go/bin:~/bin:~/.local/bin:/usr/share/bcc/tools/:$PATH
 [[ -f ~/.ghcup/env ]] && source ~/.ghcup/env
 
@@ -42,6 +60,7 @@ alias yaaw="hhttp -d /usr/share/webapps/yaaw/"
 alias virsh='virsh -c qemu:///system'
 alias checksec='pwn checksec'
 alias hv=hexyl
+alias or=okular
 
 mm () { make "$@" 2>&1 | sed -e 's/\(.*\)\b\([Ww]arning\)\(.*\)/\1\x1b[5;1;33m\2\x1b[0m\3/i' -e 's/\(.*\)\b\([Ee]rror\)\(.*\)/\1\x1b[5;1;31m\2\x1b[0m\3/' }
 compdef mm=make
@@ -64,6 +83,7 @@ bindkey -M vicmd 'L' end-of-line
 
 export MANPAGER="nvim +Man! -c 'call clearmatches()'"
 export VIMRC="$HOME/.config/nvim/init.vim"
+export PMC="$HOME/.local/share/PrismLauncher/instances/"
 export GPG_TTY=$(tty)
 
 [[ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]] && . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -95,7 +115,7 @@ vg() {
 
   if [[ -n $file ]]
   then
-     zsh -c "${EDITOR:-nvim} $file"
+     zsh -c "${EDITOR:-vim} $file"
   fi
 }
 
@@ -197,5 +217,3 @@ alias venv='source venv/bin/activate'
 export ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 [[ -f ~/.work_stuffs.zsh ]] && source ~/.work_stuffs.zsh
-#}}}
-
