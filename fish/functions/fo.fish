@@ -1,3 +1,3 @@
-function fzf_nvim_oldfiles
+function fo
     nvim -c "lua require('telescope.builtin').oldfiles()"
 end
