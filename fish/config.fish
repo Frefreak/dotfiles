@@ -13,6 +13,8 @@ if status is-interactive
     set -x MANPAGER "nvim +Man! -c 'call clearmatches()'"
     set -g async_prompt_functions _pure_prompt_git
 
+    set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
+
     fish_config theme choose Dracula
     set -x fish_key_bindings fish_hybrid_key_bindings
 end
