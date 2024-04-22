@@ -1,6 +1,7 @@
 local M = {}
 
 M = {
+    'ianding1/leetcode.vim',
     {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
@@ -12,7 +13,6 @@ M = {
     {'ray-x/go.nvim', ft = {'go'}},
     'vim-scripts/LargeFile',
     { 'Frefreak/gdscript-indent', ft = {'gdscript'} },
-    'wbthomason/packer.nvim',
     {'dracula/vim', as = 'dracula'},
     'roxma/vim-tmux-clipboard',
     {
@@ -62,18 +62,21 @@ M = {
             require('nvim_comment').setup({comment_empty = false})
         end
     },
-
+    {
+        "SmiteshP/nvim-navic",
+        dependencies = {"neovim/nvim-lspconfig"}
+    },
     {
         'hoob3rt/lualine.nvim',
         dependencies = {{'kyazdani42/nvim-web-devicons', optional = true}},
-        config = function()
-            require('lualine').setup({
-                options = {theme = 'dracula'},
-                sections = {
-                    lualine_c = {'filename', "require'lsp-status'.status()"}
-                }
-            })
-        end
+        -- config = function()
+        --     require('lualine').setup({
+        --         options = {theme = 'dracula'},
+        --         sections = {
+        --             lualine_c = {'filename', "require'lsp-status'.status()"}
+        --         }
+        --     })
+        -- end
     },
 
     {
@@ -133,6 +136,24 @@ M = {
             require('lsp-status').register_progress()
         end
     },
+    {
+      'kaarmu/typst.vim',
+      ft = 'typst',
+      lazy=false,
+    },
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            {
+                "SmiteshP/nvim-navbuddy",
+                dependencies = {
+                    "SmiteshP/nvim-navic",
+                    "MunifTanjim/nui.nvim"
+                },
+                opts = { lsp = { auto_attach = true } }
+            }
+        },
+    }
 }
 
 return M

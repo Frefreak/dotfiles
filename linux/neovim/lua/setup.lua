@@ -19,6 +19,17 @@ map('n', '<leader>>', ':BufferLineMoveNext<CR>', {})
 map('n', '<leader><', ':BufferLineMovePrev<CR>', {})
 map('n', 'gb', ':BufferLinePick<CR>', {})
 
+-- leetcode
+
+map('n', '<leader>ll', ':LeetCodeList<CR>', {})
+map('n', '<leader>lt', ':LeetCodeTest<CR>', {})
+map('n', '<leader>ls', ':LeetCodeSubmit<CR>', {})
+map('n', '<leader>li', ':LeetCodeSignIn<CR>', {})
+
+vim.g.leetcode_china = 1
+vim.g.leetcode_solution_filetype = 'rust'
+vim.g.leetcode_browser = 'firefox'
+
 -- nvim-tree
 function open_file_dir()
     local folder = vim.fn.expand('%:p:h')
@@ -75,7 +86,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = { 'pyright', 'tsserver', 'clangd', 'gopls', 'lua_ls', 'hls' }
+local servers = { 'pyright', 'tsserver', 'clangd', 'gopls', 'lua_ls', 'hls', 'typst_lsp', 'zls' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {}
 end
@@ -96,7 +107,7 @@ require('lspconfig').pyright.setup({
 })
 
 require('lspconfig').gdscript.setup({
-    filetypes = { "gd", "gdscript", "gdscript3", "gdshader" },
+    filetypes = { "gd", "gdscript", "gdscript3" },
 })
 
 
@@ -267,3 +278,43 @@ map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', {})
 
 -- leap.nvim
 require('leap').set_default_keymaps()
+
+-- navic
+local navic = require('nvim-navic')
+navic.setup {
+    lsp = {
+        auto_attach = true,
+    }
+}
+
+-- lualine
+
+require("lualine").setup({
+    sections = {
+        lualine_c = {
+            {
+                function()
+                    return navic.get_location()
+                end,
+                cond = function()
+                    return navic.is_available()
+                end
+            },
+        }
+    },
+    -- OR in winbar
+    winbar = {
+        lualine_c = {
+            {
+                function()
+                    return navic.get_location()
+                end,
+                cond = function()
+                    return navic.is_available()
+                end
+            },
+        }
+    }
+})
+
+-- navbuddy
