@@ -1,7 +1,6 @@
 local M = {}
 
 M = {
-    'ianding1/leetcode.vim',
     {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
@@ -69,14 +68,11 @@ M = {
     {
         'hoob3rt/lualine.nvim',
         dependencies = {{'kyazdani42/nvim-web-devicons', optional = true}},
-        -- config = function()
-        --     require('lualine').setup({
-        --         options = {theme = 'dracula'},
-        --         sections = {
-        --             lualine_c = {'filename', "require'lsp-status'.status()"}
-        --         }
-        --     })
-        -- end
+        config = function()
+            require('lualine').setup({
+                options = {theme = 'dracula'},
+            })
+        end
     },
 
     {
@@ -129,13 +125,6 @@ M = {
         }
     },
     {'mrcjkb/rustaceanvim', ft = 'rust'},
-    {
-        'nvim-lua/lsp-status.nvim',
-        config = function()
-            require('lsp-status').config({status_symbol = 'λ'})
-            require('lsp-status').register_progress()
-        end
-    },
     {
       'kaarmu/typst.vim',
       ft = 'typst',

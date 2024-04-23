@@ -19,17 +19,6 @@ map('n', '<leader>>', ':BufferLineMoveNext<CR>', {})
 map('n', '<leader><', ':BufferLineMovePrev<CR>', {})
 map('n', 'gb', ':BufferLinePick<CR>', {})
 
--- leetcode
-
-map('n', '<leader>ll', ':LeetCodeList<CR>', {})
-map('n', '<leader>lt', ':LeetCodeTest<CR>', {})
-map('n', '<leader>ls', ':LeetCodeSubmit<CR>', {})
-map('n', '<leader>li', ':LeetCodeSignIn<CR>', {})
-
-vim.g.leetcode_china = 1
-vim.g.leetcode_solution_filetype = 'rust'
-vim.g.leetcode_browser = 'firefox'
-
 -- nvim-tree
 function open_file_dir()
     local folder = vim.fn.expand('%:p:h')
@@ -100,7 +89,6 @@ local root_files = {
 }
 
 require('lspconfig').pyright.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
     root_dir = require('lspconfig/util').root_pattern(unpack(root_files)),
     flags = { debounce_text_changes = 150 }
@@ -126,7 +114,6 @@ local util = require 'lspconfig/util'
 
 require "lspconfig".efm.setup {
     init_options = { documentFormatting = true },
-    on_attach = on_attach,
     settings = {
         rootMarkers = { ".git/" },
         languages = {
@@ -147,7 +134,6 @@ require "lspconfig".efm.setup {
 
 local home = os.getenv('HOME')
 require 'lspconfig'.omnisharp.setup {
-    on_attach = on_attach,
     capabilities = capabilities,
     flags = { debounce_text_changes = 150 },
 
@@ -288,7 +274,6 @@ navic.setup {
 }
 
 -- lualine
-
 require("lualine").setup({
     sections = {
         lualine_c = {
@@ -302,19 +287,7 @@ require("lualine").setup({
             },
         }
     },
-    -- OR in winbar
-    winbar = {
-        lualine_c = {
-            {
-                function()
-                    return navic.get_location()
-                end,
-                cond = function()
-                    return navic.is_available()
-                end
-            },
-        }
-    }
 })
 
 -- navbuddy
+map('n', '<leader>b', ':Navbuddy<CR>', {})
