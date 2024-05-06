@@ -6,32 +6,32 @@ M = {
         cmd = "Copilot",
         event = "InsertEnter",
         config = function()
-            require("copilot").setup({filetypes = {gitcommit = true}})
+            require("copilot").setup({ filetypes = { gitcommit = true } })
         end
     },
-    {'ray-x/go.nvim', ft = {'go'}},
+    { 'ray-x/go.nvim',            ft = { 'go' } },
     'vim-scripts/LargeFile',
-    { 'Frefreak/gdscript-indent', ft = {'gdscript'} },
-    {'dracula/vim', as = 'dracula'},
+    { 'Frefreak/gdscript-indent', ft = { 'gdscript' } },
+    { 'dracula/vim',              as = 'dracula' },
     'roxma/vim-tmux-clipboard',
     {
-    'vimwiki/vimwiki',
+        'vimwiki/vimwiki',
         branch = 'dev',
         config = function()
             vim.g.vimwiki_list = {
-                {path = '~/vimwiki/', index = 'index', ext = '.md'}
+                { path = '~/vimwiki/', index = 'index', ext = '.md' }
             }
             vim.g['vimwiki_global_ext'] = 0
         end
     },
     {
         'mattn/emmet-vim',
-        ft = {'html', 'javascript', 'php', 'css', 'vue', 'xml', 'svelte'}
+        ft = { 'html', 'javascript', 'php', 'css', 'vue', 'xml', 'svelte' }
     },
     {
         'norcalli/nvim-colorizer.lua',
         config = function() require('colorizer').setup() end,
-        ft = {'css', 'html', 'svelte', 'js'}
+        ft = { 'css', 'html', 'svelte', 'js' }
     },
 
     'tpope/vim-surround',
@@ -48,7 +48,7 @@ M = {
         end
     },
     'honza/vim-snippets',
-    {'tpope/vim-fugitive', cmd = {"Git"}},
+    { 'tpope/vim-fugitive',              cmd = { "Git" } },
     {
         'lervag/vimtex',
         ft = 'tex',
@@ -58,36 +58,47 @@ M = {
         'terrortylor/nvim-comment',
         cmd = 'CommentToggle',
         config = function()
-            require('nvim_comment').setup({comment_empty = false})
+            require('nvim_comment').setup({ comment_empty = false })
         end
     },
     {
         "SmiteshP/nvim-navic",
-        dependencies = {"neovim/nvim-lspconfig"}
+        dependencies = { "neovim/nvim-lspconfig" }
     },
     {
         'hoob3rt/lualine.nvim',
-        dependencies = {{'kyazdani42/nvim-web-devicons', optional = true}},
+        dependencies = { { 'kyazdani42/nvim-web-devicons', optional = true } },
         config = function()
             require('lualine').setup({
-                options = {theme = 'dracula'},
+                options = { theme = 'dracula' },
             })
         end
     },
 
     {
         'akinsho/bufferline.nvim',
-        dependencies = {'kyazdani42/nvim-web-devicons'},
+        dependencies = { 'kyazdani42/nvim-web-devicons' },
         config = function()
-            require('bufferline').setup({options = {diagnostics = 'nvim_lsp'}})
+            require('bufferline').setup({
+                options = {
+                    diagnostics = 'nvim_lsp',
+                    separator_style = "slant",
+                    always_show_bufferline = false,
+                    hover = {
+                        enabled = true,
+                        delay = 0,
+                        reveal = { 'close' }
+                    }
+                }
+            })
         end
     },
 
     {
         'kyazdani42/nvim-tree.lua',
-        dependencies = {'kyazdani42/nvim-web-devicons'},
+        dependencies = { 'kyazdani42/nvim-web-devicons' },
         config = function()
-            require'nvim-tree'.setup {
+            require 'nvim-tree'.setup {
                 update_cwd = true,
                 renderer = {
                     icons = {
@@ -115,20 +126,20 @@ M = {
         "ray-x/lsp_signature.nvim",
         config = function() require('lsp_signature').setup() end
     },
-    {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     'nvim-lua/plenary.nvim',
     {
         'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'}
+            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
         }
     },
-    {'mrcjkb/rustaceanvim', ft = 'rust'},
+    { 'mrcjkb/rustaceanvim', ft = 'rust' },
     {
-      'kaarmu/typst.vim',
-      ft = 'typst',
-      lazy=false,
+        'kaarmu/typst.vim',
+        ft = 'typst',
+        lazy = false,
     },
     {
         "neovim/nvim-lspconfig",
