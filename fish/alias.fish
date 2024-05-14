@@ -14,12 +14,17 @@ alias -s mpv 'mpv --cover-art-auto=no'
 alias -s kr okular
 
 # git
+alias -s g "git"
 alias -s gss "git status -s"
 alias -s gco "git checkout"
 alias -s gcb "git checkout -b"
 alias -s glog "git log --oneline --decorate --color --graph"
 alias -s gd "git diff"
 alias -s ga "git add"
-alias -s gca "git commit -a"
+alias -s gca "git commit --verbose --all"
+alias -s gca! "git commit --verbose --all --amend"
 alias -s gl "git pull"
 alias -s gp "git push"
+alias -s gba "git branch --all"
+alias -s gr "git remote"
+alias -s grv "git remote --verbose"

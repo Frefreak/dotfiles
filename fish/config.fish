@@ -17,4 +17,5 @@ if status is-interactive
 
     fish_config theme choose Dracula
     set -x fish_key_bindings fish_hybrid_key_bindings
+    set -a fish_complete_path /usr/share/fish/vendor_completions.d/
 end
