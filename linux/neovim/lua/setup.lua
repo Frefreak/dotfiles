@@ -277,6 +277,7 @@ navic.setup {
 require("lualine").setup({
     sections = {
         lualine_c = {
+            'filename',
             {
                 function()
                     return navic.get_location()
