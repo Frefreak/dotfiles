@@ -59,8 +59,7 @@ augroup end
 augroup filetype_dev
 	autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 	autocmd FileType go setlocal shiftwidth=4 tabstop=4
-	autocmd FileType gdscript,gdshader setlocal shiftwidth=4 tabstop=4
-	"autocmd FileType go setlocal shiftwidth=4 tabstop=4 expandtab
+	autocmd FileType gdscript,gdshader setlocal shiftwidth=4 tabstop=4 commentstring=#\ %s
 augroup end
 
 augroup filetype_haskell
