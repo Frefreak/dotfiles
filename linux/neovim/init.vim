@@ -105,6 +105,8 @@ augroup end
 augroup filetype_nginx
 	autocmd Filetype nginx  setlocal sw=4 ts=4 expandtab sts=4
 augroup end
+
+autocmd! nvim_swapfile
 "}}}
 
 " from Damian Conway, More Instantly Better Vim - OSCON 2013 {{{
