@@ -132,12 +132,11 @@ require "lspconfig".efm.setup {
     end
 }
 
-local home = os.getenv('HOME')
 require 'lspconfig'.omnisharp.setup {
     capabilities = capabilities,
     flags = { debounce_text_changes = 150 },
 
-    cmd = { "dotnet", home .. "/omnisharp/OmniSharp.dll" },
+    cmd = { "dotnet", "/usr/lib/omnisharp/OmniSharp.dll" },
 
     -- Enables support for reading code style, naming convention and analyzer
     -- settings from .editorconfig.

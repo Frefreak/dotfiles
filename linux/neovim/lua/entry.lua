@@ -44,7 +44,11 @@ M = {
     }, 'honza/vim-snippets', {'tpope/vim-fugitive', cmd = {"Git"}}, {
         'lervag/vimtex',
         ft = 'tex',
-        config = function() vim.g.vimtex_compiler_method = 'tectonic' end
+        config = function()
+            vim.g.vimtex_compiler_method = 'tectonic'
+            vim.opt.conceallevel = 1
+            vim.g.tex_conceal = 'abdmgs'
+        end
     }, {
         'terrortylor/nvim-comment',
         cmd = 'CommentToggle',

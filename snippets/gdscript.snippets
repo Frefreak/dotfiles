@@ -5,3 +5,8 @@ endsnippet
 snippet @e "@export var"
 @export var $1: $2 = $3$0
 endsnippet
+
+snippet timer "await timer"
+await get_tree().create_timer($1).timeout
+$0
+endsnippet
