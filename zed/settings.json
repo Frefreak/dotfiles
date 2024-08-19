@@ -1,0 +1,31 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette
+
+// Theme: https://github.com/dracula/zed
+{
+  "telemetry": {
+    "metrics": false
+  },
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "buffer_font_family": "FantasqueSansM Nerd Font",
+  "buffer_line_height": "standard",
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Dracula"
+  },
+  "experimental.theme_overrides": {
+    "background": "#282a36ff",
+    "title_bar.background": "#141119ff",
+    "title_bar.inactive_background": "#1c1d26ff",
+    "status_bar.background": "#141119ff"
+  }
+}

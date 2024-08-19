@@ -1,0 +1,46 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      // put key-bindings here if you want them to work in normal & visual mode
+      "H": "vim::FirstNonWhitespace",
+      "L": "vim::EndOfLine",
+      ";": "command_palette::Toggle",
+      ":": "vim::RepeatFind",
+      "v": "vim::ToggleVisualBlock",
+      "ctrl-v": "vim::ToggleVisual",
+      "t p": ["workspace::SendKeystrokes", "\" + p"],
+      "up": ["workspace::SendKeystrokes", "5 k"],
+      "down": ["workspace::SendKeystrokes", "5 j"],
+      "left": ["workspace::SendKeystrokes", "5 h"],
+      "right": ["workspace::SendKeystrokes", "5 l"]
+    }
+  },
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "k j": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "t y": ["workspace::SendKeystrokes", "\" + y"]
+    }
+  },
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      // put key-bindings here (in addition to above) if you want them to
+      // work when no editor exists
+      // "space f": "file_finder::Toggle"
+    }
+  }
+]
