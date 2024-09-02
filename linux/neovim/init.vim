@@ -162,6 +162,7 @@ nnoremap tp "+p
 nnoremap a9 v<esc>ea(<esc>A)<esc>gv<esc>
 cmap w!! w !sudo tee % > /dev/null
 nnoremap cp :e %:h<enter>
+nnoremap <leader>cc :ccl<CR>
 
 command! SSS :syntax sync formstart
 let g:python3_host_prog = '/usr/bin/python3'
