@@ -1,6 +1,15 @@
 local M = {}
 
 M = {
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({ filetypes = { gitcommit = true } })
+        end
+    },
+    'wellle/targets.vim',
     { 'ray-x/go.nvim',            ft = { 'go' } }, 'vim-scripts/LargeFile',
     { 'Frefreak/gdscript-indent', ft = { 'gdscript' } },
     { 'dracula/vim',              as = 'dracula' }, 'roxma/vim-tmux-clipboard', {
@@ -91,7 +100,7 @@ M = {
     branch = 'perf',
     dependencies = {
         'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-buffer', 
+        'hrsh7th/cmp-buffer',
     },
 }, 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lua',
     'Frefreak/cmp-nvim-ultisnips', 'onsails/lspkind-nvim', {
