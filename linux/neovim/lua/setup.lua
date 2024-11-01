@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = { 'pyright', 'tsserver', 'clangd', 'gopls', 'lua_ls', 'hls', 'typst_lsp', 'zls' }
+local servers = { 'ruff', 'pyright', 'tsserver', 'clangd', 'gopls', 'lua_ls', 'hls', 'typst_lsp', 'zls' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {}
 end
@@ -118,15 +118,9 @@ require "lspconfig".efm.setup {
         rootMarkers = { ".git/" },
         languages = {
             lua = { { formatCommand = "lua-format -i", formatStdin = true } },
-            python = {
-                {
-                    formatCommand = "black --target-version py310 --quiet -",
-                    formatStdin = true
-                }
-            }
         }
     },
-    filetypes = { "lua", "python" },
+    filetypes = { "lua" },
     root_dir = function(fname)
         return util.root_pattern(".git")(fname) or vim.fn.getcwd()
     end
