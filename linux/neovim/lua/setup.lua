@@ -237,9 +237,9 @@ vim.api.nvim_create_autocmd("BufReadPre", {
     end,
 })
 vim.g.rustaceanvim = {
-   server = {
-     capabilities = vim.lsp.protocol.make_client_capabilities(),
-   }
+    server = {
+        capabilities = vim.lsp.protocol.make_client_capabilities(),
+    }
 }
 
 -- treesitter
