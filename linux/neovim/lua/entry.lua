@@ -25,7 +25,8 @@ M = {
                 syntax = 'markdown'
             }
         }
-        vim.g['vimwiki_global_ext'] = 0
+        -- vim.g.vimwiki_global_ext = 0
+        vim.g.vimwiki_filetypes = { 'markdown' }
     end
 }, {
     'mattn/emmet-vim',
@@ -112,7 +113,10 @@ M = {
     dependencies = {
         'nvim-lua/plenary.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
-    }
+    },
+    init = function()
+        vim.treesitter.language.register('markdown', { 'vimwiki.markdown' })
+    end
 }, { 'mrcjkb/rustaceanvim',          ft = 'rust' },
     { 'kaarmu/typst.vim',                ft = 'typst',       lazy = false }, {
     "neovim/nvim-lspconfig",
