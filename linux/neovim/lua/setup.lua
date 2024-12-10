@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = { 'ruff', 'ts_ls', 'clangd', 'gopls', 'lua_ls', 'hls', 'typst_lsp', 'zls' }
+local servers = { 'ruff', 'ts_ls', 'clangd', 'gopls', 'lua_ls', 'hls', 'tinymist', 'zls' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {}
 end
@@ -234,20 +234,25 @@ vim.api.nvim_create_autocmd("BufReadPre", {
             end,
             { silent = true, buffer = bufnr }
         )
+        vim.keymap.set('n', '<leader>em', function()
+                vim.cmd.RustLsp('expandMacro');
+            end,
+            { silent = true, buffer = bufnr }
+        )
+        vim.keymap.set('n', '<leader>oc', function()
+                vim.cmd.RustLsp('openCargo');
+            end,
+            { silent = true, buffer = bufnr }
+        )
     end,
 })
-vim.g.rustaceanvim = {
-    server = {
-        capabilities = vim.lsp.protocol.make_client_capabilities(),
-    }
-}
 
 -- treesitter
 
 local ts_config = require('nvim-treesitter.configs')
 ts_config.setup {
     highlight = { enable = true, use_languagetree = true },
-    indent = { enable = true },
+    indent = { enable = false },
 }
 
 -- telescope
