@@ -73,9 +73,18 @@ M = {
                 diagnostics = 'nvim_lsp',
                 separator_style = "slant",
                 always_show_bufferline = false,
-                hover = { enabled = true, delay = 0, reveal = { 'close' } }
+                hover = { enabled = true, delay = 0, reveal = { 'close' } },
+                diagnostics_indicator = function(count, level)
+                    local icon = level:match("error") and " " or " "
+                    return " " .. icon .. count
+                end
             }
         })
+    end
+}, {
+    'j-hui/fidget.nvim',
+    config = function()
+        require('fidget').setup()
     end
 }, {
     'kyazdani42/nvim-tree.lua',

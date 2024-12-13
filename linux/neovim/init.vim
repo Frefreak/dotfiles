@@ -29,7 +29,6 @@ syntax enable
 "}}}
 
 " general settings {{{
-set mouse=
 set fileencodings=utf8,cp936,gb18030,big5
 filetype plugin indent on
 set tabstop=8
