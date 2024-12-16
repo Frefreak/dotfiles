@@ -113,23 +113,7 @@ autocmd! nvim_swapfile
 call matchadd('ColorColumn', '\%81v', 100)
 autocmd Filetype xhtml,html,php call clearmatches() " html is special
 
-highlight BlinkHighlight guibg=#000000 guifg=#ffffff
-function! _HLNext (blinktime)
-	let [bufnum, lnum, col, off] = getpos('.')
-	let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-	let target_pat = '\c\%#\%('.@/.'\)'
-	let ring = matchadd('BlinkHighlight', target_pat, 101)
-	redraw
-	exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-	call matchdelete(ring)
-	redraw
-endfunction
-
-function! HLNext (blinktime)
-	call _HLNext(a:blinktime)
-	call _HLNext(a:blinktime)
-	call _HLNext(a:blinktime)
-endfunction
+highlight LspInlayHint guifg=#777777
 "}}}
 
 " others {{{
@@ -160,7 +144,6 @@ vnoremap ty "+y
 nnoremap tp "+p
 nnoremap a9 v<esc>ea(<esc>A)<esc>gv<esc>
 cmap w!! w !sudo tee % > /dev/null
-nnoremap cp :e %:h<enter>
 nnoremap <leader>cc :ccl<CR>
 
 command! SSS :syntax sync formstart

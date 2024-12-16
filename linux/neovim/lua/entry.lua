@@ -91,7 +91,9 @@ M = {
     dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = function()
         require 'nvim-tree'.setup {
-            update_cwd = true,
+            update_focused_file = {
+                enable = true
+            },
             renderer = {
                 icons = {
                     show = {

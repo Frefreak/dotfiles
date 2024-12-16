@@ -20,19 +20,18 @@ map('n', '<leader><', ':BufferLineMovePrev<CR>', {})
 map('n', 'gb', ':BufferLinePick<CR>', {})
 
 -- nvim-tree
-function open_file_dir()
+function change_to_parent_dir()
     local folder = vim.fn.expand('%:p:h')
     vim.fn.chdir(folder)
-    vim.api.nvim_command(":NvimTreeOpen")
+    print("dir changed to " .. folder)
 end
 
 map('n', '<C-n>', ':NvimTreeToggle<CR>', {})
-map('n', '<leader>r', ':NvimTreeRefresh<CR>', {})
-map('n', '<leader>n', ':NvimTreeFindFile<CR>', {})
-map('n', '<leader>o', ':lua open_file_dir()<CR>', {})
+map('n', '<leader>op', ':NvimTreeFindFileToggle!<CR>', {})
+map('n', '<leader>cp', ':lua change_to_parent_dir()<CR>', {})
 
 -- use ESC to turn off search highlighting
-map("n", "<Esc>", ":noh<CR>", opt)
+map("n", "<C-c>", ":noh<CR>", {})
 
 -- lsp
 local nvim_lsp = require('lspconfig')
