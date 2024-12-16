@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = { 'ruff', 'ts_ls', 'clangd', 'gopls', 'lua_ls', 'hls', 'tinymist', 'zls' }
+local servers = { 'ruff', 'ts_ls', 'gopls', 'lua_ls', 'hls', 'tinymist', 'zls' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {}
 end
@@ -97,6 +97,10 @@ require('lspconfig').pyright.setup({
 
 require('lspconfig').gdscript.setup({
     filetypes = { "gd", "gdscript", "gdscript3" },
+})
+
+require('lspconfig').clangd.setup({
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp" },
 })
 
 
@@ -245,6 +249,26 @@ vim.api.nvim_create_autocmd("BufReadPre", {
             end,
             { silent = true, buffer = bufnr }
         )
+        vim.keymap.set('n', '<leader>rr', function()
+                vim.cmd.RustLsp('run');
+            end,
+            { silent = true, buffer = bufnr }
+        )
+        vim.keymap.set('n', '<leader>db', function()
+                vim.cmd.RustLsp('debug');
+            end,
+            { silent = true, buffer = bufnr }
+        )
+        vim.keymap.set('n', '<leader>ld', function()
+                vim.cmd.RustLsp('debuggables');
+            end,
+            { silent = true, buffer = bufnr }
+        )
+        vim.keymap.set('n', '<leader>lr', function()
+                vim.cmd.RustLsp('runnables');
+            end,
+            { silent = true, buffer = bufnr }
+        )
     end,
 })
 
@@ -306,4 +330,35 @@ for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) d
         end
         return default_diagnostic_handler(err, result, context, config)
     end
+end
+
+-- dap
+local dap = require('dap')
+dap.configurations.rust = {
+    {
+        type = 'rust';
+        request = 'launch';
+        program = 'codelldb';
+    }
+}
+map('n', '<F5>', ':DapContinue<CR>', {})
+map('n', '<F9>', ':DapToggleBreakpoint<CR>', {})
+map('n', '<F10>', ':DapStepOver<CR>', {})
+map('n', '<F11>', ':DapStepInto<CR>', {})
+map('n', '<F12>', ':DapStepOut<CR>', {})
+
+require("dapui").setup()
+
+map('n', '<leader>sd', ":lua require('dapui').open()<CR>", {})
+map('n', '<leader>ed', ":lua require('dapui').close()<CR>", {})
+
+local dapui = require("dapui")
+dap.listeners.after.event_initialized["dapui_config"]=function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"]=function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"]=function()
+  dapui.close()
 end

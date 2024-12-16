@@ -138,7 +138,10 @@ M = {
             opts = { lsp = { auto_attach = true } }
         }
     }
-},
+}, { 'mfussenegger/nvim-dap'},
+{ "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
+
+
 }
 
 return M
