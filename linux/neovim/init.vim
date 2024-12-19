@@ -95,6 +95,7 @@ augroup filetype_script
   autocmd FileType cpp setlocal shiftwidth=2 tabstop=2 expandtab
 	autocmd FileType groovy setlocal foldmethod=marker ts=4 sw=4 sts=4 expandtab
 	autocmd FileType php setlocal foldmethod=marker ts=4 sw=4 sts=4 expandtab
+	autocmd FileType wgsl setlocal ts=4 sw=4 sts=4 expandtab smartindent
 augroup end
 
 augroup filetype_fix
