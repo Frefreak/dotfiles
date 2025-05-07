@@ -17,3 +17,8 @@ Still have no idea what to make.
 # really understand how rust works
 
 Need to go deeper into rust in the future!
+
+# LLM client with neovim
+
+Basically a LLM client but using neovim as interface. Might adding more pre-defined
+functions besides just chatting. Keep evolving.
