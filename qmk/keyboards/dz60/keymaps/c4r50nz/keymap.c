@@ -15,6 +15,15 @@ tap_dance_action_t tap_dance_actions[] = {
 #define VOLUP		KC_AUDIO_VOL_UP
 #define VOLDOWN		KC_AUDIO_VOL_DOWN
 
+// const key_override_t ctrl_left_override = ko_make_basic(MOD_MASK_CTRL, KC_LEFT, LGUI(KC_LEFT));
+// const key_override_t ctrl_right_override = ko_make_basic(MOD_MASK_CTRL, KC_RIGHT, LGUI(KC_RIGHT));
+
+// // This globally defines all key overrides to be used
+// const key_override_t *key_overrides[] = {
+// 	&ctrl_left_override,
+// 	&ctrl_right_override,
+// };
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	LAYOUT_60_ansi(
